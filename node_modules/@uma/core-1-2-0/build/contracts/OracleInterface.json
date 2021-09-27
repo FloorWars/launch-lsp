@@ -1,0 +1,894 @@
+{
+  "contractName": "OracleInterface",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "requestPrice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "hasPrice",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPrice",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"getPrice\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"hasPrice\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"requestPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface used by financial contracts to interact with the Oracle. Voters will use a different interface.\",\"kind\":\"dev\",\"methods\":{\"getPrice(bytes32,uint256)\":{\"details\":\"If the price is not available, the method reverts.\",\"params\":{\"identifier\":\"uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\",\"time\":\"unix timestamp for the price request.\"},\"returns\":{\"_0\":\"int256 representing the resolved price for the given identifier and timestamp.\"}},\"hasPrice(bytes32,uint256)\":{\"details\":\"Time must be in the past and the identifier must be supported.\",\"params\":{\"identifier\":\"uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\",\"time\":\"unix timestamp for the price request.\"},\"returns\":{\"_0\":\"bool if the DVM has resolved to a price for the given identifier and timestamp.\"}},\"requestPrice(bytes32,uint256)\":{\"details\":\"Time must be in the past and the identifier must be supported.\",\"params\":{\"identifier\":\"uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\",\"time\":\"unix timestamp for the price request.\"}}},\"title\":\"Financial contract facing Oracle interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getPrice(bytes32,uint256)\":{\"notice\":\"Gets the price for `identifier` and `time` if it has already been requested and resolved.\"},\"hasPrice(bytes32,uint256)\":{\"notice\":\"Whether the price for `identifier` and `time` is available.\"},\"requestPrice(bytes32,uint256)\":{\"notice\":\"Enqueues a request (if a request isn't already present) for the given `identifier`, `time` pair.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/oracle/interfaces/OracleInterface.sol\":\"OracleInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/oracle/interfaces/OracleInterface.sol\":{\"keccak256\":\"0xa6cc6210ea5e5a5b06ceb87150e73f2703f20519d9d6a6e12ca9322bd1d3f713\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://7ccf07e24daabb08694dbbfc9b3b430e197b584f94cdc845415b2fd36096695d\",\"dweb:/ipfs/QmWSWF9jYHo4TKV8AueNDXWQFPAqCDecrvG9SY2o7oP6Yr\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\n\n/**\n * @title Financial contract facing Oracle interface.\n * @dev Interface used by financial contracts to interact with the Oracle. Voters will use a different interface.\n */\ninterface OracleInterface {\n    /**\n     * @notice Enqueues a request (if a request isn't already present) for the given `identifier`, `time` pair.\n     * @dev Time must be in the past and the identifier must be supported.\n     * @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n     * @param time unix timestamp for the price request.\n     */\n    function requestPrice(bytes32 identifier, uint256 time) external;\n\n    /**\n     * @notice Whether the price for `identifier` and `time` is available.\n     * @dev Time must be in the past and the identifier must be supported.\n     * @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n     * @param time unix timestamp for the price request.\n     * @return bool if the DVM has resolved to a price for the given identifier and timestamp.\n     */\n    function hasPrice(bytes32 identifier, uint256 time) external view returns (bool);\n\n    /**\n     * @notice Gets the price for `identifier` and `time` if it has already been requested and resolved.\n     * @dev If the price is not available, the method reverts.\n     * @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n     * @param time unix timestamp for the price request.\n     * @return int256 representing the resolved price for the given identifier and timestamp.\n     */\n    function getPrice(bytes32 identifier, uint256 time) external view returns (int256);\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/oracle/interfaces/OracleInterface.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/oracle/interfaces/OracleInterface.sol",
+    "exportedSymbols": {
+      "OracleInterface": [
+        21213
+      ]
+    },
+    "id": 21214,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 21183,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:78"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 21184,
+          "nodeType": "StructuredDocumentation",
+          "src": "67:175:78",
+          "text": " @title Financial contract facing Oracle interface.\n @dev Interface used by financial contracts to interact with the Oracle. Voters will use a different interface."
+        },
+        "fullyImplemented": false,
+        "id": 21213,
+        "linearizedBaseContracts": [
+          21213
+        ],
+        "name": "OracleInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": {
+              "id": 21185,
+              "nodeType": "StructuredDocumentation",
+              "src": "275:373:78",
+              "text": " @notice Enqueues a request (if a request isn't already present) for the given `identifier`, `time` pair.\n @dev Time must be in the past and the identifier must be supported.\n @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n @param time unix timestamp for the price request."
+            },
+            "functionSelector": "68ad8ae3",
+            "id": 21192,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "requestPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 21190,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21187,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21192,
+                  "src": "675:18:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 21186,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "675:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21189,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21192,
+                  "src": "695:12:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21188,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "695:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "674:34:78"
+            },
+            "returnParameters": {
+              "id": 21191,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "717:0:78"
+            },
+            "scope": 21213,
+            "src": "653:65:78",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": {
+              "id": 21193,
+              "nodeType": "StructuredDocumentation",
+              "src": "724:431:78",
+              "text": " @notice Whether the price for `identifier` and `time` is available.\n @dev Time must be in the past and the identifier must be supported.\n @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n @param time unix timestamp for the price request.\n @return bool if the DVM has resolved to a price for the given identifier and timestamp."
+            },
+            "functionSelector": "a03e881a",
+            "id": 21202,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "hasPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 21198,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21195,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21202,
+                  "src": "1178:18:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 21194,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1178:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21197,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21202,
+                  "src": "1198:12:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21196,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1198:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1177:34:78"
+            },
+            "returnParameters": {
+              "id": 21201,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21200,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21202,
+                  "src": "1235:4:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 21199,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1235:4:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1234:6:78"
+            },
+            "scope": 21213,
+            "src": "1160:81:78",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": {
+              "id": 21203,
+              "nodeType": "StructuredDocumentation",
+              "src": "1247:448:78",
+              "text": " @notice Gets the price for `identifier` and `time` if it has already been requested and resolved.\n @dev If the price is not available, the method reverts.\n @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n @param time unix timestamp for the price request.\n @return int256 representing the resolved price for the given identifier and timestamp."
+            },
+            "functionSelector": "c9280f06",
+            "id": 21212,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 21208,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21205,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21212,
+                  "src": "1718:18:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 21204,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1718:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21207,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21212,
+                  "src": "1738:12:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21206,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1738:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1717:34:78"
+            },
+            "returnParameters": {
+              "id": 21211,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21210,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21212,
+                  "src": "1775:6:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 21209,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1775:6:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1774:8:78"
+            },
+            "scope": 21213,
+            "src": "1700:83:78",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 21214,
+        "src": "243:1542:78"
+      }
+    ],
+    "src": "42:1744:78"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/oracle/interfaces/OracleInterface.sol",
+    "exportedSymbols": {
+      "OracleInterface": [
+        21213
+      ]
+    },
+    "id": 21214,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 21183,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:78"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 21184,
+          "nodeType": "StructuredDocumentation",
+          "src": "67:175:78",
+          "text": " @title Financial contract facing Oracle interface.\n @dev Interface used by financial contracts to interact with the Oracle. Voters will use a different interface."
+        },
+        "fullyImplemented": false,
+        "id": 21213,
+        "linearizedBaseContracts": [
+          21213
+        ],
+        "name": "OracleInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": {
+              "id": 21185,
+              "nodeType": "StructuredDocumentation",
+              "src": "275:373:78",
+              "text": " @notice Enqueues a request (if a request isn't already present) for the given `identifier`, `time` pair.\n @dev Time must be in the past and the identifier must be supported.\n @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n @param time unix timestamp for the price request."
+            },
+            "functionSelector": "68ad8ae3",
+            "id": 21192,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "requestPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 21190,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21187,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21192,
+                  "src": "675:18:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 21186,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "675:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21189,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21192,
+                  "src": "695:12:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21188,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "695:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "674:34:78"
+            },
+            "returnParameters": {
+              "id": 21191,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "717:0:78"
+            },
+            "scope": 21213,
+            "src": "653:65:78",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": {
+              "id": 21193,
+              "nodeType": "StructuredDocumentation",
+              "src": "724:431:78",
+              "text": " @notice Whether the price for `identifier` and `time` is available.\n @dev Time must be in the past and the identifier must be supported.\n @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n @param time unix timestamp for the price request.\n @return bool if the DVM has resolved to a price for the given identifier and timestamp."
+            },
+            "functionSelector": "a03e881a",
+            "id": 21202,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "hasPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 21198,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21195,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21202,
+                  "src": "1178:18:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 21194,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1178:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21197,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21202,
+                  "src": "1198:12:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21196,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1198:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1177:34:78"
+            },
+            "returnParameters": {
+              "id": 21201,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21200,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21202,
+                  "src": "1235:4:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 21199,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1235:4:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1234:6:78"
+            },
+            "scope": 21213,
+            "src": "1160:81:78",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": {
+              "id": 21203,
+              "nodeType": "StructuredDocumentation",
+              "src": "1247:448:78",
+              "text": " @notice Gets the price for `identifier` and `time` if it has already been requested and resolved.\n @dev If the price is not available, the method reverts.\n @param identifier uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\n @param time unix timestamp for the price request.\n @return int256 representing the resolved price for the given identifier and timestamp."
+            },
+            "functionSelector": "c9280f06",
+            "id": 21212,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 21208,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21205,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21212,
+                  "src": "1718:18:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 21204,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1718:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 21207,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21212,
+                  "src": "1738:12:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 21206,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1738:7:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1717:34:78"
+            },
+            "returnParameters": {
+              "id": 21211,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 21210,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 21212,
+                  "src": "1775:6:78",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 21209,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1775:6:78",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1774:8:78"
+            },
+            "scope": 21213,
+            "src": "1700:83:78",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 21214,
+        "src": "243:1542:78"
+      }
+    ],
+    "src": "42:1744:78"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-11-23T23:49:10.222Z",
+  "devdoc": {
+    "details": "Interface used by financial contracts to interact with the Oracle. Voters will use a different interface.",
+    "kind": "dev",
+    "methods": {
+      "getPrice(bytes32,uint256)": {
+        "details": "If the price is not available, the method reverts.",
+        "params": {
+          "identifier": "uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.",
+          "time": "unix timestamp for the price request."
+        },
+        "returns": {
+          "_0": "int256 representing the resolved price for the given identifier and timestamp."
+        }
+      },
+      "hasPrice(bytes32,uint256)": {
+        "details": "Time must be in the past and the identifier must be supported.",
+        "params": {
+          "identifier": "uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.",
+          "time": "unix timestamp for the price request."
+        },
+        "returns": {
+          "_0": "bool if the DVM has resolved to a price for the given identifier and timestamp."
+        }
+      },
+      "requestPrice(bytes32,uint256)": {
+        "details": "Time must be in the past and the identifier must be supported.",
+        "params": {
+          "identifier": "uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.",
+          "time": "unix timestamp for the price request."
+        }
+      }
+    },
+    "title": "Financial contract facing Oracle interface.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getPrice(bytes32,uint256)": {
+        "notice": "Gets the price for `identifier` and `time` if it has already been requested and resolved."
+      },
+      "hasPrice(bytes32,uint256)": {
+        "notice": "Whether the price for `identifier` and `time` is available."
+      },
+      "requestPrice(bytes32,uint256)": {
+        "notice": "Enqueues a request (if a request isn't already present) for the given `identifier`, `time` pair."
+      }
+    },
+    "version": 1
+  }
+}

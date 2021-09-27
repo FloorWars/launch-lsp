@@ -1,0 +1,617 @@
+{
+  "contractName": "FundingRateStoreInterface",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perpetual",
+          "type": "address"
+        }
+      ],
+      "name": "getFundingRateForContract",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "rawValue",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Signed",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perpetual",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "rewardRate",
+          "type": "tuple"
+        }
+      ],
+      "name": "setRewardRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"perpetual\",\"type\":\"address\"}],\"name\":\"getFundingRateForContract\",\"outputs\":[{\"components\":[{\"internalType\":\"int256\",\"name\":\"rawValue\",\"type\":\"int256\"}],\"internalType\":\"struct FixedPoint.Signed\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"perpetual\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"rewardRate\",\"type\":\"tuple\"}],\"name\":\"setRewardRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface used by financial contracts to interact with a storage contract which sets and gets funding rates.\",\"kind\":\"dev\",\"methods\":{\"getFundingRateForContract(address)\":{\"details\":\"This method should never revert.\",\"params\":{\"perpetual\":\"perpetual contract whose funding rate identifier that the calling contracts wants to get a funding rate for.\"},\"returns\":{\"_0\":\"FixedPoint.Signed representing the funding rate for the given contract. 0.01 would represent a funding rate of 1% per second. -0.01 would represent a negative funding rate of -1% per second.\"}},\"setRewardRate(address,(uint256))\":{\"details\":\"Callable only by the Perpetual contract.\"}},\"title\":\"Funding Rate Store interface.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getFundingRateForContract(address)\":{\"notice\":\"Gets the latest funding rate for a perpetual contract.\"},\"setRewardRate(address,(uint256))\":{\"notice\":\"Set the reward rate for a specific `perpetual` contract.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/chris/temp/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol\":\"FundingRateStoreInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/Users/chris/temp/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0x15636c4d1914553c95712ef01d59e73a2ce6efacbe1a20bab8a513d5897cf96d\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://8b942ab427bf0c45a3d5b3701a8c509fcf01f2aa0ec525fc74f7f01a2aaa18cf\",\"dweb:/ipfs/QmPoSCBrBUQTiaKR6baSYchK863Lu7RY6gqMPEeUbwsgQV\"]},\"/Users/chris/temp/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol\":{\"keccak256\":\"0x79f35dfc226fd3dff7d3d491199a924b6bb39f37bdfbac848ed3ac60e2347b62\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://9252c746eebb321e05b9410100b7aa5765b198b825698969b7ba8b182215afb4\",\"dweb:/ipfs/QmWrva3bLHAqB3agH1zygfzuG3xC6Pa5oqyrumKCSztcmk\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\npragma experimental ABIEncoderV2;\n\nimport \"../../../common/implementation/FixedPoint.sol\";\n\n/**\n * @title Funding Rate Store interface.\n * @dev Interface used by financial contracts to interact with a storage contract which sets and gets funding rates.\n */\ninterface FundingRateStoreInterface {\n    /**\n     * @notice Gets the latest funding rate for a perpetual contract.\n     * @dev This method should never revert.\n     * @param perpetual perpetual contract whose funding rate identifier that the calling contracts wants to get\n     * a funding rate for.\n     * @return FixedPoint.Signed representing the funding rate for the given contract. 0.01 would represent a funding\n     * rate of 1% per second. -0.01 would represent a negative funding rate of -1% per second.\n     */\n    function getFundingRateForContract(address perpetual) external view returns (FixedPoint.Signed memory);\n\n    /**\n     * @notice Set the reward rate for a specific `perpetual` contract.\n     * @dev Callable only by the Perpetual contract.\n     */\n    function setRewardRate(address perpetual, FixedPoint.Unsigned memory rewardRate) external;\n}\n",
+  "sourcePath": "/Users/chris/temp/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol",
+    "exportedSymbols": {
+      "FundingRateStoreInterface": [
+        12606
+      ]
+    },
+    "id": 12607,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12586,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:43"
+      },
+      {
+        "id": 12587,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "66:33:43"
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../../common/implementation/FixedPoint.sol",
+        "id": 12588,
+        "nodeType": "ImportDirective",
+        "scope": 12607,
+        "sourceUnit": 1958,
+        "src": "101:55:43",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 12589,
+          "nodeType": "StructuredDocumentation",
+          "src": "158:164:43",
+          "text": " @title Funding Rate Store interface.\n @dev Interface used by financial contracts to interact with a storage contract which sets and gets funding rates."
+        },
+        "fullyImplemented": false,
+        "id": 12606,
+        "linearizedBaseContracts": [
+          12606
+        ],
+        "name": "FundingRateStoreInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": {
+              "id": 12590,
+              "nodeType": "StructuredDocumentation",
+              "src": "365:479:43",
+              "text": " @notice Gets the latest funding rate for a perpetual contract.\n @dev This method should never revert.\n @param perpetual perpetual contract whose funding rate identifier that the calling contracts wants to get\n a funding rate for.\n @return FixedPoint.Signed representing the funding rate for the given contract. 0.01 would represent a funding\n rate of 1% per second. -0.01 would represent a negative funding rate of -1% per second."
+            },
+            "functionSelector": "24b41f68",
+            "id": 12597,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getFundingRateForContract",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12593,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12592,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12597,
+                  "src": "884:17:43",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12591,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "884:7:43",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "883:19:43"
+            },
+            "returnParameters": {
+              "id": 12596,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12595,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12597,
+                  "src": "926:24:43",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12594,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1165,
+                    "src": "926:17:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "925:26:43"
+            },
+            "scope": 12606,
+            "src": "849:103:43",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": {
+              "id": 12598,
+              "nodeType": "StructuredDocumentation",
+              "src": "958:136:43",
+              "text": " @notice Set the reward rate for a specific `perpetual` contract.\n @dev Callable only by the Perpetual contract."
+            },
+            "functionSelector": "eb9c7de1",
+            "id": 12605,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setRewardRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12603,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12600,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12605,
+                  "src": "1122:17:43",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12599,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1122:7:43",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12602,
+                  "mutability": "mutable",
+                  "name": "rewardRate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12605,
+                  "src": "1141:37:43",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12601,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1141:19:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1121:58:43"
+            },
+            "returnParameters": {
+              "id": 12604,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1188:0:43"
+            },
+            "scope": 12606,
+            "src": "1099:90:43",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 12607,
+        "src": "323:868:43"
+      }
+    ],
+    "src": "42:1150:43"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol",
+    "exportedSymbols": {
+      "FundingRateStoreInterface": [
+        12606
+      ]
+    },
+    "id": 12607,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12586,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:43"
+      },
+      {
+        "id": 12587,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "66:33:43"
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../../common/implementation/FixedPoint.sol",
+        "id": 12588,
+        "nodeType": "ImportDirective",
+        "scope": 12607,
+        "sourceUnit": 1958,
+        "src": "101:55:43",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 12589,
+          "nodeType": "StructuredDocumentation",
+          "src": "158:164:43",
+          "text": " @title Funding Rate Store interface.\n @dev Interface used by financial contracts to interact with a storage contract which sets and gets funding rates."
+        },
+        "fullyImplemented": false,
+        "id": 12606,
+        "linearizedBaseContracts": [
+          12606
+        ],
+        "name": "FundingRateStoreInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": {
+              "id": 12590,
+              "nodeType": "StructuredDocumentation",
+              "src": "365:479:43",
+              "text": " @notice Gets the latest funding rate for a perpetual contract.\n @dev This method should never revert.\n @param perpetual perpetual contract whose funding rate identifier that the calling contracts wants to get\n a funding rate for.\n @return FixedPoint.Signed representing the funding rate for the given contract. 0.01 would represent a funding\n rate of 1% per second. -0.01 would represent a negative funding rate of -1% per second."
+            },
+            "functionSelector": "24b41f68",
+            "id": 12597,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getFundingRateForContract",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12593,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12592,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12597,
+                  "src": "884:17:43",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12591,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "884:7:43",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "883:19:43"
+            },
+            "returnParameters": {
+              "id": 12596,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12595,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12597,
+                  "src": "926:24:43",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12594,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1165,
+                    "src": "926:17:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "925:26:43"
+            },
+            "scope": 12606,
+            "src": "849:103:43",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": {
+              "id": 12598,
+              "nodeType": "StructuredDocumentation",
+              "src": "958:136:43",
+              "text": " @notice Set the reward rate for a specific `perpetual` contract.\n @dev Callable only by the Perpetual contract."
+            },
+            "functionSelector": "eb9c7de1",
+            "id": 12605,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setRewardRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12603,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12600,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12605,
+                  "src": "1122:17:43",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12599,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1122:7:43",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12602,
+                  "mutability": "mutable",
+                  "name": "rewardRate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12605,
+                  "src": "1141:37:43",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12601,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1141:19:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1121:58:43"
+            },
+            "returnParameters": {
+              "id": 12604,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1188:0:43"
+            },
+            "scope": 12606,
+            "src": "1099:90:43",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 12607,
+        "src": "323:868:43"
+      }
+    ],
+    "src": "42:1150:43"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-12-21T06:57:53.320Z",
+  "devdoc": {
+    "details": "Interface used by financial contracts to interact with a storage contract which sets and gets funding rates.",
+    "kind": "dev",
+    "methods": {
+      "getFundingRateForContract(address)": {
+        "details": "This method should never revert.",
+        "params": {
+          "perpetual": "perpetual contract whose funding rate identifier that the calling contracts wants to get a funding rate for."
+        },
+        "returns": {
+          "_0": "FixedPoint.Signed representing the funding rate for the given contract. 0.01 would represent a funding rate of 1% per second. -0.01 would represent a negative funding rate of -1% per second."
+        }
+      },
+      "setRewardRate(address,(uint256))": {
+        "details": "Callable only by the Perpetual contract."
+      }
+    },
+    "title": "Funding Rate Store interface.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getFundingRateForContract(address)": {
+        "notice": "Gets the latest funding rate for a perpetual contract."
+      },
+      "setRewardRate(address,(uint256))": {
+        "notice": "Set the reward rate for a specific `perpetual` contract."
+      }
+    },
+    "version": 1
+  }
+}

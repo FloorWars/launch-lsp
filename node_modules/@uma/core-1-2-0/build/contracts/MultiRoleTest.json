@@ -1,0 +1,1546 @@
+{
+  "contractName": "MultiRoleTest",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newMember",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "manager",
+          "type": "address"
+        }
+      ],
+      "name": "AddedSharedMember",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "oldMember",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "manager",
+          "type": "address"
+        }
+      ],
+      "name": "RemovedSharedMember",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newMember",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "manager",
+          "type": "address"
+        }
+      ],
+      "name": "ResetExclusiveMember",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "newMember",
+          "type": "address"
+        }
+      ],
+      "name": "addMember",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getMember",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "memberToCheck",
+          "type": "address"
+        }
+      ],
+      "name": "holdsRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "memberToRemove",
+          "type": "address"
+        }
+      ],
+      "name": "removeMember",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "renounceMembership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "newMember",
+          "type": "address"
+        }
+      ],
+      "name": "resetMember",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "managingRoleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address[]",
+          "name": "initialMembers",
+          "type": "address[]"
+        }
+      ],
+      "name": "createSharedRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "managingRoleId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "initialMember",
+          "type": "address"
+        }
+      ],
+      "name": "createExclusiveRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "revertIfNotHoldingRole",
+      "outputs": [],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newMember\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"manager\",\"type\":\"address\"}],\"name\":\"AddedSharedMember\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldMember\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"manager\",\"type\":\"address\"}],\"name\":\"RemovedSharedMember\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newMember\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"manager\",\"type\":\"address\"}],\"name\":\"ResetExclusiveMember\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"newMember\",\"type\":\"address\"}],\"name\":\"addMember\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"managingRoleId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"initialMember\",\"type\":\"address\"}],\"name\":\"createExclusiveRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"managingRoleId\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"initialMembers\",\"type\":\"address[]\"}],\"name\":\"createSharedRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"}],\"name\":\"getMember\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"memberToCheck\",\"type\":\"address\"}],\"name\":\"holdsRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"memberToRemove\",\"type\":\"address\"}],\"name\":\"removeMember\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"}],\"name\":\"renounceMembership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"newMember\",\"type\":\"address\"}],\"name\":\"resetMember\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roleId\",\"type\":\"uint256\"}],\"name\":\"revertIfNotHoldingRole\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"addMember(uint256,address)\":{\"details\":\"Reverts if `roleId` does not represent an initialized, SharedRole or if the caller is not a member of the managing role for `roleId`.\",\"params\":{\"newMember\":\"the new SharedRole member.\",\"roleId\":\"the SharedRole membership to modify.\"}},\"getMember(uint256)\":{\"details\":\"Reverts if `roleId` does not represent an initialized, exclusive role.\",\"params\":{\"roleId\":\"the ExclusiveRole membership to check.\"},\"returns\":{\"_0\":\"the address of the current ExclusiveRole member.\"}},\"holdsRole(uint256,address)\":{\"details\":\"Reverts if roleId does not correspond to an initialized role.\",\"params\":{\"memberToCheck\":\"the address to check.\",\"roleId\":\"the Role to check.\"},\"returns\":{\"_0\":\"True if `memberToCheck` is a member of `roleId`.\"}},\"removeMember(uint256,address)\":{\"details\":\"Reverts if `roleId` does not represent an initialized, SharedRole or if the caller is not a member of the managing role for `roleId`.\",\"params\":{\"memberToRemove\":\"the current SharedRole member to remove.\",\"roleId\":\"the SharedRole membership to modify.\"}},\"renounceMembership(uint256)\":{\"details\":\"Reverts if the caller is not a member of the role for `roleId` or if `roleId` is not an initialized, SharedRole.\",\"params\":{\"roleId\":\"the SharedRole membership to modify.\"}},\"resetMember(uint256,address)\":{\"details\":\"Reverts if the caller is not a member of the managing role for `roleId` or if `roleId` is not an initialized, ExclusiveRole.\",\"params\":{\"newMember\":\"the new ExclusiveRole member.\",\"roleId\":\"the ExclusiveRole membership to modify.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"addMember(uint256,address)\":{\"notice\":\"Adds `newMember` to the shared role, `roleId`.\"},\"getMember(uint256)\":{\"notice\":\"Gets the current holder of the exclusive role, `roleId`.\"},\"holdsRole(uint256,address)\":{\"notice\":\"Whether `memberToCheck` is a member of roleId.\"},\"removeMember(uint256,address)\":{\"notice\":\"Removes `memberToRemove` from the shared role, `roleId`.\"},\"renounceMembership(uint256)\":{\"notice\":\"Removes caller from the role, `roleId`.\"},\"resetMember(uint256,address)\":{\"notice\":\"Changes the exclusive role holder of `roleId` to `newMember`.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/common/test/MultiRoleTest.sol\":\"MultiRoleTest\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/implementation/MultiRole.sol\":{\"keccak256\":\"0xc35f4e028196f04a47b2456ed7efd825be3406688a314d75916f57680eae1795\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://29edb6ac3a5e5146fe262f77431d55571379cf0265925060d15f27b1b927cdd6\",\"dweb:/ipfs/QmUg31ey8b53pXdUpUBUrHx46nC3p2XChwmhLXw1h9ooyi\"]},\"/home/circleci/protocol/packages/core/contracts/common/test/MultiRoleTest.sol\":{\"keccak256\":\"0x1fcd94dd36979b0ffee7acd656e3af3083f02e04a990a18d31cb201f27e63366\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://5d5bc14b510e93fc6e0df77fa61fec1c9366cf704cf20c99a88f251e16ef3f0b\",\"dweb:/ipfs/QmPxJxPK9kqXaDho76CVinFvk1frravXBEr9NuTuouj4Z2\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610d56806100206000396000f3fe608060405234801561001057600080fd5b50600436106100935760003560e01c80637cdc1cb9116100665780637cdc1cb91461018b578063aaa14ca3146101cb578063ab3545e5146101e8578063d97c05be14610221578063e2ad8db91461024d57610093565b806319fefdf01461009857806352b34d49146101165780636be7658b1461013357806374d0a6761461015f575b600080fd5b610114600480360360608110156100ae57600080fd5b8135916020810135918101906060810160408201356401000000008111156100d557600080fd5b8201836020820111156100e757600080fd5b8035906020019184602083028401116401000000008311171561010957600080fd5b50909250905061027f565b005b6101146004803603602081101561012c57600080fd5b50356102c3565b6101146004803603604081101561014957600080fd5b50803590602001356001600160a01b031661030d565b6101146004803603604081101561017557600080fd5b50803590602001356001600160a01b031661041b565b6101b7600480360360408110156101a157600080fd5b50803590602001356001600160a01b0316610529565b604080519115158252519081900360200190f35b610114600480360360208110156101e157600080fd5b50356105d2565b610205600480360360208110156101fe57600080fd5b50356106c6565b604080516001600160a01b039092168252519081900360200190f35b6101146004803603604081101561023757600080fd5b50803590602001356001600160a01b0316610748565b6101146004803603606081101561026357600080fd5b50803590602081013590604001356001600160a01b0316610856565b6102bd848484848080602002602001604051908101604052809392919081815260200183836020028082843760009201919091525061086692505050565b50505050565b806102ce8133610529565b6103095760405162461bcd60e51b8152600401808060200182810382526022815260200180610c446022913960400191505060405180910390fd5b5050565b81600260008281526020819052604090206001015460ff16600281111561033057fe5b1461036c5760405162461bcd60e51b815260040180806020018281038252602c815260200180610c18602c913960400191505060405180910390fd5b60008381526020819052604090205483906103879033610529565b6103c25760405162461bcd60e51b8152600401808060200182810382526024815260200180610cc56024913960400191505060405180910390fd5b60008481526020819052604090206103dd906003018461096b565b60405133906001600160a01b0385169086907feb3e33034c392e69263b04ec0fa376dc12784a41b6676c7f31b936cbc0fbb5af90600090a450505050565b81600260008281526020819052604090206001015460ff16600281111561043e57fe5b1461047a5760405162461bcd60e51b815260040180806020018281038252602c815260200180610c18602c913960400191505060405180910390fd5b60008381526020819052604090205483906104959033610529565b6104d05760405162461bcd60e51b8152600401808060200182810382526024815260200180610cc56024913960400191505060405180910390fd5b60008481526020819052604090206104eb906003018461098d565b60405133906001600160a01b0385169086907f63502af7324ff6db91ab38f8236a648727d9385ea6c782073dd4882d8a61a48f90600090a450505050565b600082815260208190526040812060018082015460ff16600281111561054b57fe5b14156105665761055e6002820184610a0d565b9150506105cc565b6002600182015460ff16600281111561057b57fe5b141561058e5761055e6003820184610a20565b6040805162461bcd60e51b815260206004820152600e60248201526d125b9d985b1a59081c9bdb19525960921b604482015290519081900360640190fd5b92915050565b80600260008281526020819052604090206001015460ff1660028111156105f557fe5b146106315760405162461bcd60e51b815260040180806020018281038252602c815260200180610c18602c913960400191505060405180910390fd5b8161063c8133610529565b6106775760405162461bcd60e51b8152600401808060200182810382526022815260200180610c446022913960400191505060405180910390fd5b6000838152602081905260409020610692906003013361096b565b6040513390819085907feb3e33034c392e69263b04ec0fa376dc12784a41b6676c7f31b936cbc0fbb5af90600090a4505050565b600081600160008281526020819052604090206001015460ff1660028111156106eb57fe5b146107275760405162461bcd60e51b815260040180806020018281038252602f815260200180610be9602f913960400191505060405180910390fd5b600083815260208190526040902061074190600201610a3f565b9392505050565b81600160008281526020819052604090206001015460ff16600281111561076b57fe5b146107a75760405162461bcd60e51b815260040180806020018281038252602f815260200180610be9602f913960400191505060405180910390fd5b60008381526020819052604090205483906107c29033610529565b6107fd5760405162461bcd60e51b8152600401808060200182810382526024815260200180610cc56024913960400191505060405180910390fd5b60008481526020819052604090206108189060020184610a4c565b60405133906001600160a01b0385169086907f3b855c56b409b671c7112789d022675eb639d0bcb8896f1b6197c132f799e74690600090a450505050565b610861838383610aae565b505050565b826000808281526020819052604090206001015460ff16600281111561088857fe5b146108da576040805162461bcd60e51b815260206004820152601e60248201527f43616e6e6f74207573652061207072652d6578697374696e6720726f6c650000604482015290519081900360640190fd5b600084815260208190526040902060018101805460ff191660021790558381556109076003820184610bad565b60008481526020819052604081206001015460ff16600281111561092757fe5b14156109645760405162461bcd60e51b8152600401808060200182810382526038815260200180610ce96038913960400191505060405180910390fd5b5050505050565b6001600160a01b0316600090815260209190915260409020805460ff19169055565b6001600160a01b0381166109e8576040805162461bcd60e51b815260206004820152601f60248201527f43616e6e6f74206164642030783020746f20612073686172656420726f6c6500604482015290519081900360640190fd5b6001600160a01b0316600090815260209190915260409020805460ff19166001179055565b90546001600160a01b0391821691161490565b6001600160a01b03166000908152602091909152604090205460ff1690565b546001600160a01b031690565b6001600160a01b038116610a915760405162461bcd60e51b8152600401808060200182810382526023815260200180610ca26023913960400191505060405180910390fd5b81546001600160a01b0319166001600160a01b0391909116179055565b826000808281526020819052604090206001015460ff166002811115610ad057fe5b14610b22576040805162461bcd60e51b815260206004820152601e60248201527f43616e6e6f74207573652061207072652d6578697374696e6720726f6c650000604482015290519081900360640190fd5b60008481526020819052604090206001808201805460ff19169091179055838155610b506002820184610bde565b60008481526020819052604081206001015460ff166002811115610b7057fe5b14156109645760405162461bcd60e51b815260040180806020018281038252603c815260200180610c66603c913960400191505060405180910390fd5b60005b815181101561086157610bd683838381518110610bc957fe5b602002602001015161098d565b600101610bb0565b6103098282610a4c56fe4d7573742062652063616c6c6564206f6e20616e20696e697469616c697a6564204578636c757369766520726f6c654d7573742062652063616c6c6564206f6e20616e20696e697469616c697a65642053686172656420726f6c6553656e64657220646f6573206e6f7420686f6c6420726571756972656420726f6c65417474656d7074656420746f2075736520616e20696e76616c696420726f6c6520746f206d616e61676520616e206578636c757369766520726f6c6543616e6e6f742073657420616e206578636c757369766520726f6c6520746f2030783043616e206f6e6c792062652063616c6c6564206279206120726f6c65206d616e61676572417474656d7074656420746f2075736520616e20696e76616c696420726f6c6520746f206d616e61676520612073686172656420726f6c65a2646970667358221220db83866351dec0d5b5f2fe0ede9e94ca1ba5a0c9be6ca3f821c33d57e351eafe64736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100935760003560e01c80637cdc1cb9116100665780637cdc1cb91461018b578063aaa14ca3146101cb578063ab3545e5146101e8578063d97c05be14610221578063e2ad8db91461024d57610093565b806319fefdf01461009857806352b34d49146101165780636be7658b1461013357806374d0a6761461015f575b600080fd5b610114600480360360608110156100ae57600080fd5b8135916020810135918101906060810160408201356401000000008111156100d557600080fd5b8201836020820111156100e757600080fd5b8035906020019184602083028401116401000000008311171561010957600080fd5b50909250905061027f565b005b6101146004803603602081101561012c57600080fd5b50356102c3565b6101146004803603604081101561014957600080fd5b50803590602001356001600160a01b031661030d565b6101146004803603604081101561017557600080fd5b50803590602001356001600160a01b031661041b565b6101b7600480360360408110156101a157600080fd5b50803590602001356001600160a01b0316610529565b604080519115158252519081900360200190f35b610114600480360360208110156101e157600080fd5b50356105d2565b610205600480360360208110156101fe57600080fd5b50356106c6565b604080516001600160a01b039092168252519081900360200190f35b6101146004803603604081101561023757600080fd5b50803590602001356001600160a01b0316610748565b6101146004803603606081101561026357600080fd5b50803590602081013590604001356001600160a01b0316610856565b6102bd848484848080602002602001604051908101604052809392919081815260200183836020028082843760009201919091525061086692505050565b50505050565b806102ce8133610529565b6103095760405162461bcd60e51b8152600401808060200182810382526022815260200180610c446022913960400191505060405180910390fd5b5050565b81600260008281526020819052604090206001015460ff16600281111561033057fe5b1461036c5760405162461bcd60e51b815260040180806020018281038252602c815260200180610c18602c913960400191505060405180910390fd5b60008381526020819052604090205483906103879033610529565b6103c25760405162461bcd60e51b8152600401808060200182810382526024815260200180610cc56024913960400191505060405180910390fd5b60008481526020819052604090206103dd906003018461096b565b60405133906001600160a01b0385169086907feb3e33034c392e69263b04ec0fa376dc12784a41b6676c7f31b936cbc0fbb5af90600090a450505050565b81600260008281526020819052604090206001015460ff16600281111561043e57fe5b1461047a5760405162461bcd60e51b815260040180806020018281038252602c815260200180610c18602c913960400191505060405180910390fd5b60008381526020819052604090205483906104959033610529565b6104d05760405162461bcd60e51b8152600401808060200182810382526024815260200180610cc56024913960400191505060405180910390fd5b60008481526020819052604090206104eb906003018461098d565b60405133906001600160a01b0385169086907f63502af7324ff6db91ab38f8236a648727d9385ea6c782073dd4882d8a61a48f90600090a450505050565b600082815260208190526040812060018082015460ff16600281111561054b57fe5b14156105665761055e6002820184610a0d565b9150506105cc565b6002600182015460ff16600281111561057b57fe5b141561058e5761055e6003820184610a20565b6040805162461bcd60e51b815260206004820152600e60248201526d125b9d985b1a59081c9bdb19525960921b604482015290519081900360640190fd5b92915050565b80600260008281526020819052604090206001015460ff1660028111156105f557fe5b146106315760405162461bcd60e51b815260040180806020018281038252602c815260200180610c18602c913960400191505060405180910390fd5b8161063c8133610529565b6106775760405162461bcd60e51b8152600401808060200182810382526022815260200180610c446022913960400191505060405180910390fd5b6000838152602081905260409020610692906003013361096b565b6040513390819085907feb3e33034c392e69263b04ec0fa376dc12784a41b6676c7f31b936cbc0fbb5af90600090a4505050565b600081600160008281526020819052604090206001015460ff1660028111156106eb57fe5b146107275760405162461bcd60e51b815260040180806020018281038252602f815260200180610be9602f913960400191505060405180910390fd5b600083815260208190526040902061074190600201610a3f565b9392505050565b81600160008281526020819052604090206001015460ff16600281111561076b57fe5b146107a75760405162461bcd60e51b815260040180806020018281038252602f815260200180610be9602f913960400191505060405180910390fd5b60008381526020819052604090205483906107c29033610529565b6107fd5760405162461bcd60e51b8152600401808060200182810382526024815260200180610cc56024913960400191505060405180910390fd5b60008481526020819052604090206108189060020184610a4c565b60405133906001600160a01b0385169086907f3b855c56b409b671c7112789d022675eb639d0bcb8896f1b6197c132f799e74690600090a450505050565b610861838383610aae565b505050565b826000808281526020819052604090206001015460ff16600281111561088857fe5b146108da576040805162461bcd60e51b815260206004820152601e60248201527f43616e6e6f74207573652061207072652d6578697374696e6720726f6c650000604482015290519081900360640190fd5b600084815260208190526040902060018101805460ff191660021790558381556109076003820184610bad565b60008481526020819052604081206001015460ff16600281111561092757fe5b14156109645760405162461bcd60e51b8152600401808060200182810382526038815260200180610ce96038913960400191505060405180910390fd5b5050505050565b6001600160a01b0316600090815260209190915260409020805460ff19169055565b6001600160a01b0381166109e8576040805162461bcd60e51b815260206004820152601f60248201527f43616e6e6f74206164642030783020746f20612073686172656420726f6c6500604482015290519081900360640190fd5b6001600160a01b0316600090815260209190915260409020805460ff19166001179055565b90546001600160a01b0391821691161490565b6001600160a01b03166000908152602091909152604090205460ff1690565b546001600160a01b031690565b6001600160a01b038116610a915760405162461bcd60e51b8152600401808060200182810382526023815260200180610ca26023913960400191505060405180910390fd5b81546001600160a01b0319166001600160a01b0391909116179055565b826000808281526020819052604090206001015460ff166002811115610ad057fe5b14610b22576040805162461bcd60e51b815260206004820152601e60248201527f43616e6e6f74207573652061207072652d6578697374696e6720726f6c650000604482015290519081900360640190fd5b60008481526020819052604090206001808201805460ff19169091179055838155610b506002820184610bde565b60008481526020819052604081206001015460ff166002811115610b7057fe5b14156109645760405162461bcd60e51b815260040180806020018281038252603c815260200180610c66603c913960400191505060405180910390fd5b60005b815181101561086157610bd683838381518110610bc957fe5b602002602001015161098d565b600101610bb0565b6103098282610a4c56fe4d7573742062652063616c6c6564206f6e20616e20696e697469616c697a6564204578636c757369766520726f6c654d7573742062652063616c6c6564206f6e20616e20696e697469616c697a65642053686172656420726f6c6553656e64657220646f6573206e6f7420686f6c6420726571756972656420726f6c65417474656d7074656420746f2075736520616e20696e76616c696420726f6c6520746f206d616e61676520616e206578636c757369766520726f6c6543616e6e6f742073657420616e206578636c757369766520726f6c6520746f2030783043616e206f6e6c792062652063616c6c6564206279206120726f6c65206d616e61676572417474656d7074656420746f2075736520616e20696e76616c696420726f6c6520746f206d616e61676520612073686172656420726f6c65a2646970667358221220db83866351dec0d5b5f2fe0ede9e94ca1ba5a0c9be6ca3f821c33d57e351eafe64736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "259:613:18:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "259:613:18:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;301:214;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;301:214:18;;-1:-1:-1;301:214:18;-1:-1:-1;301:214:18;:::i;:::-;;783:87;;;;;;;;;;;;;;;;-1:-1:-1;783:87:18;;:::i;6404:262:5:-;;;;;;;;;;;;;;;;-1:-1:-1;6404:262:5;;;;;;-1:-1:-1;;;;;6404:262:5;;:::i;5790:239::-;;;;;;;;;;;;;;;;-1:-1:-1;5790:239:5;;;;;;-1:-1:-1;;;;;5790:239:5;;:::i;3945:428::-;;;;;;;;;;;;;;;;-1:-1:-1;3945:428:5;;;;;;-1:-1:-1;;;;;3945:428:5;;:::i;:::-;;;;;;;;;;;;;;;;;;6933:235;;;;;;;;;;;;;;;;-1:-1:-1;6933:235:5;;:::i;5284:160::-;;;;;;;;;;;;;;;;-1:-1:-1;5284:160:5;;:::i;:::-;;;;-1:-1:-1;;;;;5284:160:5;;;;;;;;;;;;;;4731:252;;;;;;;;;;;;;;;;-1:-1:-1;4731:252:5;;;;;;-1:-1:-1;;;;;4731:252:5;;:::i;521:207:18:-;;;;;;;;;;;;;;;;-1:-1:-1;521:207:18;;;;;;;;;;;-1:-1:-1;;;;;521:207:18;;:::i;301:214::-;451:57;469:6;477:14;493;;451:57;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;451:17:18;;-1:-1:-1;;;451:57:18:i;:::-;301:214;;;;:::o;783:87::-;860:6;2713:29:5;2723:6;2731:10;2713:9;:29::i;:::-;2705:76;;;;-1:-1:-1;;;2705:76:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;783:87:18;;:::o;6404:262:5:-;6484:6;3551:15;3525:5;:13;;;;;;;;;;:22;;;;;:41;;;;;;;;;3517:98;;;;-1:-1:-1;;;3517:98:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2989:5:::1;:13:::0;;;::::1;::::0;;;;;;:26;6508:6;;2979:49:::1;::::0;3017:10:::1;2979:9;:49::i;:::-;2971:98;;;;-1:-1:-1::0;;;2971:98:5::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;6526:5:::2;:13:::0;;;::::2;::::0;;;;;;:63:::2;::::0;:34:::2;;6574:14:::0;6526:47:::2;:63::i;:::-;6604:55;::::0;6648:10:::2;::::0;-1:-1:-1;;;;;6604:55:5;::::2;::::0;6624:6;;6604:55:::2;::::0;;;::::2;3625:1:::1;6404:262:::0;;;:::o;5790:239::-;5862:6;3551:15;3525:5;:13;;;;;;;;;;:22;;;;;:41;;;;;;;;;3517:98;;;;-1:-1:-1;;;3517:98:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2989:5:::1;:13:::0;;;::::1;::::0;;;;;;:26;5886:6;;2979:49:::1;::::0;3017:10:::1;2979:9;:49::i;:::-;2971:98;;;;-1:-1:-1::0;;;2971:98:5::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;5904:5:::2;:13:::0;;;::::2;::::0;;;;;;:55:::2;::::0;:34:::2;;5949:9:::0;5904:44:::2;:55::i;:::-;5974:48;::::0;6011:10:::2;::::0;-1:-1:-1;;;;;5974:48:5;::::2;::::0;5992:6;;5974:48:::2;::::0;;;::::2;3625:1:::1;5790:239:::0;;;:::o;3945:428::-;4024:4;4060:13;;;;;;;;;;4104:18;4087:13;;;;;;:35;;;;;;;;;4083:250;;;4145:52;:28;;;4183:13;4145:37;:52::i;:::-;4138:59;;;;;4083:250;4235:15;4218:13;;;;;;:32;;;;;;;;;4214:119;;;4273:49;:25;;;4308:13;4273:34;:49::i;4214:119::-;4342:24;;;-1:-1:-1;;;4342:24:5;;;;;;;;;;;;-1:-1:-1;;;4342:24:5;;;;;;;;;;;;;;3945:428;;;;;:::o;6933:235::-;6995:6;3551:15;3525:5;:13;;;;;;;;;;:22;;;;;:41;;;;;;;;;3517:98;;;;-1:-1:-1;;;3517:98:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;7018:6:::1;2713:29;2723:6;2731:10;2713:9;:29::i;:::-;2705:76;;;;-1:-1:-1::0;;;2705:76:5::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;7036:5:::2;:13:::0;;;::::2;::::0;;;;;;:59:::2;::::0;:34:::2;;7084:10;7036:47;:59::i;:::-;7110:51;::::0;7150:10:::2;::::0;;;7130:6;;7110:51:::2;::::0;;;::::2;3625:1:::1;6933:235:::0;;:::o;5284:160::-;5362:7;5345:6;3278:18;3252:5;:13;;;;;;;;;;:22;;;;;:44;;;;;;;;;3244:104;;;;-1:-1:-1;;;3244:104:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;5388:5:::1;:13:::0;;;::::1;::::0;;;;;;:49:::1;::::0;:37:::1;;:47;:49::i;:::-;5381:56:::0;5284:160;-1:-1:-1;;;5284:160:5:o;4731:252::-;4808:6;3278:18;3252:5;:13;;;;;;;;;;:22;;;;;:44;;;;;;;;;3244:104;;;;-1:-1:-1;;;3244:104:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2989:5:::1;:13:::0;;;::::1;::::0;;;;;;:26;4832:6;;2979:49:::1;::::0;3017:10:::1;2979:9;:49::i;:::-;2971:98;;;;-1:-1:-1::0;;;2971:98:5::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;4850:5:::2;:13:::0;;;::::2;::::0;;;;;;:60:::2;::::0;:37:::2;;4900:9:::0;4850:49:::2;:60::i;:::-;4925:51;::::0;4965:10:::2;::::0;-1:-1:-1;;;;;4925:51:5;::::2;::::0;4946:6;;4925:51:::2;::::0;;;::::2;3358:1:::1;4731:252:::0;;;:::o;521:207:18:-;662:59;683:6;691:14;707:13;662:20;:59::i;:::-;521:207;;;:::o;7962:517:5:-;8117:6;7559:16;7533:5;:13;;;;;;;;;;:22;;;;;:42;;;;;;;;;7525:85;;;;;-1:-1:-1;;;7525:85:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;8135:17:::1;8155:13:::0;;;::::1;::::0;;;;;;8178::::1;::::0;::::1;:31:::0;;-1:-1:-1;;8178:31:5::1;8194:15;8178:31;::::0;;8219:34;;;8263:46:::1;:25;::::0;::::1;8294:14:::0;8263:30:::1;:46::i;:::-;8374:16;8340:21:::0;;;::::1;::::0;;;;;;:30:::1;;::::0;::::1;;:50;::::0;::::1;;;;;;;;8319:153;;;;-1:-1:-1::0;;;8319:153:5::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;7620:1;7962:517:::0;;;;:::o;1351:157::-;-1:-1:-1;;;;;1455:38:5;1496:5;1455:38;;;;;;;;;;;:46;;-1:-1:-1;;1455:46:5;;;1351:157::o;1117:228::-;-1:-1:-1;;;;;1223:27:5;;1215:71;;;;;-1:-1:-1;;;1215:71:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1296:35:5;:22;:35;;;;;;;;;;;:42;;-1:-1:-1;;1296:42:5;1334:4;1296:42;;;1117:228::o;150:171::-;276:21;;-1:-1:-1;;;;;276:38:5;;;:21;;:38;;150:171::o;941:170::-;-1:-1:-1;;;;;1067:37:5;1044:4;1067:37;;;;;;;;;;;;;;;941:170::o;554:135::-;661:21;-1:-1:-1;;;;;661:21:5;;554:135::o;327:221::-;-1:-1:-1;;;;;433:25:5;;425:73;;;;-1:-1:-1;;;425:73:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;508:33;;-1:-1:-1;;;;;;508:33:5;-1:-1:-1;;;;;508:33:5;;;;;;;327:221::o;8816:519::-;8964:6;7559:16;7533:5;:13;;;;;;;;;;:22;;;;;:42;;;;;;;;;7525:85;;;;;-1:-1:-1;;;7525:85:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;8982:17:::1;9002:13:::0;;;::::1;::::0;;;;;;9041:18:::1;9025:13:::0;;::::1;:34:::0;;-1:-1:-1;;9025:34:5::1;::::0;;::::1;::::0;;9069;;;9113:48:::1;:28;::::0;::::1;9147:13:::0;9113:33:::1;:48::i;:::-;9226:16;9192:21:::0;;;::::1;::::0;;;;;;:30:::1;;::::0;::::1;;:50;::::0;::::1;;;;;;;;9171:157;;;;-1:-1:-1::0;;;9171:157:5::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1514:232:::0;1624:9;1619:121;1643:14;:21;1639:1;:25;1619:121;;;1685:44;1695:14;1711;1726:1;1711:17;;;;;;;;;;;;;;1685:9;:44::i;:::-;1666:3;;1619:121;;695:144;790:42;802:14;818:13;790:11;:42::i",
+  "source": "/*\n  MultiRoleTest contract.\n*/\n\n// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\n\nimport \"../implementation/MultiRole.sol\";\n\n// The purpose of this contract is to make the MultiRole creation methods externally callable for testing purposes.\ncontract MultiRoleTest is MultiRole {\n    function createSharedRole(\n        uint256 roleId,\n        uint256 managingRoleId,\n        address[] calldata initialMembers\n    ) external {\n        _createSharedRole(roleId, managingRoleId, initialMembers);\n    }\n\n    function createExclusiveRole(\n        uint256 roleId,\n        uint256 managingRoleId,\n        address initialMember\n    ) external {\n        _createExclusiveRole(roleId, managingRoleId, initialMember);\n    }\n\n    // solhint-disable-next-line no-empty-blocks\n    function revertIfNotHoldingRole(uint256 roleId) external view onlyRoleHolder(roleId) {}\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/common/test/MultiRoleTest.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/test/MultiRoleTest.sol",
+    "exportedSymbols": {
+      "MultiRoleTest": [
+        3297
+      ]
+    },
+    "id": 3298,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3251,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "75:23:18"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/MultiRole.sol",
+        "file": "../implementation/MultiRole.sol",
+        "id": 3252,
+        "nodeType": "ImportDirective",
+        "scope": 3298,
+        "sourceUnit": 2627,
+        "src": "100:41:18",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3253,
+              "name": "MultiRole",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2626,
+              "src": "285:9:18",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MultiRole_$2626",
+                "typeString": "contract MultiRole"
+              }
+            },
+            "id": 3254,
+            "nodeType": "InheritanceSpecifier",
+            "src": "285:9:18"
+          }
+        ],
+        "contractDependencies": [
+          2626
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3297,
+        "linearizedBaseContracts": [
+          3297,
+          2626
+        ],
+        "name": "MultiRoleTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3270,
+              "nodeType": "Block",
+              "src": "441:74:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3265,
+                        "name": "roleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3256,
+                        "src": "469:6:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3266,
+                        "name": "managingRoleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3258,
+                        "src": "477:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3267,
+                        "name": "initialMembers",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3261,
+                        "src": "493:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                          "typeString": "address[] calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                          "typeString": "address[] calldata"
+                        }
+                      ],
+                      "id": 3264,
+                      "name": "_createSharedRole",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2573,
+                      "src": "451:17:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$_t_uint256_$_t_array$_t_address_$dyn_memory_ptr_$returns$__$",
+                        "typeString": "function (uint256,uint256,address[] memory)"
+                      }
+                    },
+                    "id": 3268,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "451:57:18",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3269,
+                  "nodeType": "ExpressionStatement",
+                  "src": "451:57:18"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "19fefdf0",
+            "id": 3271,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createSharedRole",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3262,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3256,
+                  "mutability": "mutable",
+                  "name": "roleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3271,
+                  "src": "336:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3255,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "336:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3258,
+                  "mutability": "mutable",
+                  "name": "managingRoleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3271,
+                  "src": "360:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3257,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "360:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3261,
+                  "mutability": "mutable",
+                  "name": "initialMembers",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3271,
+                  "src": "392:33:18",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 3259,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "392:7:18",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 3260,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "392:9:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "326:105:18"
+            },
+            "returnParameters": {
+              "id": 3263,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "441:0:18"
+            },
+            "scope": 3297,
+            "src": "301:214:18",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 3286,
+              "nodeType": "Block",
+              "src": "652:76:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3281,
+                        "name": "roleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3273,
+                        "src": "683:6:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3282,
+                        "name": "managingRoleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3275,
+                        "src": "691:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3283,
+                        "name": "initialMember",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3277,
+                        "src": "707:13:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 3280,
+                      "name": "_createExclusiveRole",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2625,
+                      "src": "662:20:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,uint256,address)"
+                      }
+                    },
+                    "id": 3284,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "662:59:18",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3285,
+                  "nodeType": "ExpressionStatement",
+                  "src": "662:59:18"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "e2ad8db9",
+            "id": 3287,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createExclusiveRole",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3278,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3273,
+                  "mutability": "mutable",
+                  "name": "roleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3287,
+                  "src": "559:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3272,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "559:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3275,
+                  "mutability": "mutable",
+                  "name": "managingRoleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3287,
+                  "src": "583:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3274,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "583:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3277,
+                  "mutability": "mutable",
+                  "name": "initialMember",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3287,
+                  "src": "615:21:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 3276,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "615:7:18",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "549:93:18"
+            },
+            "returnParameters": {
+              "id": 3279,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "652:0:18"
+            },
+            "scope": 3297,
+            "src": "521:207:18",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 3295,
+              "nodeType": "Block",
+              "src": "868:2:18",
+              "statements": []
+            },
+            "documentation": null,
+            "functionSelector": "52b34d49",
+            "id": 3296,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 3292,
+                    "name": "roleId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 3289,
+                    "src": "860:6:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  }
+                ],
+                "id": 3293,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 3291,
+                  "name": "onlyRoleHolder",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 2243,
+                  "src": "845:14:18",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_uint256_$",
+                    "typeString": "modifier (uint256)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "845:22:18"
+              }
+            ],
+            "name": "revertIfNotHoldingRole",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3290,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3289,
+                  "mutability": "mutable",
+                  "name": "roleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3296,
+                  "src": "815:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3288,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "815:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "814:16:18"
+            },
+            "returnParameters": {
+              "id": 3294,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "868:0:18"
+            },
+            "scope": 3297,
+            "src": "783:87:18",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 3298,
+        "src": "259:613:18"
+      }
+    ],
+    "src": "75:798:18"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/test/MultiRoleTest.sol",
+    "exportedSymbols": {
+      "MultiRoleTest": [
+        3297
+      ]
+    },
+    "id": 3298,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3251,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "75:23:18"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/MultiRole.sol",
+        "file": "../implementation/MultiRole.sol",
+        "id": 3252,
+        "nodeType": "ImportDirective",
+        "scope": 3298,
+        "sourceUnit": 2627,
+        "src": "100:41:18",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3253,
+              "name": "MultiRole",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2626,
+              "src": "285:9:18",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MultiRole_$2626",
+                "typeString": "contract MultiRole"
+              }
+            },
+            "id": 3254,
+            "nodeType": "InheritanceSpecifier",
+            "src": "285:9:18"
+          }
+        ],
+        "contractDependencies": [
+          2626
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3297,
+        "linearizedBaseContracts": [
+          3297,
+          2626
+        ],
+        "name": "MultiRoleTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3270,
+              "nodeType": "Block",
+              "src": "441:74:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3265,
+                        "name": "roleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3256,
+                        "src": "469:6:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3266,
+                        "name": "managingRoleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3258,
+                        "src": "477:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3267,
+                        "name": "initialMembers",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3261,
+                        "src": "493:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                          "typeString": "address[] calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                          "typeString": "address[] calldata"
+                        }
+                      ],
+                      "id": 3264,
+                      "name": "_createSharedRole",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2573,
+                      "src": "451:17:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$_t_uint256_$_t_array$_t_address_$dyn_memory_ptr_$returns$__$",
+                        "typeString": "function (uint256,uint256,address[] memory)"
+                      }
+                    },
+                    "id": 3268,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "451:57:18",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3269,
+                  "nodeType": "ExpressionStatement",
+                  "src": "451:57:18"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "19fefdf0",
+            "id": 3271,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createSharedRole",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3262,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3256,
+                  "mutability": "mutable",
+                  "name": "roleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3271,
+                  "src": "336:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3255,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "336:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3258,
+                  "mutability": "mutable",
+                  "name": "managingRoleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3271,
+                  "src": "360:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3257,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "360:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3261,
+                  "mutability": "mutable",
+                  "name": "initialMembers",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3271,
+                  "src": "392:33:18",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 3259,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "392:7:18",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 3260,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "392:9:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "326:105:18"
+            },
+            "returnParameters": {
+              "id": 3263,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "441:0:18"
+            },
+            "scope": 3297,
+            "src": "301:214:18",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 3286,
+              "nodeType": "Block",
+              "src": "652:76:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3281,
+                        "name": "roleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3273,
+                        "src": "683:6:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3282,
+                        "name": "managingRoleId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3275,
+                        "src": "691:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3283,
+                        "name": "initialMember",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3277,
+                        "src": "707:13:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 3280,
+                      "name": "_createExclusiveRole",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2625,
+                      "src": "662:20:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,uint256,address)"
+                      }
+                    },
+                    "id": 3284,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "662:59:18",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3285,
+                  "nodeType": "ExpressionStatement",
+                  "src": "662:59:18"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "e2ad8db9",
+            "id": 3287,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createExclusiveRole",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3278,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3273,
+                  "mutability": "mutable",
+                  "name": "roleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3287,
+                  "src": "559:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3272,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "559:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3275,
+                  "mutability": "mutable",
+                  "name": "managingRoleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3287,
+                  "src": "583:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3274,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "583:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3277,
+                  "mutability": "mutable",
+                  "name": "initialMember",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3287,
+                  "src": "615:21:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 3276,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "615:7:18",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "549:93:18"
+            },
+            "returnParameters": {
+              "id": 3279,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "652:0:18"
+            },
+            "scope": 3297,
+            "src": "521:207:18",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 3295,
+              "nodeType": "Block",
+              "src": "868:2:18",
+              "statements": []
+            },
+            "documentation": null,
+            "functionSelector": "52b34d49",
+            "id": 3296,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 3292,
+                    "name": "roleId",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 3289,
+                    "src": "860:6:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  }
+                ],
+                "id": 3293,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 3291,
+                  "name": "onlyRoleHolder",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 2243,
+                  "src": "845:14:18",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_uint256_$",
+                    "typeString": "modifier (uint256)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "845:22:18"
+              }
+            ],
+            "name": "revertIfNotHoldingRole",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3290,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3289,
+                  "mutability": "mutable",
+                  "name": "roleId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3296,
+                  "src": "815:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3288,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "815:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "814:16:18"
+            },
+            "returnParameters": {
+              "id": 3294,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "868:0:18"
+            },
+            "scope": 3297,
+            "src": "783:87:18",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 3298,
+        "src": "259:613:18"
+      }
+    ],
+    "src": "75:798:18"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-11-23T23:49:10.007Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "addMember(uint256,address)": {
+        "details": "Reverts if `roleId` does not represent an initialized, SharedRole or if the caller is not a member of the managing role for `roleId`.",
+        "params": {
+          "newMember": "the new SharedRole member.",
+          "roleId": "the SharedRole membership to modify."
+        }
+      },
+      "getMember(uint256)": {
+        "details": "Reverts if `roleId` does not represent an initialized, exclusive role.",
+        "params": {
+          "roleId": "the ExclusiveRole membership to check."
+        },
+        "returns": {
+          "_0": "the address of the current ExclusiveRole member."
+        }
+      },
+      "holdsRole(uint256,address)": {
+        "details": "Reverts if roleId does not correspond to an initialized role.",
+        "params": {
+          "memberToCheck": "the address to check.",
+          "roleId": "the Role to check."
+        },
+        "returns": {
+          "_0": "True if `memberToCheck` is a member of `roleId`."
+        }
+      },
+      "removeMember(uint256,address)": {
+        "details": "Reverts if `roleId` does not represent an initialized, SharedRole or if the caller is not a member of the managing role for `roleId`.",
+        "params": {
+          "memberToRemove": "the current SharedRole member to remove.",
+          "roleId": "the SharedRole membership to modify."
+        }
+      },
+      "renounceMembership(uint256)": {
+        "details": "Reverts if the caller is not a member of the role for `roleId` or if `roleId` is not an initialized, SharedRole.",
+        "params": {
+          "roleId": "the SharedRole membership to modify."
+        }
+      },
+      "resetMember(uint256,address)": {
+        "details": "Reverts if the caller is not a member of the managing role for `roleId` or if `roleId` is not an initialized, ExclusiveRole.",
+        "params": {
+          "newMember": "the new ExclusiveRole member.",
+          "roleId": "the ExclusiveRole membership to modify."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "addMember(uint256,address)": {
+        "notice": "Adds `newMember` to the shared role, `roleId`."
+      },
+      "getMember(uint256)": {
+        "notice": "Gets the current holder of the exclusive role, `roleId`."
+      },
+      "holdsRole(uint256,address)": {
+        "notice": "Whether `memberToCheck` is a member of roleId."
+      },
+      "removeMember(uint256,address)": {
+        "notice": "Removes `memberToRemove` from the shared role, `roleId`."
+      },
+      "renounceMembership(uint256)": {
+        "notice": "Removes caller from the role, `roleId`."
+      },
+      "resetMember(uint256,address)": {
+        "notice": "Changes the exclusive role holder of `roleId` to `newMember`."
+      }
+    },
+    "version": 1
+  }
+}

@@ -1,0 +1,2885 @@
+{
+  "contractName": "MockFundingRateStore",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_timerAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "getCurrentTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCurrentTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "timerAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perpetual",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "rawValue",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Signed",
+          "name": "fundingRate",
+          "type": "tuple"
+        }
+      ],
+      "name": "setFundingRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perpetual",
+          "type": "address"
+        }
+      ],
+      "name": "getFundingRateForContract",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "rawValue",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Signed",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perpetual",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "amount",
+          "type": "tuple"
+        }
+      ],
+      "name": "chargeFundingRateFees",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perpetual",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "rewardRate",
+          "type": "tuple"
+        }
+      ],
+      "name": "setRewardRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_timerAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"perpetual\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"amount\",\"type\":\"tuple\"}],\"name\":\"chargeFundingRateFees\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"perpetual\",\"type\":\"address\"}],\"name\":\"getFundingRateForContract\",\"outputs\":[{\"components\":[{\"internalType\":\"int256\",\"name\":\"rawValue\",\"type\":\"int256\"}],\"internalType\":\"struct FixedPoint.Signed\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"setCurrentTime\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"perpetual\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"int256\",\"name\":\"rawValue\",\"type\":\"int256\"}],\"internalType\":\"struct FixedPoint.Signed\",\"name\":\"fundingRate\",\"type\":\"tuple\"}],\"name\":\"setFundingRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"perpetual\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"rewardRate\",\"type\":\"tuple\"}],\"name\":\"setRewardRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"timerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"getCurrentTime()\":{\"returns\":{\"_0\":\"uint for the current Testable timestamp.\"}},\"getFundingRateForContract(address)\":{\"details\":\"This method should never revert.\",\"params\":{\"perpetual\":\"perpetual contract whose funding rate identifier that the calling contracts wants to get a funding rate for.\"},\"returns\":{\"_0\":\"FixedPoint.Signed representing the funding rate for the given contract. 0.01 would represent a funding rate of 1% per second. -0.01 would represent a negative funding rate of -1% per second.\"}},\"setCurrentTime(uint256)\":{\"details\":\"Will revert if not running in test mode.\",\"params\":{\"time\":\"timestamp to set current Testable time to.\"}},\"setRewardRate(address,(uint256))\":{\"details\":\"Callable only by the Perpetual contract.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getCurrentTime()\":{\"notice\":\"Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp.\"},\"getFundingRateForContract(address)\":{\"notice\":\"Gets the latest funding rate for a perpetual contract.\"},\"setCurrentTime(uint256)\":{\"notice\":\"Sets the current time.\"},\"setRewardRate(address,(uint256))\":{\"notice\":\"Set the reward rate for a specific `perpetual` contract.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/test/MockFundingRateStore.sol\":\"MockFundingRateStore\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0x15636c4d1914553c95712ef01d59e73a2ce6efacbe1a20bab8a513d5897cf96d\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://8b942ab427bf0c45a3d5b3701a8c509fcf01f2aa0ec525fc74f7f01a2aaa18cf\",\"dweb:/ipfs/QmPoSCBrBUQTiaKR6baSYchK863Lu7RY6gqMPEeUbwsgQV\"]},\"/Users/matt/git/protocol/packages/core/contracts/common/implementation/Testable.sol\":{\"keccak256\":\"0xd7c14c59b0f4325ccc5feea6cf9acf45eefb169cbf48ffd4a265a3267b815cfa\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://b8b49c6c76f0458a196b11b0dc03f9bcc8f26851fdb51888b2a7cb9034a96493\",\"dweb:/ipfs/QmY4JDiPDcZbW8j3PWRd9YwRP28WdnSPGA1Yknj5gkWJWH\"]},\"/Users/matt/git/protocol/packages/core/contracts/common/implementation/Timer.sol\":{\"keccak256\":\"0x4ce613d5032aefb04a64fd623c216a6f68a1b903a4a7aa72721323dc988a6c90\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://6b557f3da4d90ec171cba84a2d85202c2327028a081552fe36440cdbbef6396d\",\"dweb:/ipfs/QmcLdrkekhH1VXN5jEuiqbkTzX7doz1KuVp6KQfCnyQ8C4\"]},\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol\":{\"keccak256\":\"0x79f35dfc226fd3dff7d3d491199a924b6bb39f37bdfbac848ed3ac60e2347b62\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://9252c746eebb321e05b9410100b7aa5765b198b825698969b7ba8b182215afb4\",\"dweb:/ipfs/QmWrva3bLHAqB3agH1zygfzuG3xC6Pa5oqyrumKCSztcmk\"]},\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/test/MockFundingRateStore.sol\":{\"keccak256\":\"0x9c6c8a646897143c28321b6f818785080c5342951e28277bda2e40390502264e\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://49e71be005ab06ef7f3992d85839df568580978651a5ce29c909ed31ee02dfa8\",\"dweb:/ipfs/QmZJWJQXMdfS6ZANG1qBsmsgx6JE2b22N3LzfvvadZZFpF\"]},\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol\":{\"keccak256\":\"0x01e56b2f515daaf6c17f9858816bfd6056f410d75f0bfae263b7d3296dfaadf3\",\"urls\":[\"bzz-raw://fc75d72fa78dcf28696023cdc05242c88814effd0f5a955ef92233f01c3b08a7\",\"dweb:/ipfs/QmRTgvnzizX1ytiWZD5nVv6tGp3jJzp4SjdvpXpgEGxohZ\"]},\"/Users/matt/git/protocol/packages/core/contracts/oracle/implementation/Constants.sol\":{\"keccak256\":\"0x9f936aaa234479b639a9fe683e38dfd154aaff0679bf9fbafdb5e8ff628d8699\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://72427596bb4564289678a4bfa07edf3883c9a3f162bd7f5c98f44d81d8c1d762\",\"dweb:/ipfs/Qmf7dogRJsaMsvda51dGwHJ5tiEPSCwP6ooiMhSkZ6FDDd\"]},\"/Users/matt/git/protocol/packages/core/contracts/oracle/interfaces/FinderInterface.sol\":{\"keccak256\":\"0x22ad0329b3a6e55e30fb8391aa69310966cdbc06047ea7d031a2d14450a54d2f\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://5341487810effd6dddd567cd0bf8cd67e369ac69740bd1113ce197fa42bf1a90\",\"dweb:/ipfs/QmYoXoAFTkUdxmoU6AAdHFMpKQtgGi9xaUrQrBR1h7Q7ZR\"]},\"/Users/matt/git/protocol/packages/core/contracts/oracle/interfaces/IdentifierWhitelistInterface.sol\":{\"keccak256\":\"0xfd0481f8e756e8e0f5694ecd7e6d32ef33bf17ab06158d57c69cfccee9717561\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://425d8849f8d2876f30663f77690cd202b8068f83ae02d5587466e2bce9b8a717\",\"dweb:/ipfs/QmTMNyDnP9n4ndkjiwtGD2AQj6EjA4iDzwwsj9qgVrgbXy\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x6cc1cb934a3ac2137a7dcaed018af9e235392236ceecfd3687259702b9c767ad\",\"urls\":[\"bzz-raw://0055fa88138cd1c3c6440370f8580f85857f8fe9dec41c99af9eafbeb8d9c3ce\",\"dweb:/ipfs/QmX1xDh8vwGLLCH8ti45eXjQ7Wcxv1FEGTR3jkFnd5Nv6F\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516106fb3803806106fb83398101604081905261002f91610054565b600080546001600160a01b0319166001600160a01b0392909216919091179055610082565b600060208284031215610065578081fd5b81516001600160a01b038116811461007b578182fd5b9392505050565b61066a806100916000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c806324b41f681161005b57806324b41f68146100c857806329cb924d146100e8578063be6bfb5b146100fd578063eb9c7de1146101105761007d565b80630e2cbabc146100825780631c39c38d1461009757806322f8e566146100b5575b600080fd5b61009561009036600461044f565b610123565b005b61009f6101a6565b6040516100ac9190610583565b60405180910390f35b6100956100c3366004610553565b6101b5565b6100db6100d636600461042d565b61022f565b6040516100ac91906105d8565b6100f0610262565b6040516100ac91906105ec565b61009561010b3660046104d9565b610305565b61009561011e36600461048d565b610366565b6040516340704d6760e01b81526001600160a01b038316906340704d679061014f9084906004016105e2565b602060405180830381600087803b15801561016957600080fd5b505af115801561017d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101a1919061052e565b505050565b6000546001600160a01b031681565b6000546001600160a01b03166101ca57600080fd5b60005460405163117c72b360e11b81526001600160a01b03909116906322f8e566906101fa9084906004016105ec565b600060405180830381600087803b15801561021457600080fd5b505af1158015610228573d6000803e3d6000fd5b5050505050565b610237610403565b506001600160a01b031660009081526001602090815260409182902082519182019092529054815290565b600080546001600160a01b0316156102ff5760008054906101000a90046001600160a01b03166001600160a01b03166329cb924d6040518163ffffffff1660e01b815260040160206040518083038186803b1580156102c057600080fd5b505afa1580156102d4573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102f8919061056b565b9050610302565b50425b90565b60405180606001604052808281526020018381526020016103266000610389565b90526001600160a01b0390931660009081526001602081815260409283902086515181559086015191810191909155930151516002909301929092555050565b6001600160a01b0390911660009081526001602052604090209051600290910155565b610391610403565b6040805160208101909152806103af84670de0b6b3a76400006103b7565b905292915050565b6000826103c6575060006103fd565b828202828482816103d357fe5b04146103fa5760405162461bcd60e51b81526004016103f190610597565b60405180910390fd5b90505b92915050565b6040518060200160405280600081525090565b80356001600160a01b03811681146103fd57600080fd5b60006020828403121561043e578081fd5b6104488383610416565b9392505050565b6000808284036040811215610462578182fd5b61046c8585610416565b92506020601f198201121561047f578182fd5b506020830190509250929050565b60008082840360408112156104a0578283fd5b83356104ab8161061c565b92506020601f19820112156104be578182fd5b506104c960206105f5565b6020939093013583525092909150565b600080600083850360608112156104ee578182fd5b84356104f98161061c565b93506020858101359350603f1982011215610512578182fd5b5061051d60206105f5565b604094909401358452509093909250565b60006020828403121561053f578081fd5b61054960206105f5565b9151825250919050565b600060208284031215610564578081fd5b5035919050565b60006020828403121561057c578081fd5b5051919050565b6001600160a01b0391909116815260200190565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b9051815260200190565b9035815260200190565b90815260200190565b60405181810167ffffffffffffffff8111828210171561061457600080fd5b604052919050565b6001600160a01b038116811461063157600080fd5b5056fea264697066735822122056717a874613e05583aef944f9b5cf029cb4fc232c9eac5b90e1a411bb2db1be64736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061007d5760003560e01c806324b41f681161005b57806324b41f68146100c857806329cb924d146100e8578063be6bfb5b146100fd578063eb9c7de1146101105761007d565b80630e2cbabc146100825780631c39c38d1461009757806322f8e566146100b5575b600080fd5b61009561009036600461044f565b610123565b005b61009f6101a6565b6040516100ac9190610583565b60405180910390f35b6100956100c3366004610553565b6101b5565b6100db6100d636600461042d565b61022f565b6040516100ac91906105d8565b6100f0610262565b6040516100ac91906105ec565b61009561010b3660046104d9565b610305565b61009561011e36600461048d565b610366565b6040516340704d6760e01b81526001600160a01b038316906340704d679061014f9084906004016105e2565b602060405180830381600087803b15801561016957600080fd5b505af115801561017d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101a1919061052e565b505050565b6000546001600160a01b031681565b6000546001600160a01b03166101ca57600080fd5b60005460405163117c72b360e11b81526001600160a01b03909116906322f8e566906101fa9084906004016105ec565b600060405180830381600087803b15801561021457600080fd5b505af1158015610228573d6000803e3d6000fd5b5050505050565b610237610403565b506001600160a01b031660009081526001602090815260409182902082519182019092529054815290565b600080546001600160a01b0316156102ff5760008054906101000a90046001600160a01b03166001600160a01b03166329cb924d6040518163ffffffff1660e01b815260040160206040518083038186803b1580156102c057600080fd5b505afa1580156102d4573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102f8919061056b565b9050610302565b50425b90565b60405180606001604052808281526020018381526020016103266000610389565b90526001600160a01b0390931660009081526001602081815260409283902086515181559086015191810191909155930151516002909301929092555050565b6001600160a01b0390911660009081526001602052604090209051600290910155565b610391610403565b6040805160208101909152806103af84670de0b6b3a76400006103b7565b905292915050565b6000826103c6575060006103fd565b828202828482816103d357fe5b04146103fa5760405162461bcd60e51b81526004016103f190610597565b60405180910390fd5b90505b92915050565b6040518060200160405280600081525090565b80356001600160a01b03811681146103fd57600080fd5b60006020828403121561043e578081fd5b6104488383610416565b9392505050565b6000808284036040811215610462578182fd5b61046c8585610416565b92506020601f198201121561047f578182fd5b506020830190509250929050565b60008082840360408112156104a0578283fd5b83356104ab8161061c565b92506020601f19820112156104be578182fd5b506104c960206105f5565b6020939093013583525092909150565b600080600083850360608112156104ee578182fd5b84356104f98161061c565b93506020858101359350603f1982011215610512578182fd5b5061051d60206105f5565b604094909401358452509093909250565b60006020828403121561053f578081fd5b61054960206105f5565b9151825250919050565b600060208284031215610564578081fd5b5035919050565b60006020828403121561057c578081fd5b5051919050565b6001600160a01b0391909116815260200190565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b9051815260200190565b9035815260200190565b90815260200190565b60405181810167ffffffffffffffff8111828210171561061457600080fd5b604052919050565b6001600160a01b038116811461063157600080fd5b5056fea264697066735822122056717a874613e05583aef944f9b5cf029cb4fc232c9eac5b90e1a411bb2db1be64736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "556:1418:44:-:0;;;1080:68;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;743:12:6;:28;;-1:-1:-1;;;;;;743:28:6;-1:-1:-1;;;;;743:28:6;;;;;;;;;;556:1418:44;;146:263:-1;;261:2;249:9;240:7;236:23;232:32;229:2;;;-1:-1;;267:12;229:2;83:13;;-1:-1;;;;;576:54;;701:35;;691:2;;-1:-1;;740:12;691:2;319:74;223:186;-1:-1;;;223:186::o;:::-;556:1418:44;;;;;;",
+  "deployedSourceMap": "556:1418:44:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1629:174;;;;;;:::i;:::-;;:::i;:::-;;397:27:6;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;1112:115;;;;;;:::i;:::-;;:::i;1452:171:44:-;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;1472:256:6:-;;;:::i;:::-;;;;;;;:::i;1207:239:44:-;;;;;;:::i;:::-;;:::i;1809:163::-;;;;;;:::i;:::-;;:::i;1629:174::-;1735:61;;-1:-1:-1;;;1735:61:44;;-1:-1:-1;;;;;1735:53:44;;;;;:61;;1789:6;;1735:61;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;1629:174;;:::o;397:27:6:-;;;-1:-1:-1;;;;;397:27:6;;:::o;1112:115::-;914:3;890:12;-1:-1:-1;;;;;890:12:6;882:37;;;;;;1186:12:::1;::::0;1180:40:::1;::::0;-1:-1:-1;;;1180:40:6;;-1:-1:-1;;;;;1186:12:6;;::::1;::::0;1180:34:::1;::::0;:40:::1;::::0;1215:4;;1180:40:::1;;;:::i;:::-;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;1112:115:::0;:::o;1452:171:44:-;1538:24;;:::i;:::-;-1:-1:-1;;;;;;1581:23:44;;;;;:12;:23;;;;;;;;;1574:42;;;;;;;;;;;;;1452:171::o;1472:256:6:-;1519:7;1542:12;;-1:-1:-1;;;;;1542:12:6;:28;1538:184;;1599:12;;;;;;;;-1:-1:-1;;;;;1599:12:6;-1:-1:-1;;;;;1593:34:6;;:36;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1586:43;;;;1538:184;-1:-1:-1;1667:3:6;1538:184;1472:256;:::o;1207:239:44:-;1377:62;;;;;;;;1389:11;1377:62;;;;1402:4;1377:62;;;;1408:30;1436:1;1408:27;:30::i;:::-;1377:62;;-1:-1:-1;;;;;1351:23:44;;;;;;;:12;:23;;;;;;;;;:88;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1207:239:44:o;1809:163::-;-1:-1:-1;;;;;1918:23:44;;;;;;;:12;:23;;;;;:47;;:34;;;;:47;1809:163::o;1027:135:3:-;1087:15;;:::i;:::-;1121:34;;;;;;;;;;1130:24;:1;607:6;1130:5;:24::i;:::-;1121:34;;1114:41;1027:135;-1:-1:-1;;1027:135:3:o;2119:459:89:-;2177:7;2418:6;2414:45;;-1:-1:-1;2447:1:89;2440:8;;2414:45;2481:5;;;2485:1;2481;:5;:1;2504:5;;;;;:10;2496:56;;;;-1:-1:-1;;;2496:56:89;;;;;;;:::i;:::-;;;;;;;;;2570:1;-1:-1:-1;2119:459:89;;;;;:::o;-1:-1:-1:-;;;;;;;;;;;;;;:::o;5:130::-;72:20;;-1:-1;;;;;8345:54;;8549:35;;8539:2;;8598:1;;8588:12;1874:241;;1978:2;1966:9;1957:7;1953:23;1949:32;1946:2;;;-1:-1;;1984:12;1946:2;2046:53;2091:7;2067:22;2046:53;:::i;:::-;2036:63;1940:175;-1:-1;;;1940:175::o;2122:420::-;;;2258:9;2249:7;2245:23;2270:2;2245:23;2241:32;2238:2;;;-1:-1;;2276:12;2238:2;2338:53;2383:7;2359:22;2338:53;:::i;:::-;2328:63;-1:-1;2428:2;-1:-1;;768:16;;764:25;761:2;;;-1:-1;;792:12;761:2;;2428;2498:9;2494:22;2436:90;;2232:310;;;;;:::o;2549:416::-;;;2683:9;2674:7;2670:23;2695:2;2670:23;2666:32;2663:2;;;-1:-1;;2701:12;2663:2;85:6;72:20;97:33;124:5;97:33;:::i;:::-;2753:63;-1:-1;2853:2;-1:-1;;966:19;;962:30;959:2;;;-1:-1;;995:12;959:2;;1023:20;2853:2;1023:20;:::i;:::-;2853:2;2917:22;;;;1663:20;1104:75;;-1:-1;2657:308;1111:16;;-1:-1;2657:308::o;2972:539::-;;;;3122:9;3113:7;3109:23;3134:2;3109:23;3105:32;3102:2;;;-1:-1;;3140:12;3102:2;85:6;72:20;97:33;124:5;97:33;:::i;:::-;3192:63;-1:-1;3292:2;3331:22;;;1663:20;;-1:-1;;;400:19;;396:30;393:2;;;-1:-1;;429:12;393:2;;457:20;3292:2;457:20;:::i;:::-;3400:2;3463:22;;;;208:20;538:74;;-1:-1;3096:415;;;;-1:-1;3096:415::o;3518:313::-;;3658:2;3646:9;3637:7;3633:23;3629:32;3626:2;;;-1:-1;;3664:12;3626:2;1401:20;3658:2;1401:20;:::i;:::-;1811:13;;1482:86;;-1:-1;1489:16;3620:211;-1:-1;3620:211::o;3838:241::-;;3942:2;3930:9;3921:7;3917:23;3913:32;3910:2;;;-1:-1;;3948:12;3910:2;-1:-1;1663:20;;3904:175;-1:-1;3904:175::o;4086:263::-;;4201:2;4189:9;4180:7;4176:23;4172:32;4169:2;;;-1:-1;;4207:12;4169:2;-1:-1;1811:13;;4163:186;-1:-1;4163:186::o;6005:222::-;-1:-1;;;;;8345:54;;;;4427:37;;6132:2;6117:18;;6103:124::o;6234:416::-;6434:2;6448:47;;;4808:2;6419:18;;;7911:19;4844:34;7951:14;;;4824:55;-1:-1;;;4899:12;;;4892:25;4936:12;;;6405:245::o;6657:318::-;5232:23;;4535:36;;6832:2;6817:18;;6803:172::o;6982:326::-;1663:20;;4535:36;;7161:2;7146:18;;7132:176::o;7315:222::-;4535:36;;;7442:2;7427:18;;7413:124::o;7544:256::-;7606:2;7600:9;7632:17;;;7707:18;7692:34;;7728:22;;;7689:62;7686:2;;;7764:1;;7754:12;7686:2;7606;7773:22;7584:216;;-1:-1;7584:216::o;8490:117::-;-1:-1;;;;;8345:54;;8549:35;;8539:2;;8598:1;;8588:12;8539:2;8533:74;:::o",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\n\npragma experimental ABIEncoderV2;\n\nimport \"../interfaces/FundingRateStoreInterface.sol\";\nimport \"../../../common/implementation/Testable.sol\";\nimport \"../../../common/implementation/FixedPoint.sol\";\nimport \"../../../oracle/interfaces/FinderInterface.sol\";\nimport \"../../../oracle/implementation/Constants.sol\";\nimport \"../../../oracle/interfaces/IdentifierWhitelistInterface.sol\";\nimport \"../../perpetual-multiparty/PerpetualInterface.sol\";\n\n// A mock funding rate store used for testing.\ncontract MockFundingRateStore is FundingRateStoreInterface, Testable {\n    using FixedPoint for FixedPoint.Unsigned;\n\n    struct FundingRate {\n        // Represented in wei as a % of token amount charged per second.\n        // e.g. fundingRate = 0.01 means 1% of token amount charged per second.\n        FixedPoint.Signed fundingRate;\n        uint256 timestamp; // Time the verified funding rate became available.\n        FixedPoint.Unsigned rewardRate;\n    }\n\n    mapping(address => FundingRate) private fundingRates;\n\n    constructor(address _timerAddress) public Testable(_timerAddress) {}\n\n    // Sets the funding rate for a given identifier.\n    function setFundingRate(\n        address perpetual,\n        uint256 time,\n        FixedPoint.Signed memory fundingRate\n    ) external {\n        fundingRates[perpetual] = FundingRate(fundingRate, time, FixedPoint.fromUnscaledUint(0));\n    }\n\n    function getFundingRateForContract(address perpetual) external view override returns (FixedPoint.Signed memory) {\n        return fundingRates[perpetual].fundingRate;\n    }\n\n    function chargeFundingRateFees(address perpetual, FixedPoint.Unsigned calldata amount) external {\n        PerpetualInterface(perpetual).withdrawFundingRateFees(amount);\n    }\n\n    function setRewardRate(address perpetual, FixedPoint.Unsigned memory rewardRate) external override {\n        fundingRates[perpetual].rewardRate = rewardRate;\n    }\n}\n",
+  "sourcePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/test/MockFundingRateStore.sol",
+  "ast": {
+    "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/test/MockFundingRateStore.sol",
+    "exportedSymbols": {
+      "MockFundingRateStore": [
+        12712
+      ]
+    },
+    "id": 12713,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12608,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:44"
+      },
+      {
+        "id": 12609,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:44"
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol",
+        "file": "../interfaces/FundingRateStoreInterface.sol",
+        "id": 12610,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 12607,
+        "src": "102:53:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/Testable.sol",
+        "file": "../../../common/implementation/Testable.sol",
+        "id": 12611,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 2699,
+        "src": "156:53:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../../common/implementation/FixedPoint.sol",
+        "id": 12612,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 1958,
+        "src": "210:55:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/oracle/interfaces/FinderInterface.sol",
+        "file": "../../../oracle/interfaces/FinderInterface.sol",
+        "id": 12613,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 21157,
+        "src": "266:56:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/oracle/implementation/Constants.sol",
+        "file": "../../../oracle/implementation/Constants.sol",
+        "id": 12614,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 16538,
+        "src": "323:54:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/oracle/interfaces/IdentifierWhitelistInterface.sol",
+        "file": "../../../oracle/interfaces/IdentifierWhitelistInterface.sol",
+        "id": 12615,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 21182,
+        "src": "378:69:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol",
+        "file": "../../perpetual-multiparty/PerpetualInterface.sol",
+        "id": 12616,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 13139,
+        "src": "448:59:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 12617,
+              "name": "FundingRateStoreInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 12606,
+              "src": "589:25:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FundingRateStoreInterface_$12606",
+                "typeString": "contract FundingRateStoreInterface"
+              }
+            },
+            "id": 12618,
+            "nodeType": "InheritanceSpecifier",
+            "src": "589:25:44"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 12619,
+              "name": "Testable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2698,
+              "src": "616:8:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Testable_$2698",
+                "typeString": "contract Testable"
+              }
+            },
+            "id": 12620,
+            "nodeType": "InheritanceSpecifier",
+            "src": "616:8:44"
+          }
+        ],
+        "contractDependencies": [
+          2698,
+          12606
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 12712,
+        "linearizedBaseContracts": [
+          12712,
+          2698,
+          12606
+        ],
+        "name": "MockFundingRateStore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 12623,
+            "libraryName": {
+              "contractScope": null,
+              "id": 12621,
+              "name": "FixedPoint",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1957,
+              "src": "637:10:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FixedPoint_$1957",
+                "typeString": "library FixedPoint"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "631:41:44",
+            "typeName": {
+              "contractScope": null,
+              "id": 12622,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 471,
+              "src": "652:19:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            }
+          },
+          {
+            "canonicalName": "MockFundingRateStore.FundingRate",
+            "id": 12630,
+            "members": [
+              {
+                "constant": false,
+                "id": 12625,
+                "mutability": "mutable",
+                "name": "fundingRate",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12630,
+                "src": "860:29:44",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                  "typeString": "struct FixedPoint.Signed"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12624,
+                  "name": "FixedPoint.Signed",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1165,
+                  "src": "860:17:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12627,
+                "mutability": "mutable",
+                "name": "timestamp",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12630,
+                "src": "899:17:44",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12626,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "899:7:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12629,
+                "mutability": "mutable",
+                "name": "rewardRate",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12630,
+                "src": "978:30:44",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12628,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "978:19:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "FundingRate",
+            "nodeType": "StructDefinition",
+            "scope": 12712,
+            "src": "678:337:44",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 12634,
+            "mutability": "mutable",
+            "name": "fundingRates",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 12712,
+            "src": "1021:52:44",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+              "typeString": "mapping(address => struct MockFundingRateStore.FundingRate)"
+            },
+            "typeName": {
+              "id": 12633,
+              "keyType": {
+                "id": 12631,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "1029:7:44",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1021:31:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                "typeString": "mapping(address => struct MockFundingRateStore.FundingRate)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 12632,
+                "name": "FundingRate",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 12630,
+                "src": "1040:11:44",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_FundingRate_$12630_storage_ptr",
+                  "typeString": "struct MockFundingRateStore.FundingRate"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 12642,
+              "nodeType": "Block",
+              "src": "1146:2:44",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 12643,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 12639,
+                    "name": "_timerAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 12636,
+                    "src": "1131:13:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 12640,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 12638,
+                  "name": "Testable",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 2698,
+                  "src": "1122:8:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_Testable_$2698_$",
+                    "typeString": "type(contract Testable)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1122:23:44"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12637,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12636,
+                  "mutability": "mutable",
+                  "name": "_timerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12643,
+                  "src": "1092:21:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12635,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1092:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1091:23:44"
+            },
+            "returnParameters": {
+              "id": 12641,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1146:0:44"
+            },
+            "scope": 12712,
+            "src": "1080:68:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12665,
+              "nodeType": "Block",
+              "src": "1341:105:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 12663,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 12652,
+                        "name": "fundingRates",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12634,
+                        "src": "1351:12:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                          "typeString": "mapping(address => struct MockFundingRateStore.FundingRate storage ref)"
+                        }
+                      },
+                      "id": 12654,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 12653,
+                        "name": "perpetual",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12645,
+                        "src": "1364:9:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1351:23:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                        "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 12656,
+                          "name": "fundingRate",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12649,
+                          "src": "1389:11:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                            "typeString": "struct FixedPoint.Signed memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 12657,
+                          "name": "time",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12647,
+                          "src": "1402:4:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "hexValue": "30",
+                              "id": 12660,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "1436:1:44",
+                              "subdenomination": null,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 12658,
+                              "name": "FixedPoint",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1957,
+                              "src": "1408:10:44",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_FixedPoint_$1957_$",
+                                "typeString": "type(library FixedPoint)"
+                              }
+                            },
+                            "id": 12659,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "fromUnscaledUint",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 487,
+                            "src": "1408:27:44",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_pure$_t_uint256_$returns$_t_struct$_Unsigned_$471_memory_ptr_$",
+                              "typeString": "function (uint256) pure returns (struct FixedPoint.Unsigned memory)"
+                            }
+                          },
+                          "id": 12661,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1408:30:44",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                            "typeString": "struct FixedPoint.Unsigned memory"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                            "typeString": "struct FixedPoint.Signed memory"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                            "typeString": "struct FixedPoint.Unsigned memory"
+                          }
+                        ],
+                        "id": 12655,
+                        "name": "FundingRate",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12630,
+                        "src": "1377:11:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_FundingRate_$12630_storage_ptr_$",
+                          "typeString": "type(struct MockFundingRateStore.FundingRate storage pointer)"
+                        }
+                      },
+                      "id": 12662,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1377:62:44",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FundingRate_$12630_memory_ptr",
+                        "typeString": "struct MockFundingRateStore.FundingRate memory"
+                      }
+                    },
+                    "src": "1351:88:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                      "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                    }
+                  },
+                  "id": 12664,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1351:88:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "be6bfb5b",
+            "id": 12666,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setFundingRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12650,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12645,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12666,
+                  "src": "1240:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12644,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1240:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12647,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12666,
+                  "src": "1267:12:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12646,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1267:7:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12649,
+                  "mutability": "mutable",
+                  "name": "fundingRate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12666,
+                  "src": "1289:36:44",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12648,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1165,
+                    "src": "1289:17:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1230:101:44"
+            },
+            "returnParameters": {
+              "id": 12651,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1341:0:44"
+            },
+            "scope": 12712,
+            "src": "1207:239:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              12597
+            ],
+            "body": {
+              "id": 12679,
+              "nodeType": "Block",
+              "src": "1564:59:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 12674,
+                        "name": "fundingRates",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12634,
+                        "src": "1581:12:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                          "typeString": "mapping(address => struct MockFundingRateStore.FundingRate storage ref)"
+                        }
+                      },
+                      "id": 12676,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 12675,
+                        "name": "perpetual",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12668,
+                        "src": "1594:9:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1581:23:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                        "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                      }
+                    },
+                    "id": 12677,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "fundingRate",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 12625,
+                    "src": "1581:35:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage",
+                      "typeString": "struct FixedPoint.Signed storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 12673,
+                  "id": 12678,
+                  "nodeType": "Return",
+                  "src": "1574:42:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "24b41f68",
+            "id": 12680,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getFundingRateForContract",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 12670,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1520:8:44"
+            },
+            "parameters": {
+              "id": 12669,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12668,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12680,
+                  "src": "1487:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12667,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1487:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1486:19:44"
+            },
+            "returnParameters": {
+              "id": 12673,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12672,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12680,
+                  "src": "1538:24:44",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12671,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1165,
+                    "src": "1538:17:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1537:26:44"
+            },
+            "scope": 12712,
+            "src": "1452:171:44",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 12694,
+              "nodeType": "Block",
+              "src": "1725:78:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 12691,
+                        "name": "amount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12684,
+                        "src": "1789:6:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_calldata_ptr",
+                          "typeString": "struct FixedPoint.Unsigned calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_calldata_ptr",
+                          "typeString": "struct FixedPoint.Unsigned calldata"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 12688,
+                            "name": "perpetual",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12682,
+                            "src": "1754:9:44",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 12687,
+                          "name": "PerpetualInterface",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 13138,
+                          "src": "1735:18:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_PerpetualInterface_$13138_$",
+                            "typeString": "type(contract PerpetualInterface)"
+                          }
+                        },
+                        "id": 12689,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1735:29:44",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_PerpetualInterface_$13138",
+                          "typeString": "contract PerpetualInterface"
+                        }
+                      },
+                      "id": 12690,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "withdrawFundingRateFees",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 13127,
+                      "src": "1735:53:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_struct$_Unsigned_$471_memory_ptr_$returns$_t_struct$_Unsigned_$471_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory) external returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 12692,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1735:61:44",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "id": 12693,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1735:61:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "0e2cbabc",
+            "id": 12695,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "chargeFundingRateFees",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12685,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12682,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12695,
+                  "src": "1660:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12681,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1660:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12684,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12695,
+                  "src": "1679:35:44",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_calldata_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12683,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1679:19:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1659:56:44"
+            },
+            "returnParameters": {
+              "id": 12686,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1725:0:44"
+            },
+            "scope": 12712,
+            "src": "1629:174:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              12605
+            ],
+            "body": {
+              "id": 12710,
+              "nodeType": "Block",
+              "src": "1908:64:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 12708,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 12703,
+                          "name": "fundingRates",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12634,
+                          "src": "1918:12:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                            "typeString": "mapping(address => struct MockFundingRateStore.FundingRate storage ref)"
+                          }
+                        },
+                        "id": 12705,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 12704,
+                          "name": "perpetual",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12697,
+                          "src": "1931:9:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1918:23:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                          "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                        }
+                      },
+                      "id": 12706,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "rewardRate",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 12629,
+                      "src": "1918:34:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                        "typeString": "struct FixedPoint.Unsigned storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 12707,
+                      "name": "rewardRate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 12699,
+                      "src": "1955:10:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned memory"
+                      }
+                    },
+                    "src": "1918:47:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                      "typeString": "struct FixedPoint.Unsigned storage ref"
+                    }
+                  },
+                  "id": 12709,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1918:47:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "eb9c7de1",
+            "id": 12711,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setRewardRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 12701,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1899:8:44"
+            },
+            "parameters": {
+              "id": 12700,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12697,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12711,
+                  "src": "1832:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12696,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1832:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12699,
+                  "mutability": "mutable",
+                  "name": "rewardRate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12711,
+                  "src": "1851:37:44",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12698,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1851:19:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1831:58:44"
+            },
+            "returnParameters": {
+              "id": 12702,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1908:0:44"
+            },
+            "scope": 12712,
+            "src": "1809:163:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 12713,
+        "src": "556:1418:44"
+      }
+    ],
+    "src": "42:1933:44"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/test/MockFundingRateStore.sol",
+    "exportedSymbols": {
+      "MockFundingRateStore": [
+        12712
+      ]
+    },
+    "id": 12713,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12608,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:44"
+      },
+      {
+        "id": 12609,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:44"
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/funding-rate-store/interfaces/FundingRateStoreInterface.sol",
+        "file": "../interfaces/FundingRateStoreInterface.sol",
+        "id": 12610,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 12607,
+        "src": "102:53:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/Testable.sol",
+        "file": "../../../common/implementation/Testable.sol",
+        "id": 12611,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 2699,
+        "src": "156:53:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../../common/implementation/FixedPoint.sol",
+        "id": 12612,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 1958,
+        "src": "210:55:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/oracle/interfaces/FinderInterface.sol",
+        "file": "../../../oracle/interfaces/FinderInterface.sol",
+        "id": 12613,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 21157,
+        "src": "266:56:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/oracle/implementation/Constants.sol",
+        "file": "../../../oracle/implementation/Constants.sol",
+        "id": 12614,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 16538,
+        "src": "323:54:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/oracle/interfaces/IdentifierWhitelistInterface.sol",
+        "file": "../../../oracle/interfaces/IdentifierWhitelistInterface.sol",
+        "id": 12615,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 21182,
+        "src": "378:69:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol",
+        "file": "../../perpetual-multiparty/PerpetualInterface.sol",
+        "id": 12616,
+        "nodeType": "ImportDirective",
+        "scope": 12713,
+        "sourceUnit": 13139,
+        "src": "448:59:44",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 12617,
+              "name": "FundingRateStoreInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 12606,
+              "src": "589:25:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FundingRateStoreInterface_$12606",
+                "typeString": "contract FundingRateStoreInterface"
+              }
+            },
+            "id": 12618,
+            "nodeType": "InheritanceSpecifier",
+            "src": "589:25:44"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 12619,
+              "name": "Testable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2698,
+              "src": "616:8:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Testable_$2698",
+                "typeString": "contract Testable"
+              }
+            },
+            "id": 12620,
+            "nodeType": "InheritanceSpecifier",
+            "src": "616:8:44"
+          }
+        ],
+        "contractDependencies": [
+          2698,
+          12606
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 12712,
+        "linearizedBaseContracts": [
+          12712,
+          2698,
+          12606
+        ],
+        "name": "MockFundingRateStore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 12623,
+            "libraryName": {
+              "contractScope": null,
+              "id": 12621,
+              "name": "FixedPoint",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1957,
+              "src": "637:10:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FixedPoint_$1957",
+                "typeString": "library FixedPoint"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "631:41:44",
+            "typeName": {
+              "contractScope": null,
+              "id": 12622,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 471,
+              "src": "652:19:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            }
+          },
+          {
+            "canonicalName": "MockFundingRateStore.FundingRate",
+            "id": 12630,
+            "members": [
+              {
+                "constant": false,
+                "id": 12625,
+                "mutability": "mutable",
+                "name": "fundingRate",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12630,
+                "src": "860:29:44",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                  "typeString": "struct FixedPoint.Signed"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12624,
+                  "name": "FixedPoint.Signed",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1165,
+                  "src": "860:17:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12627,
+                "mutability": "mutable",
+                "name": "timestamp",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12630,
+                "src": "899:17:44",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12626,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "899:7:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12629,
+                "mutability": "mutable",
+                "name": "rewardRate",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12630,
+                "src": "978:30:44",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12628,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "978:19:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "FundingRate",
+            "nodeType": "StructDefinition",
+            "scope": 12712,
+            "src": "678:337:44",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 12634,
+            "mutability": "mutable",
+            "name": "fundingRates",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 12712,
+            "src": "1021:52:44",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+              "typeString": "mapping(address => struct MockFundingRateStore.FundingRate)"
+            },
+            "typeName": {
+              "id": 12633,
+              "keyType": {
+                "id": 12631,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "1029:7:44",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1021:31:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                "typeString": "mapping(address => struct MockFundingRateStore.FundingRate)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 12632,
+                "name": "FundingRate",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 12630,
+                "src": "1040:11:44",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_FundingRate_$12630_storage_ptr",
+                  "typeString": "struct MockFundingRateStore.FundingRate"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 12642,
+              "nodeType": "Block",
+              "src": "1146:2:44",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 12643,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 12639,
+                    "name": "_timerAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 12636,
+                    "src": "1131:13:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 12640,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 12638,
+                  "name": "Testable",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 2698,
+                  "src": "1122:8:44",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_Testable_$2698_$",
+                    "typeString": "type(contract Testable)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1122:23:44"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12637,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12636,
+                  "mutability": "mutable",
+                  "name": "_timerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12643,
+                  "src": "1092:21:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12635,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1092:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1091:23:44"
+            },
+            "returnParameters": {
+              "id": 12641,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1146:0:44"
+            },
+            "scope": 12712,
+            "src": "1080:68:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12665,
+              "nodeType": "Block",
+              "src": "1341:105:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 12663,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 12652,
+                        "name": "fundingRates",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12634,
+                        "src": "1351:12:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                          "typeString": "mapping(address => struct MockFundingRateStore.FundingRate storage ref)"
+                        }
+                      },
+                      "id": 12654,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 12653,
+                        "name": "perpetual",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12645,
+                        "src": "1364:9:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1351:23:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                        "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 12656,
+                          "name": "fundingRate",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12649,
+                          "src": "1389:11:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                            "typeString": "struct FixedPoint.Signed memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 12657,
+                          "name": "time",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12647,
+                          "src": "1402:4:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "hexValue": "30",
+                              "id": 12660,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "1436:1:44",
+                              "subdenomination": null,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 12658,
+                              "name": "FixedPoint",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1957,
+                              "src": "1408:10:44",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_FixedPoint_$1957_$",
+                                "typeString": "type(library FixedPoint)"
+                              }
+                            },
+                            "id": 12659,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "fromUnscaledUint",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 487,
+                            "src": "1408:27:44",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_pure$_t_uint256_$returns$_t_struct$_Unsigned_$471_memory_ptr_$",
+                              "typeString": "function (uint256) pure returns (struct FixedPoint.Unsigned memory)"
+                            }
+                          },
+                          "id": 12661,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1408:30:44",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                            "typeString": "struct FixedPoint.Unsigned memory"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                            "typeString": "struct FixedPoint.Signed memory"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                            "typeString": "struct FixedPoint.Unsigned memory"
+                          }
+                        ],
+                        "id": 12655,
+                        "name": "FundingRate",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12630,
+                        "src": "1377:11:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_FundingRate_$12630_storage_ptr_$",
+                          "typeString": "type(struct MockFundingRateStore.FundingRate storage pointer)"
+                        }
+                      },
+                      "id": 12662,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1377:62:44",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FundingRate_$12630_memory_ptr",
+                        "typeString": "struct MockFundingRateStore.FundingRate memory"
+                      }
+                    },
+                    "src": "1351:88:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                      "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                    }
+                  },
+                  "id": 12664,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1351:88:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "be6bfb5b",
+            "id": 12666,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setFundingRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12650,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12645,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12666,
+                  "src": "1240:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12644,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1240:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12647,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12666,
+                  "src": "1267:12:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12646,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1267:7:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12649,
+                  "mutability": "mutable",
+                  "name": "fundingRate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12666,
+                  "src": "1289:36:44",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12648,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1165,
+                    "src": "1289:17:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1230:101:44"
+            },
+            "returnParameters": {
+              "id": 12651,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1341:0:44"
+            },
+            "scope": 12712,
+            "src": "1207:239:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              12597
+            ],
+            "body": {
+              "id": 12679,
+              "nodeType": "Block",
+              "src": "1564:59:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 12674,
+                        "name": "fundingRates",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12634,
+                        "src": "1581:12:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                          "typeString": "mapping(address => struct MockFundingRateStore.FundingRate storage ref)"
+                        }
+                      },
+                      "id": 12676,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 12675,
+                        "name": "perpetual",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12668,
+                        "src": "1594:9:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1581:23:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                        "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                      }
+                    },
+                    "id": 12677,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "fundingRate",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 12625,
+                    "src": "1581:35:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage",
+                      "typeString": "struct FixedPoint.Signed storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 12673,
+                  "id": 12678,
+                  "nodeType": "Return",
+                  "src": "1574:42:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "24b41f68",
+            "id": 12680,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getFundingRateForContract",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 12670,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1520:8:44"
+            },
+            "parameters": {
+              "id": 12669,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12668,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12680,
+                  "src": "1487:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12667,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1487:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1486:19:44"
+            },
+            "returnParameters": {
+              "id": 12673,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12672,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12680,
+                  "src": "1538:24:44",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1165_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12671,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1165,
+                    "src": "1538:17:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1165_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1537:26:44"
+            },
+            "scope": 12712,
+            "src": "1452:171:44",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 12694,
+              "nodeType": "Block",
+              "src": "1725:78:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 12691,
+                        "name": "amount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12684,
+                        "src": "1789:6:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_calldata_ptr",
+                          "typeString": "struct FixedPoint.Unsigned calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_calldata_ptr",
+                          "typeString": "struct FixedPoint.Unsigned calldata"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 12688,
+                            "name": "perpetual",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12682,
+                            "src": "1754:9:44",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 12687,
+                          "name": "PerpetualInterface",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 13138,
+                          "src": "1735:18:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_PerpetualInterface_$13138_$",
+                            "typeString": "type(contract PerpetualInterface)"
+                          }
+                        },
+                        "id": 12689,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1735:29:44",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_PerpetualInterface_$13138",
+                          "typeString": "contract PerpetualInterface"
+                        }
+                      },
+                      "id": 12690,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "withdrawFundingRateFees",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 13127,
+                      "src": "1735:53:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_struct$_Unsigned_$471_memory_ptr_$returns$_t_struct$_Unsigned_$471_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory) external returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 12692,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1735:61:44",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "id": 12693,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1735:61:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "0e2cbabc",
+            "id": 12695,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "chargeFundingRateFees",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12685,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12682,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12695,
+                  "src": "1660:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12681,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1660:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12684,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12695,
+                  "src": "1679:35:44",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_calldata_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12683,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1679:19:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1659:56:44"
+            },
+            "returnParameters": {
+              "id": 12686,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1725:0:44"
+            },
+            "scope": 12712,
+            "src": "1629:174:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              12605
+            ],
+            "body": {
+              "id": 12710,
+              "nodeType": "Block",
+              "src": "1908:64:44",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 12708,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 12703,
+                          "name": "fundingRates",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12634,
+                          "src": "1918:12:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FundingRate_$12630_storage_$",
+                            "typeString": "mapping(address => struct MockFundingRateStore.FundingRate storage ref)"
+                          }
+                        },
+                        "id": 12705,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 12704,
+                          "name": "perpetual",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 12697,
+                          "src": "1931:9:44",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1918:23:44",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_FundingRate_$12630_storage",
+                          "typeString": "struct MockFundingRateStore.FundingRate storage ref"
+                        }
+                      },
+                      "id": 12706,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "rewardRate",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 12629,
+                      "src": "1918:34:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                        "typeString": "struct FixedPoint.Unsigned storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 12707,
+                      "name": "rewardRate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 12699,
+                      "src": "1955:10:44",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned memory"
+                      }
+                    },
+                    "src": "1918:47:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                      "typeString": "struct FixedPoint.Unsigned storage ref"
+                    }
+                  },
+                  "id": 12709,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1918:47:44"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "eb9c7de1",
+            "id": 12711,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setRewardRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 12701,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1899:8:44"
+            },
+            "parameters": {
+              "id": 12700,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12697,
+                  "mutability": "mutable",
+                  "name": "perpetual",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12711,
+                  "src": "1832:17:44",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 12696,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1832:7:44",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12699,
+                  "mutability": "mutable",
+                  "name": "rewardRate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12711,
+                  "src": "1851:37:44",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12698,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1851:19:44",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1831:58:44"
+            },
+            "returnParameters": {
+              "id": 12702,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1908:0:44"
+            },
+            "scope": 12712,
+            "src": "1809:163:44",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 12713,
+        "src": "556:1418:44"
+      }
+    ],
+    "src": "42:1933:44"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-12-19T00:28:52.600Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "getCurrentTime()": {
+        "returns": {
+          "_0": "uint for the current Testable timestamp."
+        }
+      },
+      "getFundingRateForContract(address)": {
+        "details": "This method should never revert.",
+        "params": {
+          "perpetual": "perpetual contract whose funding rate identifier that the calling contracts wants to get a funding rate for."
+        },
+        "returns": {
+          "_0": "FixedPoint.Signed representing the funding rate for the given contract. 0.01 would represent a funding rate of 1% per second. -0.01 would represent a negative funding rate of -1% per second."
+        }
+      },
+      "setCurrentTime(uint256)": {
+        "details": "Will revert if not running in test mode.",
+        "params": {
+          "time": "timestamp to set current Testable time to."
+        }
+      },
+      "setRewardRate(address,(uint256))": {
+        "details": "Callable only by the Perpetual contract."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getCurrentTime()": {
+        "notice": "Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp."
+      },
+      "getFundingRateForContract(address)": {
+        "notice": "Gets the latest funding rate for a perpetual contract."
+      },
+      "setCurrentTime(uint256)": {
+        "notice": "Sets the current time."
+      },
+      "setRewardRate(address,(uint256))": {
+        "notice": "Set the reward rate for a specific `perpetual` contract."
+      }
+    },
+    "version": 1
+  }
+}

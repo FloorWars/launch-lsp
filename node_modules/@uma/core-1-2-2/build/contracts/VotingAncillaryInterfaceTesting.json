@@ -1,0 +1,4401 @@
+{
+  "contractName": "VotingAncillaryInterfaceTesting",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "encryptedVote",
+          "type": "bytes"
+        }
+      ],
+      "name": "EncryptedVote",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "PriceRequestAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "price",
+          "type": "int256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        }
+      ],
+      "name": "PriceResolved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "numTokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "RewardsRetrieved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        }
+      ],
+      "name": "VoteCommitted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "price",
+          "type": "int256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "numTokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "VoteRevealed",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "identifier",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "time",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "ancillaryData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "hash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encryptedVote",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct VotingAncillaryInterface.CommitmentAncillary[]",
+          "name": "commits",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "batchCommit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "identifier",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "time",
+              "type": "uint256"
+            },
+            {
+              "internalType": "int256",
+              "name": "price",
+              "type": "int256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "ancillaryData",
+              "type": "bytes"
+            },
+            {
+              "internalType": "int256",
+              "name": "salt",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct VotingAncillaryInterface.RevealAncillary[]",
+          "name": "reveals",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "batchReveal",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "hash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "encryptedVote",
+          "type": "bytes"
+        }
+      ],
+      "name": "commitAndEmitEncryptedVote",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "commitVote",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCurrentRoundId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCurrentTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPendingRequests",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "identifier",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "time",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "ancillaryData",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct VotingAncillaryInterface.PendingRequestAncillary[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        }
+      ],
+      "name": "getPrice",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getVotePhase",
+      "outputs": [
+        {
+          "internalType": "enum VotingAncillaryInterface.Phase",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        }
+      ],
+      "name": "hasPrice",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        }
+      ],
+      "name": "requestPrice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "voterAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "identifier",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "time",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "ancillaryData",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct VotingAncillaryInterface.PendingRequestAncillary[]",
+          "name": "toRetrieve",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "retrieveRewards",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "internalType": "int256",
+          "name": "price",
+          "type": "int256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "ancillaryData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "int256",
+          "name": "salt",
+          "type": "int256"
+        }
+      ],
+      "name": "revealVote",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCurrentTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "newGatPercentage",
+          "type": "tuple"
+        }
+      ],
+      "name": "setGatPercentage",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "newInflationRate",
+          "type": "tuple"
+        }
+      ],
+      "name": "setInflationRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newVotingAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setMigrated",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "NewRewardsExpirationTimeout",
+          "type": "uint256"
+        }
+      ],
+      "name": "setRewardsExpirationTimeout",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "snapshotCurrentRound",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "timerAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roundId",
+          "type": "uint256"
+        }
+      ],
+      "name": "rounds",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "snapshotId",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "rawValue",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct FixedPoint.Unsigned",
+              "name": "inflationRate",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "rawValue",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct FixedPoint.Unsigned",
+              "name": "gatPercentage",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "rewardsExpirationTime",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct VotingAncillaryInterfaceTesting.Round",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "identifier",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "time",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "ancillaryData",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct VotingAncillaryInterface.PendingRequestAncillary[]",
+          "name": "requests",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "getPriceRequestStatuses",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum VotingAncillaryInterfaceTesting.RequestStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "lastVotingRound",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct VotingAncillaryInterfaceTesting.RequestState[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPendingPriceRequestsArray",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"encryptedVote\",\"type\":\"bytes\"}],\"name\":\"EncryptedVote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"PriceRequestAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"price\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"name\":\"PriceResolved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"numTokens\",\"type\":\"uint256\"}],\"name\":\"RewardsRetrieved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"name\":\"VoteCommitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"price\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"numTokens\",\"type\":\"uint256\"}],\"name\":\"VoteRevealed\",\"type\":\"event\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"encryptedVote\",\"type\":\"bytes\"}],\"internalType\":\"struct VotingAncillaryInterface.CommitmentAncillary[]\",\"name\":\"commits\",\"type\":\"tuple[]\"}],\"name\":\"batchCommit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"int256\",\"name\":\"price\",\"type\":\"int256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"},{\"internalType\":\"int256\",\"name\":\"salt\",\"type\":\"int256\"}],\"internalType\":\"struct VotingAncillaryInterface.RevealAncillary[]\",\"name\":\"reveals\",\"type\":\"tuple[]\"}],\"name\":\"batchReveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"encryptedVote\",\"type\":\"bytes\"}],\"name\":\"commitAndEmitEncryptedVote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"commitVote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentRoundId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPendingPriceRequestsArray\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPendingRequests\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"internalType\":\"struct VotingAncillaryInterface.PendingRequestAncillary[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"name\":\"getPrice\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"internalType\":\"struct VotingAncillaryInterface.PendingRequestAncillary[]\",\"name\":\"requests\",\"type\":\"tuple[]\"}],\"name\":\"getPriceRequestStatuses\",\"outputs\":[{\"components\":[{\"internalType\":\"enum VotingAncillaryInterfaceTesting.RequestStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"lastVotingRound\",\"type\":\"uint256\"}],\"internalType\":\"struct VotingAncillaryInterfaceTesting.RequestState[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getVotePhase\",\"outputs\":[{\"internalType\":\"enum VotingAncillaryInterface.Phase\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"name\":\"hasPrice\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"name\":\"requestPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"voterAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"}],\"internalType\":\"struct VotingAncillaryInterface.PendingRequestAncillary[]\",\"name\":\"toRetrieve\",\"type\":\"tuple[]\"}],\"name\":\"retrieveRewards\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"},{\"internalType\":\"int256\",\"name\":\"price\",\"type\":\"int256\"},{\"internalType\":\"bytes\",\"name\":\"ancillaryData\",\"type\":\"bytes\"},{\"internalType\":\"int256\",\"name\":\"salt\",\"type\":\"int256\"}],\"name\":\"revealVote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roundId\",\"type\":\"uint256\"}],\"name\":\"rounds\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"snapshotId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"inflationRate\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"gatPercentage\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"rewardsExpirationTime\",\"type\":\"uint256\"}],\"internalType\":\"struct VotingAncillaryInterfaceTesting.Round\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"setCurrentTime\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"newGatPercentage\",\"type\":\"tuple\"}],\"name\":\"setGatPercentage\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"newInflationRate\",\"type\":\"tuple\"}],\"name\":\"setInflationRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newVotingAddress\",\"type\":\"address\"}],\"name\":\"setMigrated\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"NewRewardsExpirationTimeout\",\"type\":\"uint256\"}],\"name\":\"setRewardsExpirationTimeout\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"name\":\"snapshotCurrentRound\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"timerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"batchCommit((bytes32,uint256,bytes,bytes32,bytes)[])\":{\"details\":\"Using `encryptedVote` is optional. If included then commitment is stored on chain. Look at `project-root/common/Constants.js` for the tested maximum number of commitments that can fit in one transaction.\",\"params\":{\"commits\":\"array of structs that encapsulate an `identifier`, `time`, `hash` and optional `encryptedVote`.\"}},\"batchReveal((bytes32,uint256,int256,bytes,int256)[])\":{\"details\":\"For more information on reveals, review the comment for `revealVote`.\",\"params\":{\"reveals\":\"array of the Reveal struct which contains an identifier, time, price and salt.\"}},\"commitAndEmitEncryptedVote(bytes32,uint256,bytes,bytes32,bytes)\":{\"details\":\"An encrypted version of the vote is emitted in an event `EncryptedVote` to allow off-chain infrastructure to retrieve the commit. The contents of `encryptedVote` are never used on chain: it is purely for convenience.\",\"params\":{\"encryptedVote\":\"offchain encrypted blob containing the voters amount, time and salt.\",\"hash\":\"keccak256 hash of the price you want to vote for and a `int256 salt`.\",\"identifier\":\"unique price pair identifier. Eg: BTC/USD price pair.\",\"time\":\"unix timestamp of for the price request.\"}},\"commitVote(bytes32,uint256,bytes,bytes32)\":{\"details\":\"`identifier`, `time` must correspond to a price request that's currently in the commit phase. Commits can be changed.Since transaction data is public, the salt will be revealed with the vote. While this is the system\\u2019s expected behavior, voters should never reuse salts. If someone else is able to guess the voted price and knows that a salt will be reused, then they can determine the vote pre-reveal.\",\"params\":{\"hash\":\"keccak256 hash of the `price`, `salt`, voter `address`, `time`, current `roundId`, and `identifier`.\",\"identifier\":\"uniquely identifies the committed vote. EG BTC/USD price pair.\",\"time\":\"unix timestamp of the price being voted on.\"}},\"getCurrentRoundId()\":{\"returns\":{\"_0\":\"uint256 representing the unique round ID.\"}},\"getCurrentTime()\":{\"returns\":{\"_0\":\"uint for the current Testable timestamp.\"}},\"getPendingRequests()\":{\"returns\":{\"_0\":\"pendingRequests `PendingRequest` array containing identifiers and timestamps for all pending requests.\"}},\"getPrice(bytes32,uint256,bytes)\":{\"details\":\"If the price is not available, the method reverts.\",\"params\":{\"identifier\":\"uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\",\"time\":\"unix timestamp for the price request.\"},\"returns\":{\"_0\":\"int256 representing the resolved price for the given identifier and timestamp.\"}},\"getVotePhase()\":{\"returns\":{\"_0\":\"Phase to indicate the current phase. Either { Commit, Reveal, NUM_PHASES_PLACEHOLDER }.\"}},\"hasPrice(bytes32,uint256,bytes)\":{\"details\":\"Time must be in the past and the identifier must be supported.\",\"params\":{\"identifier\":\"uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\",\"time\":\"unix timestamp for the price request.\"},\"returns\":{\"_0\":\"bool if the DVM has resolved to a price for the given identifier and timestamp.\"}},\"requestPrice(bytes32,uint256,bytes)\":{\"details\":\"Time must be in the past and the identifier must be supported.\",\"params\":{\"identifier\":\"uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.\",\"time\":\"unix timestamp for the price request.\"}},\"retrieveRewards(address,uint256,(bytes32,uint256,bytes)[])\":{\"details\":\"Can only retrieve rewards if calling for a valid round and if the call is done within the timeout threshold (not expired).\",\"params\":{\"roundId\":\"the round from which voting rewards will be retrieved from.\",\"toRetrieve\":\"array of PendingRequests which rewards are retrieved from.\",\"voterAddress\":\"voter for which rewards will be retrieved. Does not have to be the caller.\"},\"returns\":{\"_0\":\"total amount of rewards returned to the voter.\"}},\"revealVote(bytes32,uint256,int256,bytes,int256)\":{\"details\":\"The revealed `price`, `salt`, `address`, `time`, `roundId`, and `identifier`, must hash to the latest `hash` that `commitVote()` was called with. Only the committer can reveal their vote.\",\"params\":{\"identifier\":\"voted on in the commit phase. EG BTC/USD price pair.\",\"price\":\"voted on during the commit phase.\",\"salt\":\"value used to hide the commitment price during the commit phase.\",\"time\":\"specifies the unix timestamp of the price is being voted on.\"}},\"setCurrentTime(uint256)\":{\"details\":\"Will revert if not running in test mode.\",\"params\":{\"time\":\"timestamp to set current Testable time to.\"}},\"setGatPercentage((uint256))\":{\"details\":\"This method is public because calldata structs are not currently supported by solidity.\",\"params\":{\"newGatPercentage\":\"sets the next round's Gat percentage.\"}},\"setInflationRate((uint256))\":{\"details\":\"This method is public because calldata structs are not currently supported by solidity.\",\"params\":{\"newInflationRate\":\"sets the next round's inflation rate.\"}},\"setMigrated(address)\":{\"details\":\"Can only be called by the contract owner.\",\"params\":{\"newVotingAddress\":\"the newly migrated contract address.\"}},\"setRewardsExpirationTimeout(uint256)\":{\"details\":\"This change only applies to rounds that have not yet begun.\",\"params\":{\"NewRewardsExpirationTimeout\":\"how long a caller can wait before choosing to withdraw their rewards.\"}},\"snapshotCurrentRound(bytes)\":{\"details\":\"This function can be called multiple times but each round will only every have one snapshot at the time of calling `_freezeRoundVariables`.\",\"params\":{\"signature\":\"signature required to prove caller is an EOA to prevent flash loans from being included in the snapshot.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"batchCommit((bytes32,uint256,bytes,bytes32,bytes)[])\":{\"notice\":\"Submit a batch of commits in a single transaction.\"},\"batchReveal((bytes32,uint256,int256,bytes,int256)[])\":{\"notice\":\"Reveal multiple votes in a single transaction. Look at `project-root/common/Constants.js` for the tested maximum number of reveals. that can fit in one transaction.\"},\"commitAndEmitEncryptedVote(bytes32,uint256,bytes,bytes32,bytes)\":{\"notice\":\"commits a vote and logs an event with a data blob, typically an encrypted version of the vote\"},\"commitVote(bytes32,uint256,bytes,bytes32)\":{\"notice\":\"Commit a vote for a price request for `identifier` at `time`.\"},\"getCurrentRoundId()\":{\"notice\":\"Returns the current round ID, as a function of the current time.\"},\"getCurrentTime()\":{\"notice\":\"Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp.\"},\"getPendingRequests()\":{\"notice\":\"Gets the queries that are being voted on this round.\"},\"getPrice(bytes32,uint256,bytes)\":{\"notice\":\"Gets the price for `identifier` and `time` if it has already been requested and resolved.\"},\"getVotePhase()\":{\"notice\":\"Returns the current voting phase, as a function of the current time.\"},\"hasPrice(bytes32,uint256,bytes)\":{\"notice\":\"Whether the price for `identifier` and `time` is available.\"},\"requestPrice(bytes32,uint256,bytes)\":{\"notice\":\"Enqueues a request (if a request isn't already present) for the given `identifier`, `time` pair.\"},\"retrieveRewards(address,uint256,(bytes32,uint256,bytes)[])\":{\"notice\":\"Retrieves rewards owed for a set of resolved price requests.\"},\"revealVote(bytes32,uint256,int256,bytes,int256)\":{\"notice\":\"Reveal a previously committed vote for `identifier` at `time`.\"},\"setCurrentTime(uint256)\":{\"notice\":\"Sets the current time.\"},\"setGatPercentage((uint256))\":{\"notice\":\"Resets the Gat percentage. Note: this change only applies to rounds that have not yet begun.\"},\"setInflationRate((uint256))\":{\"notice\":\"Resets the inflation rate. Note: this change only applies to rounds that have not yet begun.\"},\"setMigrated(address)\":{\"notice\":\"Disables this Voting contract in favor of the migrated one.\"},\"setRewardsExpirationTimeout(uint256)\":{\"notice\":\"Resets the rewards expiration timeout.\"},\"snapshotCurrentRound(bytes)\":{\"notice\":\"snapshot the current round's token balances and lock in the inflation rate and GAT.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/chris/temp/protocol/packages/core/contracts/oracle/test/VotingAncillaryInterfaceTest.sol\":\"VotingAncillaryInterfaceTesting\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/Users/chris/temp/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0x15636c4d1914553c95712ef01d59e73a2ce6efacbe1a20bab8a513d5897cf96d\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://8b942ab427bf0c45a3d5b3701a8c509fcf01f2aa0ec525fc74f7f01a2aaa18cf\",\"dweb:/ipfs/QmPoSCBrBUQTiaKR6baSYchK863Lu7RY6gqMPEeUbwsgQV\"]},\"/Users/chris/temp/protocol/packages/core/contracts/common/implementation/Testable.sol\":{\"keccak256\":\"0xd7c14c59b0f4325ccc5feea6cf9acf45eefb169cbf48ffd4a265a3267b815cfa\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://b8b49c6c76f0458a196b11b0dc03f9bcc8f26851fdb51888b2a7cb9034a96493\",\"dweb:/ipfs/QmY4JDiPDcZbW8j3PWRd9YwRP28WdnSPGA1Yknj5gkWJWH\"]},\"/Users/chris/temp/protocol/packages/core/contracts/common/implementation/Timer.sol\":{\"keccak256\":\"0x4ce613d5032aefb04a64fd623c216a6f68a1b903a4a7aa72721323dc988a6c90\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://6b557f3da4d90ec171cba84a2d85202c2327028a081552fe36440cdbbef6396d\",\"dweb:/ipfs/QmcLdrkekhH1VXN5jEuiqbkTzX7doz1KuVp6KQfCnyQ8C4\"]},\"/Users/chris/temp/protocol/packages/core/contracts/oracle/interfaces/OracleAncillaryInterface.sol\":{\"keccak256\":\"0x8956381a63baa2c8a0d3202154d3eea1cb240cb08500662604b1c5a2094f1db2\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://4dd9bcd9c6bbc1067f684e4b1a9beef93c3eacfc46139882b54e3e502f697caf\",\"dweb:/ipfs/QmcBvYVC1QKsDp48gJirkSPRdL4NsLV2m7seSn6dXc5uGw\"]},\"/Users/chris/temp/protocol/packages/core/contracts/oracle/interfaces/VotingAncillaryInterface.sol\":{\"keccak256\":\"0xcc57bb1b4fad947ee5665097a6fe5b99b948f375dbac61ba0f08f750fd75258c\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://1519101394a649165d86910ea22b5f457528a0a5a12c7655f6cac9ed9c1a35c4\",\"dweb:/ipfs/QmX6iRM2bsZj9p9HYzJAa6jpyedN59wFTaf6aTBTcWaeY4\"]},\"/Users/chris/temp/protocol/packages/core/contracts/oracle/test/VotingAncillaryInterfaceTest.sol\":{\"keccak256\":\"0x597775a3d6a4a020c3a960d89fcbde4d6e67901c35373a386cacb87211034de4\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://00e966f5181f78ba3d53bc05f79c719bd8e7cd2d4fcdc61e355ba35b1105eff9\",\"dweb:/ipfs/QmYMXHQgGKZvnwCQ3ZmNCfYJx2h3Qrfrn93fzSE5hRXKoK\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\n\npragma experimental ABIEncoderV2;\nimport \"../../common/implementation/FixedPoint.sol\";\nimport \"../../common/implementation/Testable.sol\";\nimport \"../interfaces/OracleAncillaryInterface.sol\";\nimport \"../interfaces/VotingAncillaryInterface.sol\";\n\n// A mock oracle used for testing. Exports the voting & oracle interfaces and events that contain ancillary data.\nabstract contract VotingAncillaryInterfaceTesting is OracleAncillaryInterface, VotingAncillaryInterface, Testable {\n    using FixedPoint for FixedPoint.Unsigned;\n\n    // Events, data structures and functions not exported in the base interfaces, used for testing.\n    event VoteCommitted(\n        address indexed voter,\n        uint256 indexed roundId,\n        bytes32 indexed identifier,\n        uint256 time,\n        bytes ancillaryData\n    );\n\n    event EncryptedVote(\n        address indexed voter,\n        uint256 indexed roundId,\n        bytes32 indexed identifier,\n        uint256 time,\n        bytes ancillaryData,\n        bytes encryptedVote\n    );\n\n    event VoteRevealed(\n        address indexed voter,\n        uint256 indexed roundId,\n        bytes32 indexed identifier,\n        uint256 time,\n        int256 price,\n        bytes ancillaryData,\n        uint256 numTokens\n    );\n\n    event RewardsRetrieved(\n        address indexed voter,\n        uint256 indexed roundId,\n        bytes32 indexed identifier,\n        uint256 time,\n        uint256 numTokens\n    );\n\n    event PriceRequestAdded(uint256 indexed roundId, bytes32 indexed identifier, uint256 time);\n\n    event PriceResolved(\n        uint256 indexed roundId,\n        bytes32 indexed identifier,\n        uint256 time,\n        int256 price,\n        bytes ancillaryData\n    );\n\n    struct Round {\n        uint256 snapshotId; // Voting token snapshot ID for this round.  0 if no snapshot has been taken.\n        FixedPoint.Unsigned inflationRate; // Inflation rate set for this round.\n        FixedPoint.Unsigned gatPercentage; // Gat rate set for this round.\n        uint256 rewardsExpirationTime; // Time that rewards for this round can be claimed until.\n    }\n\n    // Represents the status a price request has.\n    enum RequestStatus {\n        NotRequested, // Was never requested.\n        Active, // Is being voted on in the current round.\n        Resolved, // Was resolved in a previous round.\n        Future // Is scheduled to be voted on in a future round.\n    }\n\n    // Only used as a return value in view methods -- never stored in the contract.\n    struct RequestState {\n        RequestStatus status;\n        uint256 lastVotingRound;\n    }\n\n    function rounds(uint256 roundId) public view virtual returns (Round memory);\n\n    function getPriceRequestStatuses(VotingAncillaryInterface.PendingRequestAncillary[] memory requests)\n        public\n        view\n        virtual\n        returns (RequestState[] memory);\n\n    function getPendingPriceRequestsArray() external view virtual returns (bytes32[] memory);\n}\n",
+  "sourcePath": "/Users/chris/temp/protocol/packages/core/contracts/oracle/test/VotingAncillaryInterfaceTest.sol",
+  "ast": {
+    "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/oracle/test/VotingAncillaryInterfaceTest.sol",
+    "exportedSymbols": {
+      "VotingAncillaryInterfaceTesting": [
+        24129
+      ]
+    },
+    "id": 24130,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 23999,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:86"
+      },
+      {
+        "id": 24000,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:86"
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 24001,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 1958,
+        "src": "101:52:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/common/implementation/Testable.sol",
+        "file": "../../common/implementation/Testable.sol",
+        "id": 24002,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 2699,
+        "src": "154:50:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/oracle/interfaces/OracleAncillaryInterface.sol",
+        "file": "../interfaces/OracleAncillaryInterface.sol",
+        "id": 24003,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 22946,
+        "src": "205:52:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/oracle/interfaces/VotingAncillaryInterface.sol",
+        "file": "../interfaces/VotingAncillaryInterface.sol",
+        "id": 24004,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 23234,
+        "src": "258:52:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 24005,
+              "name": "OracleAncillaryInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 22945,
+              "src": "479:24:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_OracleAncillaryInterface_$22945",
+                "typeString": "contract OracleAncillaryInterface"
+              }
+            },
+            "id": 24006,
+            "nodeType": "InheritanceSpecifier",
+            "src": "479:24:86"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 24007,
+              "name": "VotingAncillaryInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 23233,
+              "src": "505:24:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_VotingAncillaryInterface_$23233",
+                "typeString": "contract VotingAncillaryInterface"
+              }
+            },
+            "id": 24008,
+            "nodeType": "InheritanceSpecifier",
+            "src": "505:24:86"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 24009,
+              "name": "Testable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2698,
+              "src": "531:8:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Testable_$2698",
+                "typeString": "contract Testable"
+              }
+            },
+            "id": 24010,
+            "nodeType": "InheritanceSpecifier",
+            "src": "531:8:86"
+          }
+        ],
+        "contractDependencies": [
+          2698,
+          22945,
+          23233
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 24129,
+        "linearizedBaseContracts": [
+          24129,
+          2698,
+          23233,
+          22945
+        ],
+        "name": "VotingAncillaryInterfaceTesting",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 24013,
+            "libraryName": {
+              "contractScope": null,
+              "id": 24011,
+              "name": "FixedPoint",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1957,
+              "src": "552:10:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FixedPoint_$1957",
+                "typeString": "library FixedPoint"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "546:41:86",
+            "typeName": {
+              "contractScope": null,
+              "id": 24012,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 471,
+              "src": "567:19:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            }
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24025,
+            "name": "VoteCommitted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24024,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24015,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "722:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24014,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "722:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24017,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "753:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24016,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "753:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24019,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "786:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24018,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "786:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24021,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "822:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24020,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "822:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24023,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "844:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24022,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "844:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "712:157:86"
+            },
+            "src": "693:177:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24039,
+            "name": "EncryptedVote",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24038,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24027,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "905:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24026,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "905:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24029,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "936:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24028,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "936:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24031,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "969:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24030,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "969:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24033,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "1005:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24032,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1005:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24035,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "1027:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24034,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1027:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24037,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "encryptedVote",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "1056:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24036,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1056:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "895:186:86"
+            },
+            "src": "876:206:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24055,
+            "name": "VoteRevealed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24054,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24041,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1116:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24040,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1116:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24043,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1147:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24042,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1147:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24045,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1180:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24044,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1180:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24047,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1216:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24046,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1216:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24049,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1238:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 24048,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1238:6:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24051,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1260:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24050,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1260:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24053,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "numTokens",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1289:17:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24052,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1289:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1106:206:86"
+            },
+            "src": "1088:225:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24067,
+            "name": "RewardsRetrieved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24066,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24057,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1351:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24056,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1351:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24059,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1382:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24058,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1382:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24061,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1415:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24060,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1415:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24063,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1451:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24062,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1451:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24065,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "numTokens",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1473:17:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24064,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1473:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1341:155:86"
+            },
+            "src": "1319:178:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24075,
+            "name": "PriceRequestAdded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24074,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24069,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24075,
+                  "src": "1527:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24068,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1527:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24071,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24075,
+                  "src": "1552:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24070,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1552:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24073,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24075,
+                  "src": "1580:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24072,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1580:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1526:67:86"
+            },
+            "src": "1503:91:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24087,
+            "name": "PriceResolved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24077,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1629:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24076,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1629:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24079,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1662:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24078,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1662:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24081,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1698:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24080,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1698:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24083,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1720:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 24082,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1720:6:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24085,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1742:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24084,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1742:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1619:148:86"
+            },
+            "src": "1600:168:86"
+          },
+          {
+            "canonicalName": "VotingAncillaryInterfaceTesting.Round",
+            "id": 24096,
+            "members": [
+              {
+                "constant": false,
+                "id": 24089,
+                "mutability": "mutable",
+                "name": "snapshotId",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "1797:18:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 24088,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1797:7:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24091,
+                "mutability": "mutable",
+                "name": "inflationRate",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "1903:33:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 24090,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "1903:19:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24093,
+                "mutability": "mutable",
+                "name": "gatPercentage",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "1984:33:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 24092,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "1984:19:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24095,
+                "mutability": "mutable",
+                "name": "rewardsExpirationTime",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "2059:29:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 24094,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2059:7:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Round",
+            "nodeType": "StructDefinition",
+            "scope": 24129,
+            "src": "1774:379:86",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "VotingAncillaryInterfaceTesting.RequestStatus",
+            "id": 24101,
+            "members": [
+              {
+                "id": 24097,
+                "name": "NotRequested",
+                "nodeType": "EnumValue",
+                "src": "2238:12:86"
+              },
+              {
+                "id": 24098,
+                "name": "Active",
+                "nodeType": "EnumValue",
+                "src": "2284:6:86"
+              },
+              {
+                "id": 24099,
+                "name": "Resolved",
+                "nodeType": "EnumValue",
+                "src": "2343:8:86"
+              },
+              {
+                "id": 24100,
+                "name": "Future",
+                "nodeType": "EnumValue",
+                "src": "2398:6:86"
+              }
+            ],
+            "name": "RequestStatus",
+            "nodeType": "EnumDefinition",
+            "src": "2209:251:86"
+          },
+          {
+            "canonicalName": "VotingAncillaryInterfaceTesting.RequestState",
+            "id": 24106,
+            "members": [
+              {
+                "constant": false,
+                "id": 24103,
+                "mutability": "mutable",
+                "name": "status",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24106,
+                "src": "2580:20:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_RequestStatus_$24101",
+                  "typeString": "enum VotingAncillaryInterfaceTesting.RequestStatus"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 24102,
+                  "name": "RequestStatus",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 24101,
+                  "src": "2580:13:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_RequestStatus_$24101",
+                    "typeString": "enum VotingAncillaryInterfaceTesting.RequestStatus"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24105,
+                "mutability": "mutable",
+                "name": "lastVotingRound",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24106,
+                "src": "2610:23:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 24104,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2610:7:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "RequestState",
+            "nodeType": "StructDefinition",
+            "scope": 24129,
+            "src": "2550:90:86",
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "8c65c81f",
+            "id": 24113,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "rounds",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 24109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24108,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24113,
+                  "src": "2662:15:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24107,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2662:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2661:17:86"
+            },
+            "returnParameters": {
+              "id": 24112,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24111,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24113,
+                  "src": "2708:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Round_$24096_memory_ptr",
+                    "typeString": "struct VotingAncillaryInterfaceTesting.Round"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 24110,
+                    "name": "Round",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 24096,
+                    "src": "2708:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Round_$24096_storage_ptr",
+                      "typeString": "struct VotingAncillaryInterfaceTesting.Round"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2707:14:86"
+            },
+            "scope": 24129,
+            "src": "2646:76:86",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "498ec3c9",
+            "id": 24122,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPriceRequestStatuses",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 24117,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24116,
+                  "mutability": "mutable",
+                  "name": "requests",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24122,
+                  "src": "2761:66:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_PendingRequestAncillary_$23090_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct VotingAncillaryInterface.PendingRequestAncillary[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 24114,
+                      "name": "VotingAncillaryInterface.PendingRequestAncillary",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 23090,
+                      "src": "2761:48:86",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_PendingRequestAncillary_$23090_storage_ptr",
+                        "typeString": "struct VotingAncillaryInterface.PendingRequestAncillary"
+                      }
+                    },
+                    "id": 24115,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2761:50:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_PendingRequestAncillary_$23090_storage_$dyn_storage_ptr",
+                      "typeString": "struct VotingAncillaryInterface.PendingRequestAncillary[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2760:68:86"
+            },
+            "returnParameters": {
+              "id": 24121,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24120,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24122,
+                  "src": "2890:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_RequestState_$24106_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct VotingAncillaryInterfaceTesting.RequestState[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 24118,
+                      "name": "RequestState",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 24106,
+                      "src": "2890:12:86",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_RequestState_$24106_storage_ptr",
+                        "typeString": "struct VotingAncillaryInterfaceTesting.RequestState"
+                      }
+                    },
+                    "id": 24119,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2890:14:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_RequestState_$24106_storage_$dyn_storage_ptr",
+                      "typeString": "struct VotingAncillaryInterfaceTesting.RequestState[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2889:23:86"
+            },
+            "scope": 24129,
+            "src": "2728:185:86",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "f116961f",
+            "id": 24128,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPendingPriceRequestsArray",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 24123,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2956:2:86"
+            },
+            "returnParameters": {
+              "id": 24127,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24126,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24128,
+                  "src": "2990:16:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                    "typeString": "bytes32[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 24124,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2990:7:86",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 24125,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2990:9:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                      "typeString": "bytes32[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2989:18:86"
+            },
+            "scope": 24129,
+            "src": "2919:89:86",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 24130,
+        "src": "426:2584:86"
+      }
+    ],
+    "src": "42:2969:86"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/oracle/test/VotingAncillaryInterfaceTest.sol",
+    "exportedSymbols": {
+      "VotingAncillaryInterfaceTesting": [
+        24129
+      ]
+    },
+    "id": 24130,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 23999,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:86"
+      },
+      {
+        "id": 24000,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:86"
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 24001,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 1958,
+        "src": "101:52:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/common/implementation/Testable.sol",
+        "file": "../../common/implementation/Testable.sol",
+        "id": 24002,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 2699,
+        "src": "154:50:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/oracle/interfaces/OracleAncillaryInterface.sol",
+        "file": "../interfaces/OracleAncillaryInterface.sol",
+        "id": 24003,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 22946,
+        "src": "205:52:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/chris/temp/protocol/packages/core/contracts/oracle/interfaces/VotingAncillaryInterface.sol",
+        "file": "../interfaces/VotingAncillaryInterface.sol",
+        "id": 24004,
+        "nodeType": "ImportDirective",
+        "scope": 24130,
+        "sourceUnit": 23234,
+        "src": "258:52:86",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 24005,
+              "name": "OracleAncillaryInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 22945,
+              "src": "479:24:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_OracleAncillaryInterface_$22945",
+                "typeString": "contract OracleAncillaryInterface"
+              }
+            },
+            "id": 24006,
+            "nodeType": "InheritanceSpecifier",
+            "src": "479:24:86"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 24007,
+              "name": "VotingAncillaryInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 23233,
+              "src": "505:24:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_VotingAncillaryInterface_$23233",
+                "typeString": "contract VotingAncillaryInterface"
+              }
+            },
+            "id": 24008,
+            "nodeType": "InheritanceSpecifier",
+            "src": "505:24:86"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 24009,
+              "name": "Testable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2698,
+              "src": "531:8:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Testable_$2698",
+                "typeString": "contract Testable"
+              }
+            },
+            "id": 24010,
+            "nodeType": "InheritanceSpecifier",
+            "src": "531:8:86"
+          }
+        ],
+        "contractDependencies": [
+          2698,
+          22945,
+          23233
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 24129,
+        "linearizedBaseContracts": [
+          24129,
+          2698,
+          23233,
+          22945
+        ],
+        "name": "VotingAncillaryInterfaceTesting",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 24013,
+            "libraryName": {
+              "contractScope": null,
+              "id": 24011,
+              "name": "FixedPoint",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1957,
+              "src": "552:10:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FixedPoint_$1957",
+                "typeString": "library FixedPoint"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "546:41:86",
+            "typeName": {
+              "contractScope": null,
+              "id": 24012,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 471,
+              "src": "567:19:86",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            }
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24025,
+            "name": "VoteCommitted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24024,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24015,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "722:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24014,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "722:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24017,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "753:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24016,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "753:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24019,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "786:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24018,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "786:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24021,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "822:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24020,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "822:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24023,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24025,
+                  "src": "844:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24022,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "844:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "712:157:86"
+            },
+            "src": "693:177:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24039,
+            "name": "EncryptedVote",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24038,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24027,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "905:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24026,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "905:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24029,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "936:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24028,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "936:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24031,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "969:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24030,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "969:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24033,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "1005:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24032,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1005:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24035,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "1027:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24034,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1027:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24037,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "encryptedVote",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24039,
+                  "src": "1056:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24036,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1056:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "895:186:86"
+            },
+            "src": "876:206:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24055,
+            "name": "VoteRevealed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24054,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24041,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1116:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24040,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1116:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24043,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1147:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24042,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1147:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24045,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1180:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24044,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1180:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24047,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1216:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24046,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1216:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24049,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1238:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 24048,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1238:6:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24051,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1260:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24050,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1260:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24053,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "numTokens",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24055,
+                  "src": "1289:17:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24052,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1289:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1106:206:86"
+            },
+            "src": "1088:225:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24067,
+            "name": "RewardsRetrieved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24066,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24057,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "voter",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1351:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 24056,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1351:7:86",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24059,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1382:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24058,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1382:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24061,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1415:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24060,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1415:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24063,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1451:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24062,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1451:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24065,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "numTokens",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24067,
+                  "src": "1473:17:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24064,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1473:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1341:155:86"
+            },
+            "src": "1319:178:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24075,
+            "name": "PriceRequestAdded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24074,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24069,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24075,
+                  "src": "1527:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24068,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1527:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24071,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24075,
+                  "src": "1552:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24070,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1552:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24073,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24075,
+                  "src": "1580:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24072,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1580:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1526:67:86"
+            },
+            "src": "1503:91:86"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 24087,
+            "name": "PriceResolved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 24086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24077,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1629:23:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24076,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1629:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24079,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "identifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1662:26:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 24078,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1662:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24081,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1698:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24080,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1698:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24083,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1720:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 24082,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1720:6:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 24085,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "ancillaryData",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24087,
+                  "src": "1742:19:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 24084,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1742:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1619:148:86"
+            },
+            "src": "1600:168:86"
+          },
+          {
+            "canonicalName": "VotingAncillaryInterfaceTesting.Round",
+            "id": 24096,
+            "members": [
+              {
+                "constant": false,
+                "id": 24089,
+                "mutability": "mutable",
+                "name": "snapshotId",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "1797:18:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 24088,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1797:7:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24091,
+                "mutability": "mutable",
+                "name": "inflationRate",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "1903:33:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 24090,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "1903:19:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24093,
+                "mutability": "mutable",
+                "name": "gatPercentage",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "1984:33:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 24092,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "1984:19:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24095,
+                "mutability": "mutable",
+                "name": "rewardsExpirationTime",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24096,
+                "src": "2059:29:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 24094,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2059:7:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Round",
+            "nodeType": "StructDefinition",
+            "scope": 24129,
+            "src": "1774:379:86",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "VotingAncillaryInterfaceTesting.RequestStatus",
+            "id": 24101,
+            "members": [
+              {
+                "id": 24097,
+                "name": "NotRequested",
+                "nodeType": "EnumValue",
+                "src": "2238:12:86"
+              },
+              {
+                "id": 24098,
+                "name": "Active",
+                "nodeType": "EnumValue",
+                "src": "2284:6:86"
+              },
+              {
+                "id": 24099,
+                "name": "Resolved",
+                "nodeType": "EnumValue",
+                "src": "2343:8:86"
+              },
+              {
+                "id": 24100,
+                "name": "Future",
+                "nodeType": "EnumValue",
+                "src": "2398:6:86"
+              }
+            ],
+            "name": "RequestStatus",
+            "nodeType": "EnumDefinition",
+            "src": "2209:251:86"
+          },
+          {
+            "canonicalName": "VotingAncillaryInterfaceTesting.RequestState",
+            "id": 24106,
+            "members": [
+              {
+                "constant": false,
+                "id": 24103,
+                "mutability": "mutable",
+                "name": "status",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24106,
+                "src": "2580:20:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_RequestStatus_$24101",
+                  "typeString": "enum VotingAncillaryInterfaceTesting.RequestStatus"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 24102,
+                  "name": "RequestStatus",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 24101,
+                  "src": "2580:13:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_RequestStatus_$24101",
+                    "typeString": "enum VotingAncillaryInterfaceTesting.RequestStatus"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24105,
+                "mutability": "mutable",
+                "name": "lastVotingRound",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 24106,
+                "src": "2610:23:86",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 24104,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2610:7:86",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "RequestState",
+            "nodeType": "StructDefinition",
+            "scope": 24129,
+            "src": "2550:90:86",
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "8c65c81f",
+            "id": 24113,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "rounds",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 24109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24108,
+                  "mutability": "mutable",
+                  "name": "roundId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24113,
+                  "src": "2662:15:86",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 24107,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2662:7:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2661:17:86"
+            },
+            "returnParameters": {
+              "id": 24112,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24111,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24113,
+                  "src": "2708:12:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Round_$24096_memory_ptr",
+                    "typeString": "struct VotingAncillaryInterfaceTesting.Round"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 24110,
+                    "name": "Round",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 24096,
+                    "src": "2708:5:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Round_$24096_storage_ptr",
+                      "typeString": "struct VotingAncillaryInterfaceTesting.Round"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2707:14:86"
+            },
+            "scope": 24129,
+            "src": "2646:76:86",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "498ec3c9",
+            "id": 24122,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPriceRequestStatuses",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 24117,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24116,
+                  "mutability": "mutable",
+                  "name": "requests",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24122,
+                  "src": "2761:66:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_PendingRequestAncillary_$23090_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct VotingAncillaryInterface.PendingRequestAncillary[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 24114,
+                      "name": "VotingAncillaryInterface.PendingRequestAncillary",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 23090,
+                      "src": "2761:48:86",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_PendingRequestAncillary_$23090_storage_ptr",
+                        "typeString": "struct VotingAncillaryInterface.PendingRequestAncillary"
+                      }
+                    },
+                    "id": 24115,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2761:50:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_PendingRequestAncillary_$23090_storage_$dyn_storage_ptr",
+                      "typeString": "struct VotingAncillaryInterface.PendingRequestAncillary[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2760:68:86"
+            },
+            "returnParameters": {
+              "id": 24121,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24120,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24122,
+                  "src": "2890:21:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_RequestState_$24106_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct VotingAncillaryInterfaceTesting.RequestState[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 24118,
+                      "name": "RequestState",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 24106,
+                      "src": "2890:12:86",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_RequestState_$24106_storage_ptr",
+                        "typeString": "struct VotingAncillaryInterfaceTesting.RequestState"
+                      }
+                    },
+                    "id": 24119,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2890:14:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_RequestState_$24106_storage_$dyn_storage_ptr",
+                      "typeString": "struct VotingAncillaryInterfaceTesting.RequestState[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2889:23:86"
+            },
+            "scope": 24129,
+            "src": "2728:185:86",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "f116961f",
+            "id": 24128,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPendingPriceRequestsArray",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 24123,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2956:2:86"
+            },
+            "returnParameters": {
+              "id": 24127,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 24126,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 24128,
+                  "src": "2990:16:86",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                    "typeString": "bytes32[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 24124,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2990:7:86",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 24125,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2990:9:86",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                      "typeString": "bytes32[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2989:18:86"
+            },
+            "scope": 24129,
+            "src": "2919:89:86",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 24130,
+        "src": "426:2584:86"
+      }
+    ],
+    "src": "42:2969:86"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-12-14T08:25:49.566Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "batchCommit((bytes32,uint256,bytes,bytes32,bytes)[])": {
+        "details": "Using `encryptedVote` is optional. If included then commitment is stored on chain. Look at `project-root/common/Constants.js` for the tested maximum number of commitments that can fit in one transaction.",
+        "params": {
+          "commits": "array of structs that encapsulate an `identifier`, `time`, `hash` and optional `encryptedVote`."
+        }
+      },
+      "batchReveal((bytes32,uint256,int256,bytes,int256)[])": {
+        "details": "For more information on reveals, review the comment for `revealVote`.",
+        "params": {
+          "reveals": "array of the Reveal struct which contains an identifier, time, price and salt."
+        }
+      },
+      "commitAndEmitEncryptedVote(bytes32,uint256,bytes,bytes32,bytes)": {
+        "details": "An encrypted version of the vote is emitted in an event `EncryptedVote` to allow off-chain infrastructure to retrieve the commit. The contents of `encryptedVote` are never used on chain: it is purely for convenience.",
+        "params": {
+          "encryptedVote": "offchain encrypted blob containing the voters amount, time and salt.",
+          "hash": "keccak256 hash of the price you want to vote for and a `int256 salt`.",
+          "identifier": "unique price pair identifier. Eg: BTC/USD price pair.",
+          "time": "unix timestamp of for the price request."
+        }
+      },
+      "commitVote(bytes32,uint256,bytes,bytes32)": {
+        "details": "`identifier`, `time` must correspond to a price request that's currently in the commit phase. Commits can be changed.Since transaction data is public, the salt will be revealed with the vote. While this is the system’s expected behavior, voters should never reuse salts. If someone else is able to guess the voted price and knows that a salt will be reused, then they can determine the vote pre-reveal.",
+        "params": {
+          "hash": "keccak256 hash of the `price`, `salt`, voter `address`, `time`, current `roundId`, and `identifier`.",
+          "identifier": "uniquely identifies the committed vote. EG BTC/USD price pair.",
+          "time": "unix timestamp of the price being voted on."
+        }
+      },
+      "getCurrentRoundId()": {
+        "returns": {
+          "_0": "uint256 representing the unique round ID."
+        }
+      },
+      "getCurrentTime()": {
+        "returns": {
+          "_0": "uint for the current Testable timestamp."
+        }
+      },
+      "getPendingRequests()": {
+        "returns": {
+          "_0": "pendingRequests `PendingRequest` array containing identifiers and timestamps for all pending requests."
+        }
+      },
+      "getPrice(bytes32,uint256,bytes)": {
+        "details": "If the price is not available, the method reverts.",
+        "params": {
+          "identifier": "uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.",
+          "time": "unix timestamp for the price request."
+        },
+        "returns": {
+          "_0": "int256 representing the resolved price for the given identifier and timestamp."
+        }
+      },
+      "getVotePhase()": {
+        "returns": {
+          "_0": "Phase to indicate the current phase. Either { Commit, Reveal, NUM_PHASES_PLACEHOLDER }."
+        }
+      },
+      "hasPrice(bytes32,uint256,bytes)": {
+        "details": "Time must be in the past and the identifier must be supported.",
+        "params": {
+          "identifier": "uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.",
+          "time": "unix timestamp for the price request."
+        },
+        "returns": {
+          "_0": "bool if the DVM has resolved to a price for the given identifier and timestamp."
+        }
+      },
+      "requestPrice(bytes32,uint256,bytes)": {
+        "details": "Time must be in the past and the identifier must be supported.",
+        "params": {
+          "identifier": "uniquely identifies the price requested. eg BTC/USD (encoded as bytes32) could be requested.",
+          "time": "unix timestamp for the price request."
+        }
+      },
+      "retrieveRewards(address,uint256,(bytes32,uint256,bytes)[])": {
+        "details": "Can only retrieve rewards if calling for a valid round and if the call is done within the timeout threshold (not expired).",
+        "params": {
+          "roundId": "the round from which voting rewards will be retrieved from.",
+          "toRetrieve": "array of PendingRequests which rewards are retrieved from.",
+          "voterAddress": "voter for which rewards will be retrieved. Does not have to be the caller."
+        },
+        "returns": {
+          "_0": "total amount of rewards returned to the voter."
+        }
+      },
+      "revealVote(bytes32,uint256,int256,bytes,int256)": {
+        "details": "The revealed `price`, `salt`, `address`, `time`, `roundId`, and `identifier`, must hash to the latest `hash` that `commitVote()` was called with. Only the committer can reveal their vote.",
+        "params": {
+          "identifier": "voted on in the commit phase. EG BTC/USD price pair.",
+          "price": "voted on during the commit phase.",
+          "salt": "value used to hide the commitment price during the commit phase.",
+          "time": "specifies the unix timestamp of the price is being voted on."
+        }
+      },
+      "setCurrentTime(uint256)": {
+        "details": "Will revert if not running in test mode.",
+        "params": {
+          "time": "timestamp to set current Testable time to."
+        }
+      },
+      "setGatPercentage((uint256))": {
+        "details": "This method is public because calldata structs are not currently supported by solidity.",
+        "params": {
+          "newGatPercentage": "sets the next round's Gat percentage."
+        }
+      },
+      "setInflationRate((uint256))": {
+        "details": "This method is public because calldata structs are not currently supported by solidity.",
+        "params": {
+          "newInflationRate": "sets the next round's inflation rate."
+        }
+      },
+      "setMigrated(address)": {
+        "details": "Can only be called by the contract owner.",
+        "params": {
+          "newVotingAddress": "the newly migrated contract address."
+        }
+      },
+      "setRewardsExpirationTimeout(uint256)": {
+        "details": "This change only applies to rounds that have not yet begun.",
+        "params": {
+          "NewRewardsExpirationTimeout": "how long a caller can wait before choosing to withdraw their rewards."
+        }
+      },
+      "snapshotCurrentRound(bytes)": {
+        "details": "This function can be called multiple times but each round will only every have one snapshot at the time of calling `_freezeRoundVariables`.",
+        "params": {
+          "signature": "signature required to prove caller is an EOA to prevent flash loans from being included in the snapshot."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "batchCommit((bytes32,uint256,bytes,bytes32,bytes)[])": {
+        "notice": "Submit a batch of commits in a single transaction."
+      },
+      "batchReveal((bytes32,uint256,int256,bytes,int256)[])": {
+        "notice": "Reveal multiple votes in a single transaction. Look at `project-root/common/Constants.js` for the tested maximum number of reveals. that can fit in one transaction."
+      },
+      "commitAndEmitEncryptedVote(bytes32,uint256,bytes,bytes32,bytes)": {
+        "notice": "commits a vote and logs an event with a data blob, typically an encrypted version of the vote"
+      },
+      "commitVote(bytes32,uint256,bytes,bytes32)": {
+        "notice": "Commit a vote for a price request for `identifier` at `time`."
+      },
+      "getCurrentRoundId()": {
+        "notice": "Returns the current round ID, as a function of the current time."
+      },
+      "getCurrentTime()": {
+        "notice": "Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp."
+      },
+      "getPendingRequests()": {
+        "notice": "Gets the queries that are being voted on this round."
+      },
+      "getPrice(bytes32,uint256,bytes)": {
+        "notice": "Gets the price for `identifier` and `time` if it has already been requested and resolved."
+      },
+      "getVotePhase()": {
+        "notice": "Returns the current voting phase, as a function of the current time."
+      },
+      "hasPrice(bytes32,uint256,bytes)": {
+        "notice": "Whether the price for `identifier` and `time` is available."
+      },
+      "requestPrice(bytes32,uint256,bytes)": {
+        "notice": "Enqueues a request (if a request isn't already present) for the given `identifier`, `time` pair."
+      },
+      "retrieveRewards(address,uint256,(bytes32,uint256,bytes)[])": {
+        "notice": "Retrieves rewards owed for a set of resolved price requests."
+      },
+      "revealVote(bytes32,uint256,int256,bytes,int256)": {
+        "notice": "Reveal a previously committed vote for `identifier` at `time`."
+      },
+      "setCurrentTime(uint256)": {
+        "notice": "Sets the current time."
+      },
+      "setGatPercentage((uint256))": {
+        "notice": "Resets the Gat percentage. Note: this change only applies to rounds that have not yet begun."
+      },
+      "setInflationRate((uint256))": {
+        "notice": "Resets the inflation rate. Note: this change only applies to rounds that have not yet begun."
+      },
+      "setMigrated(address)": {
+        "notice": "Disables this Voting contract in favor of the migrated one."
+      },
+      "setRewardsExpirationTimeout(uint256)": {
+        "notice": "Resets the rewards expiration timeout."
+      },
+      "snapshotCurrentRound(bytes)": {
+        "notice": "snapshot the current round's token balances and lock in the inflation rate and GAT."
+      }
+    },
+    "version": 1
+  }
+}

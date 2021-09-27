@@ -1,0 +1,666 @@
+{
+  "contractName": "PerpetualInterface",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "amount",
+          "type": "tuple"
+        }
+      ],
+      "name": "withdrawFundingRateFees",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getFundingRateIdentifier",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCollateralCurrency",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getCollateralCurrency\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getFundingRateIdentifier\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"amount\",\"type\":\"tuple\"}],\"name\":\"withdrawFundingRateFees\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"External methods that the FundingRateStore needs access to.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol\":\"PerpetualInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0x15636c4d1914553c95712ef01d59e73a2ce6efacbe1a20bab8a513d5897cf96d\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://8b942ab427bf0c45a3d5b3701a8c509fcf01f2aa0ec525fc74f7f01a2aaa18cf\",\"dweb:/ipfs/QmPoSCBrBUQTiaKR6baSYchK863Lu7RY6gqMPEeUbwsgQV\"]},\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol\":{\"keccak256\":\"0x01e56b2f515daaf6c17f9858816bfd6056f410d75f0bfae263b7d3296dfaadf3\",\"urls\":[\"bzz-raw://fc75d72fa78dcf28696023cdc05242c88814effd0f5a955ef92233f01c3b08a7\",\"dweb:/ipfs/QmRTgvnzizX1ytiWZD5nVv6tGp3jJzp4SjdvpXpgEGxohZ\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x6cc1cb934a3ac2137a7dcaed018af9e235392236ceecfd3687259702b9c767ad\",\"urls\":[\"bzz-raw://0055fa88138cd1c3c6440370f8580f85857f8fe9dec41c99af9eafbeb8d9c3ce\",\"dweb:/ipfs/QmX1xDh8vwGLLCH8ti45eXjQ7Wcxv1FEGTR3jkFnd5Nv6F\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.6.0;\npragma experimental ABIEncoderV2;\n\nimport \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\nimport \"../../common/implementation/FixedPoint.sol\";\n\n/**\n * @notice External methods that the FundingRateStore needs access to.\n */\ninterface PerpetualInterface {\n    function withdrawFundingRateFees(FixedPoint.Unsigned memory amount) external returns (FixedPoint.Unsigned memory);\n\n    function getFundingRateIdentifier() external view returns (bytes32);\n\n    function getCollateralCurrency() external view returns (IERC20);\n}\n",
+  "sourcePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol",
+    "exportedSymbols": {
+      "PerpetualInterface": [
+        13138
+      ]
+    },
+    "id": 13139,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13116,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:47"
+      },
+      {
+        "id": 13117,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:47"
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "id": 13118,
+        "nodeType": "ImportDirective",
+        "scope": 13139,
+        "sourceUnit": 23559,
+        "src": "59:56:47",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 13119,
+        "nodeType": "ImportDirective",
+        "scope": 13139,
+        "sourceUnit": 1958,
+        "src": "116:52:47",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 13120,
+          "nodeType": "StructuredDocumentation",
+          "src": "170:78:47",
+          "text": " @notice External methods that the FundingRateStore needs access to."
+        },
+        "fullyImplemented": false,
+        "id": 13138,
+        "linearizedBaseContracts": [
+          13138
+        ],
+        "name": "PerpetualInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "40704d67",
+            "id": 13127,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdrawFundingRateFees",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 13123,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13122,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13127,
+                  "src": "317:33:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 13121,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "317:19:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "316:35:47"
+            },
+            "returnParameters": {
+              "id": 13126,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13125,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13127,
+                  "src": "370:26:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 13124,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "370:19:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "369:28:47"
+            },
+            "scope": 13138,
+            "src": "284:114:47",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "41b3eb7c",
+            "id": 13132,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getFundingRateIdentifier",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 13128,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "437:2:47"
+            },
+            "returnParameters": {
+              "id": 13131,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13130,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13132,
+                  "src": "463:7:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13129,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "463:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "462:9:47"
+            },
+            "scope": 13138,
+            "src": "404:68:47",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "0cd77bb9",
+            "id": 13137,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCollateralCurrency",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 13133,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "508:2:47"
+            },
+            "returnParameters": {
+              "id": 13136,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13135,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13137,
+                  "src": "534:6:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$23558",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 13134,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 23558,
+                    "src": "534:6:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$23558",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "533:8:47"
+            },
+            "scope": 13138,
+            "src": "478:64:47",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 13139,
+        "src": "249:295:47"
+      }
+    ],
+    "src": "0:545:47"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/PerpetualInterface.sol",
+    "exportedSymbols": {
+      "PerpetualInterface": [
+        13138
+      ]
+    },
+    "id": 13139,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13116,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:47"
+      },
+      {
+        "id": 13117,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:47"
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "id": 13118,
+        "nodeType": "ImportDirective",
+        "scope": 13139,
+        "sourceUnit": 23559,
+        "src": "59:56:47",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 13119,
+        "nodeType": "ImportDirective",
+        "scope": 13139,
+        "sourceUnit": 1958,
+        "src": "116:52:47",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 13120,
+          "nodeType": "StructuredDocumentation",
+          "src": "170:78:47",
+          "text": " @notice External methods that the FundingRateStore needs access to."
+        },
+        "fullyImplemented": false,
+        "id": 13138,
+        "linearizedBaseContracts": [
+          13138
+        ],
+        "name": "PerpetualInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "40704d67",
+            "id": 13127,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdrawFundingRateFees",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 13123,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13122,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13127,
+                  "src": "317:33:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 13121,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "317:19:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "316:35:47"
+            },
+            "returnParameters": {
+              "id": 13126,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13125,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13127,
+                  "src": "370:26:47",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 13124,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "370:19:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "369:28:47"
+            },
+            "scope": 13138,
+            "src": "284:114:47",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "41b3eb7c",
+            "id": 13132,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getFundingRateIdentifier",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 13128,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "437:2:47"
+            },
+            "returnParameters": {
+              "id": 13131,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13130,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13132,
+                  "src": "463:7:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13129,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "463:7:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "462:9:47"
+            },
+            "scope": 13138,
+            "src": "404:68:47",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "0cd77bb9",
+            "id": 13137,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCollateralCurrency",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 13133,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "508:2:47"
+            },
+            "returnParameters": {
+              "id": 13136,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13135,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 13137,
+                  "src": "534:6:47",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$23558",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 13134,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 23558,
+                    "src": "534:6:47",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$23558",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "533:8:47"
+            },
+            "scope": 13138,
+            "src": "478:64:47",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 13139,
+        "src": "249:295:47"
+      }
+    ],
+    "src": "0:545:47"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-12-19T00:28:52.614Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "External methods that the FundingRateStore needs access to.",
+    "version": 1
+  }
+}
