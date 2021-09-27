@@ -1,6 +1,6 @@
 const Web3 = require("web3");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const { getAbi, getAddress } = require("./local_modules/@uma/core");
+const { getAbi, getAddress } = require("./local_modules/core");
 const { parseFixed } = require("@ethersproject/bignumber");
 const fs = require('fs');
 
