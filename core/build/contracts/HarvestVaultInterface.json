@@ -1,0 +1,424 @@
+{
+  "contractName": "HarvestVaultInterface",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "underlying",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPricePerFullShare",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getPricePerFullShare\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"underlying\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This only contains the methods/events that we use in our contracts or offchain infrastructure.\",\"kind\":\"dev\",\"methods\":{},\"title\":\"Interface for Harvest-style vaults.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/common/interfaces/HarvestVaultInterface.sol\":\"HarvestVaultInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/interfaces/HarvestVaultInterface.sol\":{\"keccak256\":\"0x9edff54233513573a1779b9ce3879b757cf711dec1b4e32ae2dd6e0862804c7c\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://acb1fe2c20d2c2ae3478dccd991956988bdf867966e447881f13409ae65d2136\",\"dweb:/ipfs/QmRtwA1pCVtH8cp83aEazRkPZUaEy1SV3kDeyt9SoS9ozH\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xf8e8d118a7a8b2e134181f7da655f6266aa3a0f9134b2605747139fcb0c5d835\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9ec48567e7ad06acb670980d5cdf3fd7f3949bf12894f02d68c3bb43e75aa84f\",\"dweb:/ipfs/QmaG3R2J9cz92YT77vFjYrjMNU2wHp4ypwYD62HqDUqS5U\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.8.0;\n\nimport \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\n\n/**\n * @title Interface for Harvest-style vaults.\n * @dev This only contains the methods/events that we use in our contracts or offchain infrastructure.\n */\nabstract contract HarvestVaultInterface {\n    // Return the underlying token.\n    function underlying() external view virtual returns (IERC20);\n\n    // Gets the number of return tokens that a \"share\" of this vault is worth.\n    function getPricePerFullShare() external view virtual returns (uint256);\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/HarvestVaultInterface.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/HarvestVaultInterface.sol",
+    "exportedSymbols": {
+      "HarvestVaultInterface": [
+        5564
+      ],
+      "IERC20": [
+        41847
+      ]
+    },
+    "id": 5565,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5550,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:22"
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "id": 5551,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 5565,
+        "sourceUnit": 41848,
+        "src": "67:56:22",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 5552,
+          "nodeType": "StructuredDocumentation",
+          "src": "125:156:22",
+          "text": " @title Interface for Harvest-style vaults.\n @dev This only contains the methods/events that we use in our contracts or offchain infrastructure."
+        },
+        "fullyImplemented": false,
+        "id": 5564,
+        "linearizedBaseContracts": [
+          5564
+        ],
+        "name": "HarvestVaultInterface",
+        "nameLocation": "300:21:22",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "6f307dc3",
+            "id": 5558,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlying",
+            "nameLocation": "373:10:22",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5553,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "383:2:22"
+            },
+            "returnParameters": {
+              "id": 5557,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5556,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5558,
+                  "src": "417:6:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$41847",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 5555,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5554,
+                      "name": "IERC20",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 41847,
+                      "src": "417:6:22"
+                    },
+                    "referencedDeclaration": 41847,
+                    "src": "417:6:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$41847",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "416:8:22"
+            },
+            "scope": 5564,
+            "src": "364:61:22",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "77c7b8fc",
+            "id": 5563,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPricePerFullShare",
+            "nameLocation": "519:20:22",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5559,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "539:2:22"
+            },
+            "returnParameters": {
+              "id": 5562,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5561,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5563,
+                  "src": "573:7:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5560,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "573:7:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "572:9:22"
+            },
+            "scope": 5564,
+            "src": "510:72:22",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5565,
+        "src": "282:302:22",
+        "usedErrors": []
+      }
+    ],
+    "src": "42:543:22"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/HarvestVaultInterface.sol",
+    "exportedSymbols": {
+      "HarvestVaultInterface": [
+        5564
+      ],
+      "IERC20": [
+        41847
+      ]
+    },
+    "id": 5565,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5550,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:22"
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "id": 5551,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 5565,
+        "sourceUnit": 41848,
+        "src": "67:56:22",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 5552,
+          "nodeType": "StructuredDocumentation",
+          "src": "125:156:22",
+          "text": " @title Interface for Harvest-style vaults.\n @dev This only contains the methods/events that we use in our contracts or offchain infrastructure."
+        },
+        "fullyImplemented": false,
+        "id": 5564,
+        "linearizedBaseContracts": [
+          5564
+        ],
+        "name": "HarvestVaultInterface",
+        "nameLocation": "300:21:22",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "6f307dc3",
+            "id": 5558,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underlying",
+            "nameLocation": "373:10:22",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5553,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "383:2:22"
+            },
+            "returnParameters": {
+              "id": 5557,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5556,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5558,
+                  "src": "417:6:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$41847",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 5555,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5554,
+                      "name": "IERC20",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 41847,
+                      "src": "417:6:22"
+                    },
+                    "referencedDeclaration": 41847,
+                    "src": "417:6:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$41847",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "416:8:22"
+            },
+            "scope": 5564,
+            "src": "364:61:22",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "77c7b8fc",
+            "id": 5563,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPricePerFullShare",
+            "nameLocation": "519:20:22",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5559,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "539:2:22"
+            },
+            "returnParameters": {
+              "id": 5562,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5561,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5563,
+                  "src": "573:7:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5560,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "573:7:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "572:9:22"
+            },
+            "scope": 5564,
+            "src": "510:72:22",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5565,
+        "src": "282:302:22",
+        "usedErrors": []
+      }
+    ],
+    "src": "42:543:22"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-07-16T20:27:09.603Z",
+  "devdoc": {
+    "details": "This only contains the methods/events that we use in our contracts or offchain infrastructure.",
+    "kind": "dev",
+    "methods": {},
+    "title": "Interface for Harvest-style vaults.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

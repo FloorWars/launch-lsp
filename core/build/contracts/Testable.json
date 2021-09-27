@@ -1,0 +1,1807 @@
+{
+  "contractName": "Testable",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "timerAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCurrentTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCurrentTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getCurrentTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"setCurrentTime\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"timerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"constructor\":{\"params\":{\"_timerAddress\":\"Contract that stores the current time in a testing environment. Must be set to 0x0 for production environments that use live time.\"}},\"getCurrentTime()\":{\"returns\":{\"_0\":\"uint for the current Testable timestamp.\"}},\"setCurrentTime(uint256)\":{\"details\":\"Will revert if not running in test mode.\",\"params\":{\"time\":\"timestamp to set current Testable time to.\"}}},\"title\":\"Base class that provides time overrides, but only if being run in test mode.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"Constructs the Testable contract. Called by child contracts.\"},\"getCurrentTime()\":{\"notice\":\"Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp.\"},\"setCurrentTime(uint256)\":{\"notice\":\"Sets the current time.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/common/implementation/Testable.sol\":\"Testable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/implementation/Testable.sol\":{\"keccak256\":\"0xc8c2806fa5c7898d8f69f0c860e4cdc62bba5f349e067d67da44e29e02042017\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://5c5a09efecfeecca33ebcaf69b4790e37dc221385308c872afd33830e093ef80\",\"dweb:/ipfs/QmYny7WeDJ9ntr8FKVp74xdq7kvQ2ina4si5uBj1DAk2ua\"]},\"/home/circleci/protocol/packages/core/contracts/common/implementation/Timer.sol\":{\"keccak256\":\"0x9e0dd7389718bd5d1da910273a6f4cee98ee22bfc0c92bde0f0955c0e23adb5e\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://7ddac8d3cb76f8811156a11a7702d7c05b15a0f18c22b5abdc318723193f9266\",\"dweb:/ipfs/QmPxL7AU8NkURJaZ6WxXNcw88wGMSoPX4jbt7SMdPJqtYv\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.8.0;\n\nimport \"./Timer.sol\";\n\n/**\n * @title Base class that provides time overrides, but only if being run in test mode.\n */\nabstract contract Testable {\n    // If the contract is being run in production, then `timerAddress` will be the 0x0 address.\n    // Note: this variable should be set on construction and never modified.\n    address public timerAddress;\n\n    /**\n     * @notice Constructs the Testable contract. Called by child contracts.\n     * @param _timerAddress Contract that stores the current time in a testing environment.\n     * Must be set to 0x0 for production environments that use live time.\n     */\n    constructor(address _timerAddress) {\n        timerAddress = _timerAddress;\n    }\n\n    /**\n     * @notice Reverts if not running in test mode.\n     */\n    modifier onlyIfTest {\n        require(timerAddress != address(0x0));\n        _;\n    }\n\n    /**\n     * @notice Sets the current time.\n     * @dev Will revert if not running in test mode.\n     * @param time timestamp to set current Testable time to.\n     */\n    function setCurrentTime(uint256 time) external onlyIfTest {\n        Timer(timerAddress).setCurrentTime(time);\n    }\n\n    /**\n     * @notice Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode.\n     * Otherwise, it will return the block timestamp.\n     * @return uint for the current Testable timestamp.\n     */\n    function getCurrentTime() public view returns (uint256) {\n        if (timerAddress != address(0x0)) {\n            return Timer(timerAddress).getCurrentTime();\n        } else {\n            return block.timestamp; // solhint-disable-line not-rely-on-time\n        }\n    }\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/Testable.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/Testable.sol",
+    "exportedSymbols": {
+      "Testable": [
+        4418
+      ],
+      "Timer": [
+        4505
+      ]
+    },
+    "id": 4419,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4347,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:13"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/Timer.sol",
+        "file": "./Timer.sol",
+        "id": 4348,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4419,
+        "sourceUnit": 4506,
+        "src": "67:21:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 4349,
+          "nodeType": "StructuredDocumentation",
+          "src": "90:94:13",
+          "text": " @title Base class that provides time overrides, but only if being run in test mode."
+        },
+        "fullyImplemented": true,
+        "id": 4418,
+        "linearizedBaseContracts": [
+          4418
+        ],
+        "name": "Testable",
+        "nameLocation": "203:8:13",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "1c39c38d",
+            "id": 4351,
+            "mutability": "mutable",
+            "name": "timerAddress",
+            "nameLocation": "406:12:13",
+            "nodeType": "VariableDeclaration",
+            "scope": 4418,
+            "src": "391:27:13",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 4350,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "391:7:13",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4361,
+              "nodeType": "Block",
+              "src": "718:45:13",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 4359,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 4357,
+                      "name": "timerAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4351,
+                      "src": "728:12:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 4358,
+                      "name": "_timerAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4354,
+                      "src": "743:13:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "728:28:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 4360,
+                  "nodeType": "ExpressionStatement",
+                  "src": "728:28:13"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4352,
+              "nodeType": "StructuredDocumentation",
+              "src": "425:253:13",
+              "text": " @notice Constructs the Testable contract. Called by child contracts.\n @param _timerAddress Contract that stores the current time in a testing environment.\n Must be set to 0x0 for production environments that use live time."
+            },
+            "id": 4362,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4355,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4354,
+                  "mutability": "mutable",
+                  "name": "_timerAddress",
+                  "nameLocation": "703:13:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4362,
+                  "src": "695:21:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4353,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "695:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "694:23:13"
+            },
+            "returnParameters": {
+              "id": 4356,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "718:0:13"
+            },
+            "scope": 4418,
+            "src": "683:80:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 4375,
+              "nodeType": "Block",
+              "src": "857:65:13",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 4371,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 4366,
+                          "name": "timerAddress",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4351,
+                          "src": "875:12:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "!=",
+                        "rightExpression": {
+                          "arguments": [
+                            {
+                              "hexValue": "307830",
+                              "id": 4369,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "899:3:13",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0x0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 4368,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "891:7:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 4367,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "891:7:13",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 4370,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "891:12:13",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "875:28:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 4365,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "867:7:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 4372,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "867:37:13",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4373,
+                  "nodeType": "ExpressionStatement",
+                  "src": "867:37:13"
+                },
+                {
+                  "id": 4374,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "914:1:13"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4363,
+              "nodeType": "StructuredDocumentation",
+              "src": "769:63:13",
+              "text": " @notice Reverts if not running in test mode."
+            },
+            "id": 4376,
+            "name": "onlyIfTest",
+            "nameLocation": "846:10:13",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 4364,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "857:0:13"
+            },
+            "src": "837:85:13",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 4391,
+              "nodeType": "Block",
+              "src": "1155:57:13",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4388,
+                        "name": "time",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4379,
+                        "src": "1200:4:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "arguments": [
+                          {
+                            "id": 4385,
+                            "name": "timerAddress",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4351,
+                            "src": "1171:12:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 4384,
+                          "name": "Timer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4505,
+                          "src": "1165:5:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_Timer_$4505_$",
+                            "typeString": "type(contract Timer)"
+                          }
+                        },
+                        "id": 4386,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1165:19:13",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Timer_$4505",
+                          "typeString": "contract Timer"
+                        }
+                      },
+                      "id": 4387,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "setCurrentTime",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4495,
+                      "src": "1165:34:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256) external"
+                      }
+                    },
+                    "id": 4389,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1165:40:13",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4390,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1165:40:13"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4377,
+              "nodeType": "StructuredDocumentation",
+              "src": "928:164:13",
+              "text": " @notice Sets the current time.\n @dev Will revert if not running in test mode.\n @param time timestamp to set current Testable time to."
+            },
+            "functionSelector": "22f8e566",
+            "id": 4392,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 4382,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 4381,
+                  "name": "onlyIfTest",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 4376,
+                  "src": "1144:10:13"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1144:10:13"
+              }
+            ],
+            "name": "setCurrentTime",
+            "nameLocation": "1106:14:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4380,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4379,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nameLocation": "1129:4:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4392,
+                  "src": "1121:12:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4378,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1121:7:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1120:14:13"
+            },
+            "returnParameters": {
+              "id": 4383,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1155:0:13"
+            },
+            "scope": 4418,
+            "src": "1097:115:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 4416,
+              "nodeType": "Block",
+              "src": "1513:212:13",
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    },
+                    "id": 4403,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 4398,
+                      "name": "timerAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4351,
+                      "src": "1527:12:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "!=",
+                    "rightExpression": {
+                      "arguments": [
+                        {
+                          "hexValue": "307830",
+                          "id": 4401,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1551:3:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0x0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          }
+                        ],
+                        "id": 4400,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1543:7:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 4399,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1543:7:13",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 4402,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1543:12:13",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1527:28:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 4414,
+                    "nodeType": "Block",
+                    "src": "1631:88:13",
+                    "statements": [
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 4411,
+                            "name": "block",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4294967292,
+                            "src": "1652:5:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_block",
+                              "typeString": "block"
+                            }
+                          },
+                          "id": 4412,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "timestamp",
+                          "nodeType": "MemberAccess",
+                          "src": "1652:15:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 4397,
+                        "id": 4413,
+                        "nodeType": "Return",
+                        "src": "1645:22:13"
+                      }
+                    ]
+                  },
+                  "id": 4415,
+                  "nodeType": "IfStatement",
+                  "src": "1523:196:13",
+                  "trueBody": {
+                    "id": 4410,
+                    "nodeType": "Block",
+                    "src": "1557:68:13",
+                    "statements": [
+                      {
+                        "expression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "arguments": [
+                                {
+                                  "id": 4405,
+                                  "name": "timerAddress",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 4351,
+                                  "src": "1584:12:13",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                  }
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": [
+                                  {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                  }
+                                ],
+                                "id": 4404,
+                                "name": "Timer",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4505,
+                                "src": "1578:5:13",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_Timer_$4505_$",
+                                  "typeString": "type(contract Timer)"
+                                }
+                              },
+                              "id": 4406,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "kind": "typeConversion",
+                              "lValueRequested": false,
+                              "names": [],
+                              "nodeType": "FunctionCall",
+                              "src": "1578:19:13",
+                              "tryCall": false,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_Timer_$4505",
+                                "typeString": "contract Timer"
+                              }
+                            },
+                            "id": 4407,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "getCurrentTime",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 4504,
+                            "src": "1578:34:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                              "typeString": "function () view external returns (uint256)"
+                            }
+                          },
+                          "id": 4408,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1578:36:13",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 4397,
+                        "id": 4409,
+                        "nodeType": "Return",
+                        "src": "1571:43:13"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4393,
+              "nodeType": "StructuredDocumentation",
+              "src": "1218:234:13",
+              "text": " @notice Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode.\n Otherwise, it will return the block timestamp.\n @return uint for the current Testable timestamp."
+            },
+            "functionSelector": "29cb924d",
+            "id": 4417,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCurrentTime",
+            "nameLocation": "1466:14:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4394,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1480:2:13"
+            },
+            "returnParameters": {
+              "id": 4397,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4396,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4417,
+                  "src": "1504:7:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4395,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1504:7:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1503:9:13"
+            },
+            "scope": 4418,
+            "src": "1457:268:13",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4419,
+        "src": "185:1542:13",
+        "usedErrors": []
+      }
+    ],
+    "src": "42:1686:13"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/Testable.sol",
+    "exportedSymbols": {
+      "Testable": [
+        4418
+      ],
+      "Timer": [
+        4505
+      ]
+    },
+    "id": 4419,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4347,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:13"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/Timer.sol",
+        "file": "./Timer.sol",
+        "id": 4348,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4419,
+        "sourceUnit": 4506,
+        "src": "67:21:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 4349,
+          "nodeType": "StructuredDocumentation",
+          "src": "90:94:13",
+          "text": " @title Base class that provides time overrides, but only if being run in test mode."
+        },
+        "fullyImplemented": true,
+        "id": 4418,
+        "linearizedBaseContracts": [
+          4418
+        ],
+        "name": "Testable",
+        "nameLocation": "203:8:13",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "1c39c38d",
+            "id": 4351,
+            "mutability": "mutable",
+            "name": "timerAddress",
+            "nameLocation": "406:12:13",
+            "nodeType": "VariableDeclaration",
+            "scope": 4418,
+            "src": "391:27:13",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 4350,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "391:7:13",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4361,
+              "nodeType": "Block",
+              "src": "718:45:13",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 4359,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 4357,
+                      "name": "timerAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4351,
+                      "src": "728:12:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 4358,
+                      "name": "_timerAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4354,
+                      "src": "743:13:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "728:28:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 4360,
+                  "nodeType": "ExpressionStatement",
+                  "src": "728:28:13"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4352,
+              "nodeType": "StructuredDocumentation",
+              "src": "425:253:13",
+              "text": " @notice Constructs the Testable contract. Called by child contracts.\n @param _timerAddress Contract that stores the current time in a testing environment.\n Must be set to 0x0 for production environments that use live time."
+            },
+            "id": 4362,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4355,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4354,
+                  "mutability": "mutable",
+                  "name": "_timerAddress",
+                  "nameLocation": "703:13:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4362,
+                  "src": "695:21:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4353,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "695:7:13",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "694:23:13"
+            },
+            "returnParameters": {
+              "id": 4356,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "718:0:13"
+            },
+            "scope": 4418,
+            "src": "683:80:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 4375,
+              "nodeType": "Block",
+              "src": "857:65:13",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 4371,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 4366,
+                          "name": "timerAddress",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4351,
+                          "src": "875:12:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "!=",
+                        "rightExpression": {
+                          "arguments": [
+                            {
+                              "hexValue": "307830",
+                              "id": 4369,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "899:3:13",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0x0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 4368,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "891:7:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 4367,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "891:7:13",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 4370,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "891:12:13",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "875:28:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 4365,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "867:7:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 4372,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "867:37:13",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4373,
+                  "nodeType": "ExpressionStatement",
+                  "src": "867:37:13"
+                },
+                {
+                  "id": 4374,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "914:1:13"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4363,
+              "nodeType": "StructuredDocumentation",
+              "src": "769:63:13",
+              "text": " @notice Reverts if not running in test mode."
+            },
+            "id": 4376,
+            "name": "onlyIfTest",
+            "nameLocation": "846:10:13",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 4364,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "857:0:13"
+            },
+            "src": "837:85:13",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 4391,
+              "nodeType": "Block",
+              "src": "1155:57:13",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4388,
+                        "name": "time",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4379,
+                        "src": "1200:4:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "arguments": [
+                          {
+                            "id": 4385,
+                            "name": "timerAddress",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4351,
+                            "src": "1171:12:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 4384,
+                          "name": "Timer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4505,
+                          "src": "1165:5:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_Timer_$4505_$",
+                            "typeString": "type(contract Timer)"
+                          }
+                        },
+                        "id": 4386,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1165:19:13",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Timer_$4505",
+                          "typeString": "contract Timer"
+                        }
+                      },
+                      "id": 4387,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "setCurrentTime",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4495,
+                      "src": "1165:34:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256) external"
+                      }
+                    },
+                    "id": 4389,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1165:40:13",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4390,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1165:40:13"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4377,
+              "nodeType": "StructuredDocumentation",
+              "src": "928:164:13",
+              "text": " @notice Sets the current time.\n @dev Will revert if not running in test mode.\n @param time timestamp to set current Testable time to."
+            },
+            "functionSelector": "22f8e566",
+            "id": 4392,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 4382,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 4381,
+                  "name": "onlyIfTest",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 4376,
+                  "src": "1144:10:13"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1144:10:13"
+              }
+            ],
+            "name": "setCurrentTime",
+            "nameLocation": "1106:14:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4380,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4379,
+                  "mutability": "mutable",
+                  "name": "time",
+                  "nameLocation": "1129:4:13",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4392,
+                  "src": "1121:12:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4378,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1121:7:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1120:14:13"
+            },
+            "returnParameters": {
+              "id": 4383,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1155:0:13"
+            },
+            "scope": 4418,
+            "src": "1097:115:13",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 4416,
+              "nodeType": "Block",
+              "src": "1513:212:13",
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    },
+                    "id": 4403,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 4398,
+                      "name": "timerAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4351,
+                      "src": "1527:12:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "!=",
+                    "rightExpression": {
+                      "arguments": [
+                        {
+                          "hexValue": "307830",
+                          "id": 4401,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1551:3:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0x0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          }
+                        ],
+                        "id": 4400,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1543:7:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 4399,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1543:7:13",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 4402,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1543:12:13",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1527:28:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 4414,
+                    "nodeType": "Block",
+                    "src": "1631:88:13",
+                    "statements": [
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 4411,
+                            "name": "block",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4294967292,
+                            "src": "1652:5:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_block",
+                              "typeString": "block"
+                            }
+                          },
+                          "id": 4412,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "timestamp",
+                          "nodeType": "MemberAccess",
+                          "src": "1652:15:13",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 4397,
+                        "id": 4413,
+                        "nodeType": "Return",
+                        "src": "1645:22:13"
+                      }
+                    ]
+                  },
+                  "id": 4415,
+                  "nodeType": "IfStatement",
+                  "src": "1523:196:13",
+                  "trueBody": {
+                    "id": 4410,
+                    "nodeType": "Block",
+                    "src": "1557:68:13",
+                    "statements": [
+                      {
+                        "expression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "arguments": [
+                                {
+                                  "id": 4405,
+                                  "name": "timerAddress",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 4351,
+                                  "src": "1584:12:13",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                  }
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": [
+                                  {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                  }
+                                ],
+                                "id": 4404,
+                                "name": "Timer",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4505,
+                                "src": "1578:5:13",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_Timer_$4505_$",
+                                  "typeString": "type(contract Timer)"
+                                }
+                              },
+                              "id": 4406,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "kind": "typeConversion",
+                              "lValueRequested": false,
+                              "names": [],
+                              "nodeType": "FunctionCall",
+                              "src": "1578:19:13",
+                              "tryCall": false,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_Timer_$4505",
+                                "typeString": "contract Timer"
+                              }
+                            },
+                            "id": 4407,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "getCurrentTime",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 4504,
+                            "src": "1578:34:13",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                              "typeString": "function () view external returns (uint256)"
+                            }
+                          },
+                          "id": 4408,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1578:36:13",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 4397,
+                        "id": 4409,
+                        "nodeType": "Return",
+                        "src": "1571:43:13"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": {
+              "id": 4393,
+              "nodeType": "StructuredDocumentation",
+              "src": "1218:234:13",
+              "text": " @notice Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode.\n Otherwise, it will return the block timestamp.\n @return uint for the current Testable timestamp."
+            },
+            "functionSelector": "29cb924d",
+            "id": 4417,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCurrentTime",
+            "nameLocation": "1466:14:13",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4394,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1480:2:13"
+            },
+            "returnParameters": {
+              "id": 4397,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4396,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4417,
+                  "src": "1504:7:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4395,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1504:7:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1503:9:13"
+            },
+            "scope": 4418,
+            "src": "1457:268:13",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4419,
+        "src": "185:1542:13",
+        "usedErrors": []
+      }
+    ],
+    "src": "42:1686:13"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-07-16T20:27:09.549Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "params": {
+          "_timerAddress": "Contract that stores the current time in a testing environment. Must be set to 0x0 for production environments that use live time."
+        }
+      },
+      "getCurrentTime()": {
+        "returns": {
+          "_0": "uint for the current Testable timestamp."
+        }
+      },
+      "setCurrentTime(uint256)": {
+        "details": "Will revert if not running in test mode.",
+        "params": {
+          "time": "timestamp to set current Testable time to."
+        }
+      }
+    },
+    "title": "Base class that provides time overrides, but only if being run in test mode.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "constructor": {
+        "notice": "Constructs the Testable contract. Called by child contracts."
+      },
+      "getCurrentTime()": {
+        "notice": "Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp."
+      },
+      "setCurrentTime(uint256)": {
+        "notice": "Sets the current time."
+      }
+    },
+    "version": 1
+  }
+}
