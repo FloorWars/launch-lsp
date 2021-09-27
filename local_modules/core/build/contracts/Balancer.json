@@ -1,0 +1,382 @@
+{
+  "contractName": "Balancer",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "tokenIn",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "tokenOut",
+          "type": "address"
+        }
+      ],
+      "name": "getSpotPriceSansFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "spotPrice",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenIn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenOut\",\"type\":\"address\"}],\"name\":\"getSpotPriceSansFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"spotPrice\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This only contains the methods/events that we use in our contracts or offchain infrastructure.\",\"kind\":\"dev\",\"methods\":{},\"title\":\"Interface for Balancer.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/common/interfaces/Balancer.sol\":\"Balancer\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/interfaces/Balancer.sol\":{\"keccak256\":\"0xf1ebcbbaa0ba361f0fd4947a4b74d7386a0998a6c684321bf07bdf836588e009\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://ac5ea952da183e72ba9cc5e277f3697b98fa78a82df677fa2a43883359d1ec62\",\"dweb:/ipfs/QmVxa9QxBBJ5MNHAB4SEpYuAsYGpD51LKMuERWPbTAMHxe\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.8.0;\n\n/**\n * @title Interface for Balancer.\n * @dev This only contains the methods/events that we use in our contracts or offchain infrastructure.\n */\nabstract contract Balancer {\n    function getSpotPriceSansFee(address tokenIn, address tokenOut) external view virtual returns (uint256 spotPrice);\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/Balancer.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/Balancer.sol",
+    "exportedSymbols": {
+      "Balancer": [
+        5500
+      ]
+    },
+    "id": 5501,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5489,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:20"
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 5490,
+          "nodeType": "StructuredDocumentation",
+          "src": "67:144:20",
+          "text": " @title Interface for Balancer.\n @dev This only contains the methods/events that we use in our contracts or offchain infrastructure."
+        },
+        "fullyImplemented": false,
+        "id": 5500,
+        "linearizedBaseContracts": [
+          5500
+        ],
+        "name": "Balancer",
+        "nameLocation": "230:8:20",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "1446a7ff",
+            "id": 5499,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getSpotPriceSansFee",
+            "nameLocation": "254:19:20",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5495,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5492,
+                  "mutability": "mutable",
+                  "name": "tokenIn",
+                  "nameLocation": "282:7:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5499,
+                  "src": "274:15:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5491,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "274:7:20",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5494,
+                  "mutability": "mutable",
+                  "name": "tokenOut",
+                  "nameLocation": "299:8:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5499,
+                  "src": "291:16:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5493,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "291:7:20",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "273:35:20"
+            },
+            "returnParameters": {
+              "id": 5498,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5497,
+                  "mutability": "mutable",
+                  "name": "spotPrice",
+                  "nameLocation": "348:9:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5499,
+                  "src": "340:17:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5496,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "340:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "339:19:20"
+            },
+            "scope": 5500,
+            "src": "245:114:20",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5501,
+        "src": "212:149:20",
+        "usedErrors": []
+      }
+    ],
+    "src": "42:320:20"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/Balancer.sol",
+    "exportedSymbols": {
+      "Balancer": [
+        5500
+      ]
+    },
+    "id": 5501,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5489,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:20"
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 5490,
+          "nodeType": "StructuredDocumentation",
+          "src": "67:144:20",
+          "text": " @title Interface for Balancer.\n @dev This only contains the methods/events that we use in our contracts or offchain infrastructure."
+        },
+        "fullyImplemented": false,
+        "id": 5500,
+        "linearizedBaseContracts": [
+          5500
+        ],
+        "name": "Balancer",
+        "nameLocation": "230:8:20",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "1446a7ff",
+            "id": 5499,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getSpotPriceSansFee",
+            "nameLocation": "254:19:20",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5495,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5492,
+                  "mutability": "mutable",
+                  "name": "tokenIn",
+                  "nameLocation": "282:7:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5499,
+                  "src": "274:15:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5491,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "274:7:20",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5494,
+                  "mutability": "mutable",
+                  "name": "tokenOut",
+                  "nameLocation": "299:8:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5499,
+                  "src": "291:16:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5493,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "291:7:20",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "273:35:20"
+            },
+            "returnParameters": {
+              "id": 5498,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5497,
+                  "mutability": "mutable",
+                  "name": "spotPrice",
+                  "nameLocation": "348:9:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5499,
+                  "src": "340:17:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5496,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "340:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "339:19:20"
+            },
+            "scope": 5500,
+            "src": "245:114:20",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5501,
+        "src": "212:149:20",
+        "usedErrors": []
+      }
+    ],
+    "src": "42:320:20"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-07-16T20:27:09.602Z",
+  "devdoc": {
+    "details": "This only contains the methods/events that we use in our contracts or offchain infrastructure.",
+    "kind": "dev",
+    "methods": {},
+    "title": "Interface for Balancer.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
