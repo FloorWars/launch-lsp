@@ -1,0 +1,558 @@
+{
+  "contractName": "UniswapMock",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint112",
+          "name": "reserve0",
+          "type": "uint112"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint112",
+          "name": "reserve1",
+          "type": "uint112"
+        }
+      ],
+      "name": "Sync",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint112",
+          "name": "reserve0",
+          "type": "uint112"
+        },
+        {
+          "internalType": "uint112",
+          "name": "reserve1",
+          "type": "uint112"
+        }
+      ],
+      "name": "setPrice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint112\",\"name\":\"reserve0\",\"type\":\"uint112\"},{\"indexed\":false,\"internalType\":\"uint112\",\"name\":\"reserve1\",\"type\":\"uint112\"}],\"name\":\"Sync\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint112\",\"name\":\"reserve0\",\"type\":\"uint112\"},{\"internalType\":\"uint112\",\"name\":\"reserve1\",\"type\":\"uint112\"}],\"name\":\"setPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Uniswap v2 Mock that allows manual price injection.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/common/test/UniswapMock.sol\":\"UniswapMock\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/interfaces/Uniswap.sol\":{\"keccak256\":\"0x5ed9c25eb6c4b5c874aaea73f010d419f9f39e11ebb4d993129ef3edeea4ad20\",\"urls\":[\"bzz-raw://96011a003a13800eaefb0a6f8630effa5db53b224bbfc52ff9ca286d9156f02a\",\"dweb:/ipfs/QmZJhHhQxFhkuX7GgXi5DzNSJZtTVz9nBSuVgVQFfc2jCr\"]},\"/home/circleci/protocol/packages/core/contracts/common/test/UniswapMock.sol\":{\"keccak256\":\"0xee934ae3636095955063bb8df376abeebc8e445ff2f835f471cb16755fb3efbc\",\"urls\":[\"bzz-raw://f94584935da747c7e9e768a969b6f54f47d5e1fdf70e107e658763d8e57f5173\",\"dweb:/ipfs/QmZdcPPYTFwhSjzdooM5dY6gLYvm7zM6rFVZusZrhLRvoS\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060d98061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80638fa07a1114602d575b600080fd5b605860048036036040811015604157600080fd5b506001600160701b0381358116916020013516605a565b005b604080516001600160701b0380851682528316602082015281517f1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1929181900390910190a1505056fea2646970667358221220bb3fade7f0819b4f031324c93d310c655c8a2664cd0472a0c1fcbc8de1ab7f6364736f6c634300060c0033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80638fa07a1114602d575b600080fd5b605860048036036040811015604157600080fd5b506001600160701b0381358116916020013516605a565b005b604080516001600160701b0380851682528316602082015281517f1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1929181900390910190a1505056fea2646970667358221220bb3fade7f0819b4f031324c93d310c655c8a2664cd0472a0c1fcbc8de1ab7f6364736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "133:149:23:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "133:149:23:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;171:109;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;171:109:23;;;;;;;;;;:::i;:::-;;;249:24;;;-1:-1:-1;;;;;249:24:23;;;;;;;;;;;;;;;;;;;;;;;;171:109;;:::o",
+  "source": "pragma solidity ^0.6.0;\n\nimport \"../interfaces/Uniswap.sol\";\n\n\n/**\n * @title Uniswap v2 Mock that allows manual price injection.\n */\ncontract UniswapMock is Uniswap {\n    function setPrice(uint112 reserve0, uint112 reserve1) external {\n        emit Sync(reserve0, reserve1);\n    }\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/common/test/UniswapMock.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/test/UniswapMock.sol",
+    "exportedSymbols": {
+      "UniswapMock": [
+        3309
+      ]
+    },
+    "id": 3310,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3291,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:23"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/Uniswap.sol",
+        "file": "../interfaces/Uniswap.sol",
+        "id": 3292,
+        "nodeType": "ImportDirective",
+        "scope": 3310,
+        "sourceUnit": 2114,
+        "src": "25:35:23",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3294,
+              "name": "Uniswap",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2113,
+              "src": "157:7:23",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Uniswap_$2113",
+                "typeString": "contract Uniswap"
+              }
+            },
+            "id": 3295,
+            "nodeType": "InheritanceSpecifier",
+            "src": "157:7:23"
+          }
+        ],
+        "contractDependencies": [
+          2113
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 3293,
+          "nodeType": "StructuredDocumentation",
+          "src": "63:69:23",
+          "text": " @title Uniswap v2 Mock that allows manual price injection."
+        },
+        "fullyImplemented": true,
+        "id": 3309,
+        "linearizedBaseContracts": [
+          3309,
+          2113
+        ],
+        "name": "UniswapMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3307,
+              "nodeType": "Block",
+              "src": "234:46:23",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3303,
+                        "name": "reserve0",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3297,
+                        "src": "254:8:23",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3304,
+                        "name": "reserve1",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3299,
+                        "src": "264:8:23",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        },
+                        {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        }
+                      ],
+                      "id": 3302,
+                      "name": "Sync",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2112,
+                      "src": "249:4:23",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint112_$_t_uint112_$returns$__$",
+                        "typeString": "function (uint112,uint112)"
+                      }
+                    },
+                    "id": 3305,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "249:24:23",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3306,
+                  "nodeType": "EmitStatement",
+                  "src": "244:29:23"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "8fa07a11",
+            "id": 3308,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3300,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3297,
+                  "mutability": "mutable",
+                  "name": "reserve0",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3308,
+                  "src": "189:16:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint112",
+                    "typeString": "uint112"
+                  },
+                  "typeName": {
+                    "id": 3296,
+                    "name": "uint112",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "189:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint112",
+                      "typeString": "uint112"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3299,
+                  "mutability": "mutable",
+                  "name": "reserve1",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3308,
+                  "src": "207:16:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint112",
+                    "typeString": "uint112"
+                  },
+                  "typeName": {
+                    "id": 3298,
+                    "name": "uint112",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "207:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint112",
+                      "typeString": "uint112"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "188:36:23"
+            },
+            "returnParameters": {
+              "id": 3301,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "234:0:23"
+            },
+            "scope": 3309,
+            "src": "171:109:23",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 3310,
+        "src": "133:149:23"
+      }
+    ],
+    "src": "0:283:23"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/test/UniswapMock.sol",
+    "exportedSymbols": {
+      "UniswapMock": [
+        3309
+      ]
+    },
+    "id": 3310,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3291,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:23"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/Uniswap.sol",
+        "file": "../interfaces/Uniswap.sol",
+        "id": 3292,
+        "nodeType": "ImportDirective",
+        "scope": 3310,
+        "sourceUnit": 2114,
+        "src": "25:35:23",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3294,
+              "name": "Uniswap",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2113,
+              "src": "157:7:23",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Uniswap_$2113",
+                "typeString": "contract Uniswap"
+              }
+            },
+            "id": 3295,
+            "nodeType": "InheritanceSpecifier",
+            "src": "157:7:23"
+          }
+        ],
+        "contractDependencies": [
+          2113
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 3293,
+          "nodeType": "StructuredDocumentation",
+          "src": "63:69:23",
+          "text": " @title Uniswap v2 Mock that allows manual price injection."
+        },
+        "fullyImplemented": true,
+        "id": 3309,
+        "linearizedBaseContracts": [
+          3309,
+          2113
+        ],
+        "name": "UniswapMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3307,
+              "nodeType": "Block",
+              "src": "234:46:23",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3303,
+                        "name": "reserve0",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3297,
+                        "src": "254:8:23",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3304,
+                        "name": "reserve1",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3299,
+                        "src": "264:8:23",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        },
+                        {
+                          "typeIdentifier": "t_uint112",
+                          "typeString": "uint112"
+                        }
+                      ],
+                      "id": 3302,
+                      "name": "Sync",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2112,
+                      "src": "249:4:23",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint112_$_t_uint112_$returns$__$",
+                        "typeString": "function (uint112,uint112)"
+                      }
+                    },
+                    "id": 3305,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "249:24:23",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3306,
+                  "nodeType": "EmitStatement",
+                  "src": "244:29:23"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "8fa07a11",
+            "id": 3308,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3300,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3297,
+                  "mutability": "mutable",
+                  "name": "reserve0",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3308,
+                  "src": "189:16:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint112",
+                    "typeString": "uint112"
+                  },
+                  "typeName": {
+                    "id": 3296,
+                    "name": "uint112",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "189:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint112",
+                      "typeString": "uint112"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3299,
+                  "mutability": "mutable",
+                  "name": "reserve1",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3308,
+                  "src": "207:16:23",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint112",
+                    "typeString": "uint112"
+                  },
+                  "typeName": {
+                    "id": 3298,
+                    "name": "uint112",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "207:7:23",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint112",
+                      "typeString": "uint112"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "188:36:23"
+            },
+            "returnParameters": {
+              "id": 3301,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "234:0:23"
+            },
+            "scope": 3309,
+            "src": "171:109:23",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 3310,
+        "src": "133:149:23"
+      }
+    ],
+    "src": "0:283:23"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-10-06T21:03:39.018Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "title": "Uniswap v2 Mock that allows manual price injection.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

@@ -1,0 +1,3510 @@
+{
+  "contractName": "TokenMigrator",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "_rate",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "_oldToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_newToken",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "hasMigrated",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "newToken",
+      "outputs": [
+        {
+          "internalType": "contract ExpandedIERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "oldToken",
+      "outputs": [
+        {
+          "internalType": "contract VotingToken",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "rawValue",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "snapshotId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "tokenHolder",
+          "type": "address"
+        }
+      ],
+      "name": "migrateTokens",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"_rate\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"_oldToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_newToken\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"hasMigrated\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenHolder\",\"type\":\"address\"}],\"name\":\"migrateTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"newToken\",\"outputs\":[{\"internalType\":\"contract ExpandedIERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"oldToken\",\"outputs\":[{\"internalType\":\"contract VotingToken\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"snapshotId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Handles migrating token holders from one token to the next.\",\"kind\":\"dev\",\"methods\":{\"constructor\":{\"details\":\"This function triggers the snapshot upon which all migrations will be based.\",\"params\":{\"_newToken\":\"address of the token being migrated to.\",\"_oldToken\":\"address of the token being migrated from.\",\"_rate\":\"the number of old tokens it takes to generate one new token.\"}},\"migrateTokens(address)\":{\"details\":\"This function can only be called once per `tokenHolder`. Anyone can call this method on behalf of any other token holder since there is no disadvantage to receiving the tokens earlier.\",\"params\":{\"tokenHolder\":\"address of the token holder to migrate.\"}}},\"title\":\"Migration contract for VotingTokens.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":\"Construct the TokenMigrator contract.\",\"migrateTokens(address)\":{\"notice\":\"Migrates the tokenHolder's old tokens to new tokens.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/oracle/implementation/TokenMigrator.sol\":\"TokenMigrator\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/implementation/ExpandedERC20.sol\":{\"keccak256\":\"0x0b42526a6373e8b14d488537e05bd9919cca6cb1fae3b14f2429a5062b083997\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://06cfe7f58991110a9ce32b82a5d0deb5f762da7010dc55298430ec6f45cdec4b\",\"dweb:/ipfs/QmQKbe8vyQ742YmnzkHSNLRsjucEjfJa8d5vfgdV6Fxm4k\"]},\"/home/circleci/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0xab45bbd5979790b9f84b2f741fc5476d7196f5fd924704d38798540fa1b2e2f3\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://24affc9dbe1fa7c73ed6e1f46f8e1f9f46b83954d43d0bb2ef15ed80fe7e1fc2\",\"dweb:/ipfs/Qmbddhukgu2FdV1VKpACsuterX2kcq2X9jJs6usPqXLSqE\"]},\"/home/circleci/protocol/packages/core/contracts/common/implementation/MultiRole.sol\":{\"keccak256\":\"0xc35f4e028196f04a47b2456ed7efd825be3406688a314d75916f57680eae1795\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://29edb6ac3a5e5146fe262f77431d55571379cf0265925060d15f27b1b927cdd6\",\"dweb:/ipfs/QmUg31ey8b53pXdUpUBUrHx46nC3p2XChwmhLXw1h9ooyi\"]},\"/home/circleci/protocol/packages/core/contracts/common/interfaces/ExpandedIERC20.sol\":{\"keccak256\":\"0x7ecd92b537bb1776f65bc0414e732c97559d07e309bd41e666bc65f143f2d895\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://d1794951b316e87eedfd212fc54abe0261fe9defd62aca71f9a36452c3092abd\",\"dweb:/ipfs/QmXz4w3nVxSc9VTtLUa5mSTsb2btvdhgB72UrVbEdiJoFy\"]},\"/home/circleci/protocol/packages/core/contracts/oracle/implementation/TokenMigrator.sol\":{\"keccak256\":\"0x3e51dd9de4f65a72fa5fadb7cf5a874a8299485c5303946f18d723de8ab74c65\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://5b1a0e53994db8640708a6a93ae57cb03ba80968894c42acd95d2d9b3195cc6c\",\"dweb:/ipfs/QmZF3pq5GsRwNNcHBsNX8uXQyUcWqanTXcc1jT3n7Ri3vp\"]},\"/home/circleci/protocol/packages/core/contracts/oracle/implementation/VotingToken.sol\":{\"keccak256\":\"0x377006e6429ed0dee3b4295f648ff09824e00f9bc9a720b84692348e479623df\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://f4515fa405a51c9ac0cb362198fe03850443b39eb03f1c15105b506d1a0aba81\",\"dweb:/ipfs/QmTry2jbRH1gMn6amMACHzi1LKJHHMNRakX5R9QbgbQha2\"]},\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0x0de74dfa6b37943c1b834cbd8fb7a8d052e5ff80c7adb33692102dd6cd2985e9\",\"urls\":[\"bzz-raw://9d2d827fcf4a838f5821732c0acd6a40d21c2a5a2cfe2563feec91465f47bb60\",\"dweb:/ipfs/Qmex3wMKf5Sghbfvr288RUg1kP2uAyTMf11w83WbMbpQQc\"]},\"@openzeppelin/contracts/math/Math.sol\":{\"keccak256\":\"0x50280546205978ca6573541955e15453b4c07a19e6c8ec4f6785a5ae0d7343fb\",\"urls\":[\"bzz-raw://6463c7833ba4b3cbc3b56d50b56e7ce870aaec674633d7897a459b234478fa3e\",\"dweb:/ipfs/QmRkfjwTpA5E4SxUoHw8Qb7g6eXahtgmLrWWtTGH2TDZLj\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]},\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x3211de52f707a62a356a34fdea9d6a7bed46402d5ce45f1891a16fe2132fbb47\",\"urls\":[\"bzz-raw://45dfe794ad43a3674fab38a378c57eb6ed3353949f6529ccad4a4cbc91d45fc5\",\"dweb:/ipfs/QmReFGciE9fgsb6Nas1Fx593pzKWMjaDa1VQg4CEJQaD6U\"]},\"@openzeppelin/contracts/token/ERC20/ERC20Snapshot.sol\":{\"keccak256\":\"0x5e3f26bd43cf4dc30cfc964c03cefd701fe11952ee12e43222bbbe11ff2f928f\",\"urls\":[\"bzz-raw://2d4a8b33e68ae7e906907b42a2dde2693545672f1e2b37b82bc18799056a8392\",\"dweb:/ipfs/QmT3AdfADU3xDZ1jemuFxVutTHq8SdoJtBHdUpKyoTyKgh\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x6cc1cb934a3ac2137a7dcaed018af9e235392236ceecfd3687259702b9c767ad\",\"urls\":[\"bzz-raw://0055fa88138cd1c3c6440370f8580f85857f8fe9dec41c99af9eafbeb8d9c3ce\",\"dweb:/ipfs/QmX1xDh8vwGLLCH8ti45eXjQ7Wcxv1FEGTR3jkFnd5Nv6F\"]},\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x5f7da58ee3d9faa9b8999a93d49c8ff978f1afc88ae9bcfc6f9cbb44da011c2b\",\"urls\":[\"bzz-raw://4f089d954b3ecaa26949412fe63e9a184b056562c6c13dd4a0529a5d9a2e685a\",\"dweb:/ipfs/QmVK5iCNAMcEJQxT59bsC5E53JQASDQPU6khHox3d5ZXCn\"]},\"@openzeppelin/contracts/utils/Arrays.sol\":{\"keccak256\":\"0x6167b89f91ae6ca26fcba6ad04565ffa70a74694e0e46fda9b1500b2b796cf34\",\"urls\":[\"bzz-raw://aa7a5a74568c83dee67049f8dc42a80450add6c440828a2f16ac4f64905faa75\",\"dweb:/ipfs/QmaVFRGewWReDnvpHraeyrh3GsHLxH1tq6BVKdhYxBaykT\"]},\"@openzeppelin/contracts/utils/Counters.sol\":{\"keccak256\":\"0x4f3a00edb976e97943fe0a620ea2948955a75eff2a9231c202d50d1e062d8da5\",\"urls\":[\"bzz-raw://4d83aa87b7c75f666d57a0e5b779a19c00b453b14ee4ed88cfda6d056fdcf14c\",\"dweb:/ipfs/QmXpWwQVFo66hsrAZmHxoxNzwEwBDgNWvaUYqY4TJV38vk\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516108ed3803806108ed83398101604081905261002f916101e0565b61004760008461012360201b6103011790919060201c565b61006c5760405162461bcd60e51b815260040161006390610267565b60405180910390fd5b8251600355600180546001600160a01b038084166001600160a01b0319928316179092556000805485841692169190911780825560408051634b88b8ad60e11b815290519190931692639711715a9260048083019360209390929083900390910190829087803b1580156100df57600080fd5b505af11580156100f3573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610117919061024f565b600255506102d1915050565b600061012e8261013b565b5183511190505b92915050565b6101436101b6565b604051806020016040528061016d670de0b6b3a76400008561017560201b6103191790919060201c565b905292915050565b60008261018457506000610135565b8282028284828161019157fe5b04146101af5760405162461bcd60e51b815260040161006390610290565b9392505050565b6040518060200160405280600081525090565b80516001600160a01b038116811461013557600080fd5b600080600083850360608112156101f5578384fd5b6020811215610202578384fd5b50604051602081016001600160401b0381118282101715610221578485fd5b60405284518152925061023785602086016101c9565b915061024685604086016101c9565b90509250925092565b600060208284031215610260578081fd5b5051919050565b6020808252600f908201526e0526174652063616e2774206265203608c1b604082015260600190565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b61060d806102e06000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c80632c4e722e146100675780632ddc79b714610085578063b31c710a1461008d578063c1684711146100a2578063c42bd05a146100b7578063d7625c88146100bf575b600080fd5b61006f6100df565b60405161007c91906105ce565b60405180910390f35b61006f6100e5565b6100956100eb565b60405161007c91906104d0565b6100b56100b036600461044d565b6100fa565b005b6100956102dd565b6100d26100cd36600461044d565b6102ec565b60405161007c91906104c5565b60035481565b60025481565b6000546001600160a01b031681565b6001600160a01b03811660009081526004602052604090205460ff161561013c5760405162461bcd60e51b81526004016101339061059d565b60405180910390fd5b6001600160a01b0381166000908152600460205260409020805460ff1916600117905561016761043a565b60408051602081019182905260005460025463277166bf60e11b909352909182916001600160a01b031690634ee2cd7e906101a7908790602486016104ac565b60206040518083038186803b1580156101bf57600080fd5b505afa1580156101d3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101f79190610494565b90529050610206816000610301565b61021057506102da565b61021861043a565b6040805160208101909152600354815261023390839061035a565b60015481516040516340c10f1960e01b81529293506001600160a01b03909116916340c10f1991610269918791906004016104ac565b602060405180830381600087803b15801561028357600080fd5b505af1158015610297573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102bb9190610474565b6102d75760405162461bcd60e51b815260040161013390610537565b50505b50565b6001546001600160a01b031681565b60046020526000908152604090205460ff1681565b600061030c82610398565b5183511190505b92915050565b60008261032857506000610313565b8282028284828161033557fe5b04146103535760405162461bcd60e51b81526004016101339061055c565b9392505050565b61036261043a565b604080516020810190915282518451829161038f9161038990670de0b6b3a7640000610319565b906103c6565b90529392505050565b6103a061043a565b6040805160208101909152806103be84670de0b6b3a7640000610319565b905292915050565b600061035383836040518060400160405280601a81526020017f536166654d6174683a206469766973696f6e206279207a65726f000000000000815250600081836104245760405162461bcd60e51b815260040161013391906104e4565b50600083858161043057fe5b0495945050505050565b6040518060200160405280600081525090565b60006020828403121561045e578081fd5b81356001600160a01b0381168114610353578182fd5b600060208284031215610485578081fd5b81518015158114610353578182fd5b6000602082840312156104a5578081fd5b5051919050565b6001600160a01b03929092168252602082015260400190565b901515815260200190565b6001600160a01b0391909116815260200190565b6000602080835283518082850152825b81811015610510578581018301518582016040015282016104f4565b818111156105215783604083870101525b50601f01601f1916929092016040019392505050565b6020808252600b908201526a135a5b9d0819985a5b195960aa1b604082015260600190565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b602080825260179082015276416c7265616479206d6967726174656420746f6b656e7360481b604082015260600190565b9081526020019056fea26469706673582212209e809e01a8e9d154dbf590ee0330ce25ccf2ce6314a848758c774f4a880940b564736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100625760003560e01c80632c4e722e146100675780632ddc79b714610085578063b31c710a1461008d578063c1684711146100a2578063c42bd05a146100b7578063d7625c88146100bf575b600080fd5b61006f6100df565b60405161007c91906105ce565b60405180910390f35b61006f6100e5565b6100956100eb565b60405161007c91906104d0565b6100b56100b036600461044d565b6100fa565b005b6100956102dd565b6100d26100cd36600461044d565b6102ec565b60405161007c91906104c5565b60035481565b60025481565b6000546001600160a01b031681565b6001600160a01b03811660009081526004602052604090205460ff161561013c5760405162461bcd60e51b81526004016101339061059d565b60405180910390fd5b6001600160a01b0381166000908152600460205260409020805460ff1916600117905561016761043a565b60408051602081019182905260005460025463277166bf60e11b909352909182916001600160a01b031690634ee2cd7e906101a7908790602486016104ac565b60206040518083038186803b1580156101bf57600080fd5b505afa1580156101d3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101f79190610494565b90529050610206816000610301565b61021057506102da565b61021861043a565b6040805160208101909152600354815261023390839061035a565b60015481516040516340c10f1960e01b81529293506001600160a01b03909116916340c10f1991610269918791906004016104ac565b602060405180830381600087803b15801561028357600080fd5b505af1158015610297573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102bb9190610474565b6102d75760405162461bcd60e51b815260040161013390610537565b50505b50565b6001546001600160a01b031681565b60046020526000908152604090205460ff1681565b600061030c82610398565b5183511190505b92915050565b60008261032857506000610313565b8282028284828161033557fe5b04146103535760405162461bcd60e51b81526004016101339061055c565b9392505050565b61036261043a565b604080516020810190915282518451829161038f9161038990670de0b6b3a7640000610319565b906103c6565b90529392505050565b6103a061043a565b6040805160208101909152806103be84670de0b6b3a7640000610319565b905292915050565b600061035383836040518060400160405280601a81526020017f536166654d6174683a206469766973696f6e206279207a65726f000000000000815250600081836104245760405162461bcd60e51b815260040161013391906104e4565b50600083858161043057fe5b0495945050505050565b6040518060200160405280600081525090565b60006020828403121561045e578081fd5b81356001600160a01b0381168114610353578182fd5b600060208284031215610485578081fd5b81518015158114610353578182fd5b6000602082840312156104a5578081fd5b5051919050565b6001600160a01b03929092168252602082015260400190565b901515815260200190565b6001600160a01b0391909116815260200190565b6000602080835283518082850152825b81811015610510578581018301518582016040015282016104f4565b818111156105215783604083870101525b50601f01601f1916929092016040019392505050565b6020808252600b908201526a135a5b9d0819985a5b195960aa1b604082015260600190565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b602080825260179082015276416c7265616479206d6967726174656420746f6b656e7360481b604082015260600190565b9081526020019056fea26469706673582212209e809e01a8e9d154dbf590ee0330ce25ccf2ce6314a848758c774f4a880940b564736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "360:2137:69:-:0;;;1134:485;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1417:22;1437:1;1417:5;:19;;;;;;:22;;;;:::i;:::-;1409:50;;;;-1:-1:-1;;;1409:50:69;;;;;;;:::i;:::-;;;;;;;;;1469:12;;:4;:12;1491:8;:36;;-1:-1:-1;;;;;1491:36:69;;;-1:-1:-1;;;;;;1491:36:69;;;;;;;1469:12;1537:33;;;;;;;;;;;;;;1593:19;;;-1:-1:-1;;;1593:19:69;;;;:8;;;;;:17;;:19;;;;;;;;;;;;;;;;;;;:8;:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1580:10;:32;-1:-1:-1;360:2137:69;;-1:-1:-1;;360:2137:69;2248:147:4;2324:4;2360:19;2377:1;2360:16;:19::i;:::-;:28;2347:10;;:41;;-1:-1:-1;2248:147:4;;;;;:::o;1032:135::-;1092:15;;:::i;:::-;1126:34;;;;;;;;1135:24;607:6;1135:1;:5;;;;;;:24;;;;:::i;:::-;1126:34;;1119:41;1032:135;-1:-1:-1;;1032:135:4:o;2119:459:100:-;2177:7;2418:6;2414:45;;-1:-1:-1;2447:1:100;2440:8;;2414:45;2481:5;;;2485:1;2481;:5;:1;2504:5;;;;;:10;2496:56;;;;-1:-1:-1;;;2496:56:100;;;;;;;:::i;:::-;2570:1;2119:459;-1:-1:-1;;;2119:459:100:o;360:2137:69:-;;;;;;;;;;;;;;:::o;5:134:-1:-;83:13;;-1:-1;;;;;3682:54;;3886:35;;3876:2;;3935:1;;3925:12;676:585;;;;838:9;829:7;825:23;850:2;825:23;821:32;818:2;;;-1:-1;;856:12;818:2;304:4;283:19;279:30;276:2;;;-1:-1;;312:12;276:2;-1:-1;3149:2;3143:9;304:4;3175:17;;-1:-1;;;;;3235:34;;3271:22;;;3232:62;3229:2;;;-1:-1;;3297:12;3229:2;3149;3316:22;613:13;;421:86;;428:16;-1:-1;1062:64;1118:7;304:4;1094:22;;1062:64;:::i;:::-;1052:74;;1181:64;1237:7;3149:2;1217:9;1213:22;1181:64;:::i;:::-;1171:74;;812:449;;;;;:::o;1268:263::-;;1383:2;1371:9;1362:7;1358:23;1354:32;1351:2;;;-1:-1;;1389:12;1351:2;-1:-1;613:13;;1345:186;-1:-1;1345:186::o;2241:416::-;2441:2;2455:47;;;1763:2;2426:18;;;3454:19;-1:-1;;;3494:14;;;1779:38;1836:12;;;2412:245::o;2664:416::-;2864:2;2878:47;;;2087:2;2849:18;;;3454:19;2123:34;3494:14;;;2103:55;-1:-1;;;2178:12;;;2171:25;2215:12;;;2835:245::o;:::-;360:2137:69;;;;;;",
+  "deployedSourceMap": "360:2137:69:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;677:31;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;646:25;;;:::i;576:27::-;;;:::i;:::-;;;;;;;:::i;1979:516::-;;;;;;:::i;:::-;;:::i;:::-;;609:30;;;:::i;715:43::-;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;677:31::-;;;;:::o;646:25::-;;;;:::o;576:27::-;;;-1:-1:-1;;;;;576:27:69;;:::o;1979:516::-;-1:-1:-1;;;;;2051:24:69;;;;;;:11;:24;;;;;;;;2050:25;2042:61;;;;-1:-1:-1;;;2042:61:69;;;;;;;:::i;:::-;;;;;;;;;-1:-1:-1;;;;;2113:24:69;;;;;;:11;:24;;;;;:31;;-1:-1:-1;;2113:31:69;2140:4;2113:31;;;2155:37;;:::i;:::-;2195:66;;;;;;;;;;-1:-1:-1;2215:8:69;2249:10;;-1:-1:-1;;;2215:45:69;;;2195:66;;;;-1:-1:-1;;;;;2215:8:69;;:20;;:45;;2236:11;;2215:45;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;2195:66;;2155:106;-1:-1:-1;2277:27:69;2155:106;2302:1;2277:24;:27::i;:::-;2272:65;;2320:7;;;2272:65;2347:37;;:::i;:::-;2387:20;;;;;;;;;2402:4;2387:20;;;;;:10;;:14;:20::i;:::-;2425:8;;2452:19;;2425:47;;-1:-1:-1;;;2425:47:69;;2347:60;;-1:-1:-1;;;;;;2425:8:69;;;;:13;;:47;;2439:11;;2452:19;2425:47;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;2417:71;;;;-1:-1:-1;;;2417:71:69;;;;;;;:::i;:::-;1979:516;;;;:::o;609:30::-;;;-1:-1:-1;;;;;609:30:69;;:::o;715:43::-;;;;;;;;;;;;;;;:::o;2248:147:4:-;2324:4;2360:19;2377:1;2360:16;:19::i;:::-;:28;2347:10;;:41;;-1:-1:-1;2248:147:4;;;;;:::o;2119:459:100:-;2177:7;2418:6;2414:45;;-1:-1:-1;2447:1:100;2440:8;;2414:45;2481:5;;;2485:1;2481;:5;:1;2504:5;;;;;:10;2496:56;;;;-1:-1:-1;;;2496:56:100;;;;;;;:::i;:::-;2570:1;2119:459;-1:-1:-1;;;2119:459:100:o;10602:634:4:-;10676:15;;:::i;:::-;11170:59;;;;;;;;;11217:10;;11179;;11170:59;;11179:49;;:33;;607:6;11179:14;:33::i;:::-;:37;;:49::i;:::-;11170:59;;11163:66;10602:634;-1:-1:-1;;;10602:634:4:o;1032:135::-;1092:15;;:::i;:::-;1126:34;;;;;;;;;;1135:24;:1;607:6;1135:5;:24::i;:::-;1126:34;;1119:41;1032:135;-1:-1:-1;;1032:135:4:o;3033:130:100:-;3091:7;3117:39;3121:1;3124;3117:39;;;;;;;;;;;;;;;;;3724:7;3824:12;3817:5;3809:28;;;;-1:-1:-1;;;3809:28:100;;;;;;;;:::i;:::-;;3847:9;3863:1;3859;:5;;;;;;;3638:338;-1:-1:-1;;;;;3638:338:100:o;-1:-1:-1:-;;;;;;;;;;;;;;:::o;418:241::-;;522:2;510:9;501:7;497:23;493:32;490:2;;;-1:-1;;528:12;490:2;72:20;;-1:-1;;;;;6761:54;;7965:35;;7955:2;;-1:-1;;8004:12;666:257;;778:2;766:9;757:7;753:23;749:32;746:2;;;-1:-1;;784:12;746:2;223:6;217:13;8111:5;6673:13;6666:21;8089:5;8086:32;8076:2;;-1:-1;;8122:12;930:263;;1045:2;1033:9;1024:7;1020:23;1016:32;1013:2;;;-1:-1;;1051:12;1013:2;-1:-1;355:13;;1007:186;-1:-1;1007:186::o;3290:333::-;-1:-1;;;;;6761:54;;;;1271:37;;3609:2;3594:18;;3241:37;3445:2;3430:18;;3416:207::o;3630:210::-;6673:13;;6666:21;1385:34;;3751:2;3736:18;;3722:118::o;3847:268::-;-1:-1;;;;;6761:54;;;;1525:73;;3997:2;3982:18;;3968:147::o;4393:310::-;;4540:2;;4561:17;4554:47;1930:5;6296:12;6453:6;4540:2;4529:9;4525:18;6441:19;-1:-1;7597:101;7611:6;7608:1;7605:13;7597:101;;;7678:11;;;;;7672:18;7659:11;;;6481:14;7659:11;7652:39;7626:10;;7597:101;;;7713:6;7710:1;7707:13;7704:2;;;-1:-1;6481:14;7769:6;4529:9;7760:16;;7753:27;7704:2;-1:-1;7885:7;7869:14;-1:-1;;7865:28;2088:39;;;;6481:14;2088:39;;4511:192;-1:-1;;;4511:192::o;4710:416::-;4910:2;4924:47;;;2364:2;4895:18;;;6441:19;-1:-1;;;6481:14;;;2380:34;2433:12;;;4881:245::o;5133:416::-;5333:2;5347:47;;;2684:2;5318:18;;;6441:19;2720:34;6481:14;;;2700:55;-1:-1;;;2775:12;;;2768:25;2812:12;;;5304:245::o;5556:416::-;5756:2;5770:47;;;3063:2;5741:18;;;6441:19;-1:-1;;;6481:14;;;3079:46;3144:12;;;5727:245::o;5979:222::-;3241:37;;;6106:2;6091:18;;6077:124::o",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\n\npragma experimental ABIEncoderV2;\n\nimport \"../../common/implementation/FixedPoint.sol\";\nimport \"../../common/interfaces/ExpandedIERC20.sol\";\nimport \"./VotingToken.sol\";\n\n/**\n * @title Migration contract for VotingTokens.\n * @dev Handles migrating token holders from one token to the next.\n */\ncontract TokenMigrator {\n    using FixedPoint for FixedPoint.Unsigned;\n\n    /****************************************\n     *    INTERNAL VARIABLES AND STORAGE    *\n     ****************************************/\n\n    VotingToken public oldToken;\n    ExpandedIERC20 public newToken;\n\n    uint256 public snapshotId;\n    FixedPoint.Unsigned public rate;\n\n    mapping(address => bool) public hasMigrated;\n\n    /**\n     * @notice Construct the TokenMigrator contract.\n     * @dev This function triggers the snapshot upon which all migrations will be based.\n     * @param _rate the number of old tokens it takes to generate one new token.\n     * @param _oldToken address of the token being migrated from.\n     * @param _newToken address of the token being migrated to.\n     */\n    constructor(\n        FixedPoint.Unsigned memory _rate,\n        address _oldToken,\n        address _newToken\n    ) public {\n        // Prevents division by 0 in migrateTokens().\n        // Also it doesn’t make sense to have “0 old tokens equate to 1 new token”.\n        require(_rate.isGreaterThan(0), \"Rate can't be 0\");\n        rate = _rate;\n        newToken = ExpandedIERC20(_newToken);\n        oldToken = VotingToken(_oldToken);\n        snapshotId = oldToken.snapshot();\n    }\n\n    /**\n     * @notice Migrates the tokenHolder's old tokens to new tokens.\n     * @dev This function can only be called once per `tokenHolder`. Anyone can call this method\n     * on behalf of any other token holder since there is no disadvantage to receiving the tokens earlier.\n     * @param tokenHolder address of the token holder to migrate.\n     */\n    function migrateTokens(address tokenHolder) external {\n        require(!hasMigrated[tokenHolder], \"Already migrated tokens\");\n        hasMigrated[tokenHolder] = true;\n\n        FixedPoint.Unsigned memory oldBalance = FixedPoint.Unsigned(oldToken.balanceOfAt(tokenHolder, snapshotId));\n\n        if (!oldBalance.isGreaterThan(0)) {\n            return;\n        }\n\n        FixedPoint.Unsigned memory newBalance = oldBalance.div(rate);\n        require(newToken.mint(tokenHolder, newBalance.rawValue), \"Mint failed\");\n    }\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/oracle/implementation/TokenMigrator.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/oracle/implementation/TokenMigrator.sol",
+    "exportedSymbols": {
+      "TokenMigrator": [
+        20289
+      ]
+    },
+    "id": 20290,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 20166,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:69"
+      },
+      {
+        "id": 20167,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:69"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 20168,
+        "nodeType": "ImportDirective",
+        "scope": 20290,
+        "sourceUnit": 2374,
+        "src": "102:52:69",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/ExpandedIERC20.sol",
+        "file": "../../common/interfaces/ExpandedIERC20.sol",
+        "id": 20169,
+        "nodeType": "ImportDirective",
+        "scope": 20290,
+        "sourceUnit": 3334,
+        "src": "155:52:69",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/oracle/implementation/VotingToken.sol",
+        "file": "./VotingToken.sol",
+        "id": 20170,
+        "nodeType": "ImportDirective",
+        "scope": 20290,
+        "sourceUnit": 22883,
+        "src": "208:27:69",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 20171,
+          "nodeType": "StructuredDocumentation",
+          "src": "237:122:69",
+          "text": " @title Migration contract for VotingTokens.\n @dev Handles migrating token holders from one token to the next."
+        },
+        "fullyImplemented": true,
+        "id": 20289,
+        "linearizedBaseContracts": [
+          20289
+        ],
+        "name": "TokenMigrator",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 20174,
+            "libraryName": {
+              "contractScope": null,
+              "id": 20172,
+              "name": "FixedPoint",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2373,
+              "src": "395:10:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FixedPoint_$2373",
+                "typeString": "library FixedPoint"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "389:41:69",
+            "typeName": {
+              "contractScope": null,
+              "id": 20173,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 887,
+              "src": "410:19:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "functionSelector": "b31c710a",
+            "id": 20176,
+            "mutability": "mutable",
+            "name": "oldToken",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "576:27:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_VotingToken_$22882",
+              "typeString": "contract VotingToken"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20175,
+              "name": "VotingToken",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 22882,
+              "src": "576:11:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_VotingToken_$22882",
+                "typeString": "contract VotingToken"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "c42bd05a",
+            "id": 20178,
+            "mutability": "mutable",
+            "name": "newToken",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "609:30:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+              "typeString": "contract ExpandedIERC20"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20177,
+              "name": "ExpandedIERC20",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3333,
+              "src": "609:14:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                "typeString": "contract ExpandedIERC20"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "2ddc79b7",
+            "id": 20180,
+            "mutability": "mutable",
+            "name": "snapshotId",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "646:25:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20179,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "646:7:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "2c4e722e",
+            "id": 20182,
+            "mutability": "mutable",
+            "name": "rate",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "677:31:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+              "typeString": "struct FixedPoint.Unsigned"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20181,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 887,
+              "src": "677:19:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "d7625c88",
+            "id": 20186,
+            "mutability": "mutable",
+            "name": "hasMigrated",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "715:43:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+              "typeString": "mapping(address => bool)"
+            },
+            "typeName": {
+              "id": 20185,
+              "keyType": {
+                "id": 20183,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "723:7:69",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "715:24:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                "typeString": "mapping(address => bool)"
+              },
+              "valueType": {
+                "id": 20184,
+                "name": "bool",
+                "nodeType": "ElementaryTypeName",
+                "src": "734:4:69",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 20226,
+              "nodeType": "Block",
+              "src": "1255:364:69",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "30",
+                            "id": 20199,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1437:1:69",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 20197,
+                            "name": "_rate",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20189,
+                            "src": "1417:5:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                              "typeString": "struct FixedPoint.Unsigned memory"
+                            }
+                          },
+                          "id": 20198,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isGreaterThan",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 975,
+                          "src": "1417:19:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$887_memory_ptr_$_t_uint256_$returns$_t_bool_$bound_to$_t_struct$_Unsigned_$887_memory_ptr_$",
+                            "typeString": "function (struct FixedPoint.Unsigned memory,uint256) pure returns (bool)"
+                          }
+                        },
+                        "id": 20200,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1417:22:69",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "526174652063616e27742062652030",
+                        "id": 20201,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1441:17:69",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_896223a59a0fc203a07f6fd1f93a2490b14732500087964820c6088768b74d2f",
+                          "typeString": "literal_string \"Rate can't be 0\""
+                        },
+                        "value": "Rate can't be 0"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_896223a59a0fc203a07f6fd1f93a2490b14732500087964820c6088768b74d2f",
+                          "typeString": "literal_string \"Rate can't be 0\""
+                        }
+                      ],
+                      "id": 20196,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1409:7:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 20202,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1409:50:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 20203,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1409:50:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20206,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20204,
+                      "name": "rate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20182,
+                      "src": "1469:4:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                        "typeString": "struct FixedPoint.Unsigned storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 20205,
+                      "name": "_rate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20189,
+                      "src": "1476:5:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned memory"
+                      }
+                    },
+                    "src": "1469:12:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                      "typeString": "struct FixedPoint.Unsigned storage ref"
+                    }
+                  },
+                  "id": 20207,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1469:12:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20212,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20208,
+                      "name": "newToken",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20178,
+                      "src": "1491:8:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                        "typeString": "contract ExpandedIERC20"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 20210,
+                          "name": "_newToken",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20193,
+                          "src": "1517:9:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 20209,
+                        "name": "ExpandedIERC20",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3333,
+                        "src": "1502:14:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ExpandedIERC20_$3333_$",
+                          "typeString": "type(contract ExpandedIERC20)"
+                        }
+                      },
+                      "id": 20211,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1502:25:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                        "typeString": "contract ExpandedIERC20"
+                      }
+                    },
+                    "src": "1491:36:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                      "typeString": "contract ExpandedIERC20"
+                    }
+                  },
+                  "id": 20213,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1491:36:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20218,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20214,
+                      "name": "oldToken",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20176,
+                      "src": "1537:8:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_VotingToken_$22882",
+                        "typeString": "contract VotingToken"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 20216,
+                          "name": "_oldToken",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20191,
+                          "src": "1560:9:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 20215,
+                        "name": "VotingToken",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 22882,
+                        "src": "1548:11:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_VotingToken_$22882_$",
+                          "typeString": "type(contract VotingToken)"
+                        }
+                      },
+                      "id": 20217,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1548:22:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_VotingToken_$22882",
+                        "typeString": "contract VotingToken"
+                      }
+                    },
+                    "src": "1537:33:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_VotingToken_$22882",
+                      "typeString": "contract VotingToken"
+                    }
+                  },
+                  "id": 20219,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1537:33:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20224,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20220,
+                      "name": "snapshotId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20180,
+                      "src": "1580:10:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 20221,
+                          "name": "oldToken",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20176,
+                          "src": "1593:8:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_VotingToken_$22882",
+                            "typeString": "contract VotingToken"
+                          }
+                        },
+                        "id": 20222,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "snapshot",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 22824,
+                        "src": "1593:17:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                          "typeString": "function () external returns (uint256)"
+                        }
+                      },
+                      "id": 20223,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1593:19:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1580:32:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 20225,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1580:32:69"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 20187,
+              "nodeType": "StructuredDocumentation",
+              "src": "765:364:69",
+              "text": " @notice Construct the TokenMigrator contract.\n @dev This function triggers the snapshot upon which all migrations will be based.\n @param _rate the number of old tokens it takes to generate one new token.\n @param _oldToken address of the token being migrated from.\n @param _newToken address of the token being migrated to."
+            },
+            "id": 20227,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 20194,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 20189,
+                  "mutability": "mutable",
+                  "name": "_rate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20227,
+                  "src": "1155:32:69",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 20188,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "1155:19:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 20191,
+                  "mutability": "mutable",
+                  "name": "_oldToken",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20227,
+                  "src": "1197:17:69",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 20190,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1197:7:69",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 20193,
+                  "mutability": "mutable",
+                  "name": "_newToken",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20227,
+                  "src": "1224:17:69",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 20192,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1224:7:69",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1145:102:69"
+            },
+            "returnParameters": {
+              "id": 20195,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1255:0:69"
+            },
+            "scope": 20289,
+            "src": "1134:485:69",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 20287,
+              "nodeType": "Block",
+              "src": "2032:463:69",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 20237,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "UnaryOperation",
+                        "operator": "!",
+                        "prefix": true,
+                        "src": "2050:25:69",
+                        "subExpression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 20234,
+                            "name": "hasMigrated",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20186,
+                            "src": "2051:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                              "typeString": "mapping(address => bool)"
+                            }
+                          },
+                          "id": 20236,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 20235,
+                            "name": "tokenHolder",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20230,
+                            "src": "2063:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "2051:24:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "416c7265616479206d6967726174656420746f6b656e73",
+                        "id": 20238,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2077:25:69",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_fcd037704fc7ab329f55fcd0c839c006e5185a0070b79b2c8ff55d75abc373d3",
+                          "typeString": "literal_string \"Already migrated tokens\""
+                        },
+                        "value": "Already migrated tokens"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_fcd037704fc7ab329f55fcd0c839c006e5185a0070b79b2c8ff55d75abc373d3",
+                          "typeString": "literal_string \"Already migrated tokens\""
+                        }
+                      ],
+                      "id": 20233,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2042:7:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 20239,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2042:61:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 20240,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2042:61:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20245,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 20241,
+                        "name": "hasMigrated",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20186,
+                        "src": "2113:11:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                          "typeString": "mapping(address => bool)"
+                        }
+                      },
+                      "id": 20243,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 20242,
+                        "name": "tokenHolder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20230,
+                        "src": "2125:11:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "2113:24:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "74727565",
+                      "id": 20244,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2140:4:69",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    },
+                    "src": "2113:31:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 20246,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2113:31:69"
+                },
+                {
+                  "assignments": [
+                    20250
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 20250,
+                      "mutability": "mutable",
+                      "name": "oldBalance",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 20287,
+                      "src": "2155:37:69",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 20249,
+                        "name": "FixedPoint.Unsigned",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 887,
+                        "src": "2155:19:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                          "typeString": "struct FixedPoint.Unsigned"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 20259,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 20255,
+                            "name": "tokenHolder",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20230,
+                            "src": "2236:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 20256,
+                            "name": "snapshotId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20180,
+                            "src": "2249:10:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 20253,
+                            "name": "oldToken",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20176,
+                            "src": "2215:8:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_VotingToken_$22882",
+                              "typeString": "contract VotingToken"
+                            }
+                          },
+                          "id": 20254,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "balanceOfAt",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 27006,
+                          "src": "2215:20:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (address,uint256) view external returns (uint256)"
+                          }
+                        },
+                        "id": 20257,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2215:45:69",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 20251,
+                        "name": "FixedPoint",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2373,
+                        "src": "2195:10:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_FixedPoint_$2373_$",
+                          "typeString": "type(library FixedPoint)"
+                        }
+                      },
+                      "id": 20252,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "Unsigned",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 887,
+                      "src": "2195:19:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Unsigned_$887_storage_ptr_$",
+                        "typeString": "type(struct FixedPoint.Unsigned storage pointer)"
+                      }
+                    },
+                    "id": 20258,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2195:66:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2155:106:69"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 20264,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "!",
+                    "prefix": true,
+                    "src": "2276:28:69",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 20262,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2302:1:69",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 20260,
+                          "name": "oldBalance",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20250,
+                          "src": "2277:10:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                            "typeString": "struct FixedPoint.Unsigned memory"
+                          }
+                        },
+                        "id": 20261,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "isGreaterThan",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 975,
+                        "src": "2277:24:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$887_memory_ptr_$_t_uint256_$returns$_t_bool_$bound_to$_t_struct$_Unsigned_$887_memory_ptr_$",
+                          "typeString": "function (struct FixedPoint.Unsigned memory,uint256) pure returns (bool)"
+                        }
+                      },
+                      "id": 20263,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2277:27:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 20267,
+                  "nodeType": "IfStatement",
+                  "src": "2272:65:69",
+                  "trueBody": {
+                    "id": 20266,
+                    "nodeType": "Block",
+                    "src": "2306:31:69",
+                    "statements": [
+                      {
+                        "expression": null,
+                        "functionReturnParameters": 20232,
+                        "id": 20265,
+                        "nodeType": "Return",
+                        "src": "2320:7:69"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "assignments": [
+                    20271
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 20271,
+                      "mutability": "mutable",
+                      "name": "newBalance",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 20287,
+                      "src": "2347:37:69",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 20270,
+                        "name": "FixedPoint.Unsigned",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 887,
+                        "src": "2347:19:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                          "typeString": "struct FixedPoint.Unsigned"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 20276,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 20274,
+                        "name": "rate",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20182,
+                        "src": "2402:4:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 20272,
+                        "name": "oldBalance",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20250,
+                        "src": "2387:10:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      },
+                      "id": 20273,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "div",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1426,
+                      "src": "2387:14:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$887_memory_ptr_$_t_struct$_Unsigned_$887_memory_ptr_$returns$_t_struct$_Unsigned_$887_memory_ptr_$bound_to$_t_struct$_Unsigned_$887_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 20275,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2387:20:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2347:60:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 20280,
+                            "name": "tokenHolder",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20230,
+                            "src": "2439:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 20281,
+                              "name": "newBalance",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 20271,
+                              "src": "2452:10:69",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                                "typeString": "struct FixedPoint.Unsigned memory"
+                              }
+                            },
+                            "id": 20282,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "rawValue",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 886,
+                            "src": "2452:19:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 20278,
+                            "name": "newToken",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20178,
+                            "src": "2425:8:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                              "typeString": "contract ExpandedIERC20"
+                            }
+                          },
+                          "id": 20279,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "mint",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 3317,
+                          "src": "2425:13:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
+                            "typeString": "function (address,uint256) external returns (bool)"
+                          }
+                        },
+                        "id": 20283,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2425:47:69",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4d696e74206661696c6564",
+                        "id": 20284,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2474:13:69",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_28c39b78ba029f0fc13f1547f14e04b4ee342add2eb73cbd87e27098ff34658b",
+                          "typeString": "literal_string \"Mint failed\""
+                        },
+                        "value": "Mint failed"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_28c39b78ba029f0fc13f1547f14e04b4ee342add2eb73cbd87e27098ff34658b",
+                          "typeString": "literal_string \"Mint failed\""
+                        }
+                      ],
+                      "id": 20277,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2417:7:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 20285,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2417:71:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 20286,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2417:71:69"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 20228,
+              "nodeType": "StructuredDocumentation",
+              "src": "1625:349:69",
+              "text": " @notice Migrates the tokenHolder's old tokens to new tokens.\n @dev This function can only be called once per `tokenHolder`. Anyone can call this method\n on behalf of any other token holder since there is no disadvantage to receiving the tokens earlier.\n @param tokenHolder address of the token holder to migrate."
+            },
+            "functionSelector": "c1684711",
+            "id": 20288,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "migrateTokens",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 20231,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 20230,
+                  "mutability": "mutable",
+                  "name": "tokenHolder",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20288,
+                  "src": "2002:19:69",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 20229,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2002:7:69",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2001:21:69"
+            },
+            "returnParameters": {
+              "id": 20232,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2032:0:69"
+            },
+            "scope": 20289,
+            "src": "1979:516:69",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 20290,
+        "src": "360:2137:69"
+      }
+    ],
+    "src": "42:2456:69"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/oracle/implementation/TokenMigrator.sol",
+    "exportedSymbols": {
+      "TokenMigrator": [
+        20289
+      ]
+    },
+    "id": 20290,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 20166,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:69"
+      },
+      {
+        "id": 20167,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:69"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 20168,
+        "nodeType": "ImportDirective",
+        "scope": 20290,
+        "sourceUnit": 2374,
+        "src": "102:52:69",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/interfaces/ExpandedIERC20.sol",
+        "file": "../../common/interfaces/ExpandedIERC20.sol",
+        "id": 20169,
+        "nodeType": "ImportDirective",
+        "scope": 20290,
+        "sourceUnit": 3334,
+        "src": "155:52:69",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/oracle/implementation/VotingToken.sol",
+        "file": "./VotingToken.sol",
+        "id": 20170,
+        "nodeType": "ImportDirective",
+        "scope": 20290,
+        "sourceUnit": 22883,
+        "src": "208:27:69",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 20171,
+          "nodeType": "StructuredDocumentation",
+          "src": "237:122:69",
+          "text": " @title Migration contract for VotingTokens.\n @dev Handles migrating token holders from one token to the next."
+        },
+        "fullyImplemented": true,
+        "id": 20289,
+        "linearizedBaseContracts": [
+          20289
+        ],
+        "name": "TokenMigrator",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 20174,
+            "libraryName": {
+              "contractScope": null,
+              "id": 20172,
+              "name": "FixedPoint",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2373,
+              "src": "395:10:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FixedPoint_$2373",
+                "typeString": "library FixedPoint"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "389:41:69",
+            "typeName": {
+              "contractScope": null,
+              "id": 20173,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 887,
+              "src": "410:19:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "functionSelector": "b31c710a",
+            "id": 20176,
+            "mutability": "mutable",
+            "name": "oldToken",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "576:27:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_VotingToken_$22882",
+              "typeString": "contract VotingToken"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20175,
+              "name": "VotingToken",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 22882,
+              "src": "576:11:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_VotingToken_$22882",
+                "typeString": "contract VotingToken"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "c42bd05a",
+            "id": 20178,
+            "mutability": "mutable",
+            "name": "newToken",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "609:30:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+              "typeString": "contract ExpandedIERC20"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20177,
+              "name": "ExpandedIERC20",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3333,
+              "src": "609:14:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                "typeString": "contract ExpandedIERC20"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "2ddc79b7",
+            "id": 20180,
+            "mutability": "mutable",
+            "name": "snapshotId",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "646:25:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 20179,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "646:7:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "2c4e722e",
+            "id": 20182,
+            "mutability": "mutable",
+            "name": "rate",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "677:31:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+              "typeString": "struct FixedPoint.Unsigned"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20181,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 887,
+              "src": "677:19:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "d7625c88",
+            "id": 20186,
+            "mutability": "mutable",
+            "name": "hasMigrated",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 20289,
+            "src": "715:43:69",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+              "typeString": "mapping(address => bool)"
+            },
+            "typeName": {
+              "id": 20185,
+              "keyType": {
+                "id": 20183,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "723:7:69",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "715:24:69",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                "typeString": "mapping(address => bool)"
+              },
+              "valueType": {
+                "id": 20184,
+                "name": "bool",
+                "nodeType": "ElementaryTypeName",
+                "src": "734:4:69",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 20226,
+              "nodeType": "Block",
+              "src": "1255:364:69",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "30",
+                            "id": 20199,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1437:1:69",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 20197,
+                            "name": "_rate",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20189,
+                            "src": "1417:5:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                              "typeString": "struct FixedPoint.Unsigned memory"
+                            }
+                          },
+                          "id": 20198,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isGreaterThan",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 975,
+                          "src": "1417:19:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$887_memory_ptr_$_t_uint256_$returns$_t_bool_$bound_to$_t_struct$_Unsigned_$887_memory_ptr_$",
+                            "typeString": "function (struct FixedPoint.Unsigned memory,uint256) pure returns (bool)"
+                          }
+                        },
+                        "id": 20200,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1417:22:69",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "526174652063616e27742062652030",
+                        "id": 20201,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1441:17:69",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_896223a59a0fc203a07f6fd1f93a2490b14732500087964820c6088768b74d2f",
+                          "typeString": "literal_string \"Rate can't be 0\""
+                        },
+                        "value": "Rate can't be 0"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_896223a59a0fc203a07f6fd1f93a2490b14732500087964820c6088768b74d2f",
+                          "typeString": "literal_string \"Rate can't be 0\""
+                        }
+                      ],
+                      "id": 20196,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1409:7:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 20202,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1409:50:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 20203,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1409:50:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20206,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20204,
+                      "name": "rate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20182,
+                      "src": "1469:4:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                        "typeString": "struct FixedPoint.Unsigned storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 20205,
+                      "name": "_rate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20189,
+                      "src": "1476:5:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned memory"
+                      }
+                    },
+                    "src": "1469:12:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                      "typeString": "struct FixedPoint.Unsigned storage ref"
+                    }
+                  },
+                  "id": 20207,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1469:12:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20212,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20208,
+                      "name": "newToken",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20178,
+                      "src": "1491:8:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                        "typeString": "contract ExpandedIERC20"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 20210,
+                          "name": "_newToken",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20193,
+                          "src": "1517:9:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 20209,
+                        "name": "ExpandedIERC20",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3333,
+                        "src": "1502:14:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ExpandedIERC20_$3333_$",
+                          "typeString": "type(contract ExpandedIERC20)"
+                        }
+                      },
+                      "id": 20211,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1502:25:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                        "typeString": "contract ExpandedIERC20"
+                      }
+                    },
+                    "src": "1491:36:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                      "typeString": "contract ExpandedIERC20"
+                    }
+                  },
+                  "id": 20213,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1491:36:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20218,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20214,
+                      "name": "oldToken",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20176,
+                      "src": "1537:8:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_VotingToken_$22882",
+                        "typeString": "contract VotingToken"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 20216,
+                          "name": "_oldToken",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20191,
+                          "src": "1560:9:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 20215,
+                        "name": "VotingToken",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 22882,
+                        "src": "1548:11:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_VotingToken_$22882_$",
+                          "typeString": "type(contract VotingToken)"
+                        }
+                      },
+                      "id": 20217,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1548:22:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_VotingToken_$22882",
+                        "typeString": "contract VotingToken"
+                      }
+                    },
+                    "src": "1537:33:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_VotingToken_$22882",
+                      "typeString": "contract VotingToken"
+                    }
+                  },
+                  "id": 20219,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1537:33:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20224,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 20220,
+                      "name": "snapshotId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 20180,
+                      "src": "1580:10:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 20221,
+                          "name": "oldToken",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20176,
+                          "src": "1593:8:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_VotingToken_$22882",
+                            "typeString": "contract VotingToken"
+                          }
+                        },
+                        "id": 20222,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "snapshot",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 22824,
+                        "src": "1593:17:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                          "typeString": "function () external returns (uint256)"
+                        }
+                      },
+                      "id": 20223,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1593:19:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1580:32:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 20225,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1580:32:69"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 20187,
+              "nodeType": "StructuredDocumentation",
+              "src": "765:364:69",
+              "text": " @notice Construct the TokenMigrator contract.\n @dev This function triggers the snapshot upon which all migrations will be based.\n @param _rate the number of old tokens it takes to generate one new token.\n @param _oldToken address of the token being migrated from.\n @param _newToken address of the token being migrated to."
+            },
+            "id": 20227,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 20194,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 20189,
+                  "mutability": "mutable",
+                  "name": "_rate",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20227,
+                  "src": "1155:32:69",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 20188,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "1155:19:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 20191,
+                  "mutability": "mutable",
+                  "name": "_oldToken",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20227,
+                  "src": "1197:17:69",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 20190,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1197:7:69",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 20193,
+                  "mutability": "mutable",
+                  "name": "_newToken",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20227,
+                  "src": "1224:17:69",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 20192,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1224:7:69",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1145:102:69"
+            },
+            "returnParameters": {
+              "id": 20195,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1255:0:69"
+            },
+            "scope": 20289,
+            "src": "1134:485:69",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 20287,
+              "nodeType": "Block",
+              "src": "2032:463:69",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 20237,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "UnaryOperation",
+                        "operator": "!",
+                        "prefix": true,
+                        "src": "2050:25:69",
+                        "subExpression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 20234,
+                            "name": "hasMigrated",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20186,
+                            "src": "2051:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                              "typeString": "mapping(address => bool)"
+                            }
+                          },
+                          "id": 20236,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 20235,
+                            "name": "tokenHolder",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20230,
+                            "src": "2063:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "2051:24:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "416c7265616479206d6967726174656420746f6b656e73",
+                        "id": 20238,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2077:25:69",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_fcd037704fc7ab329f55fcd0c839c006e5185a0070b79b2c8ff55d75abc373d3",
+                          "typeString": "literal_string \"Already migrated tokens\""
+                        },
+                        "value": "Already migrated tokens"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_fcd037704fc7ab329f55fcd0c839c006e5185a0070b79b2c8ff55d75abc373d3",
+                          "typeString": "literal_string \"Already migrated tokens\""
+                        }
+                      ],
+                      "id": 20233,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2042:7:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 20239,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2042:61:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 20240,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2042:61:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 20245,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 20241,
+                        "name": "hasMigrated",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20186,
+                        "src": "2113:11:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                          "typeString": "mapping(address => bool)"
+                        }
+                      },
+                      "id": 20243,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 20242,
+                        "name": "tokenHolder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20230,
+                        "src": "2125:11:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "2113:24:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "74727565",
+                      "id": 20244,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2140:4:69",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    },
+                    "src": "2113:31:69",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 20246,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2113:31:69"
+                },
+                {
+                  "assignments": [
+                    20250
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 20250,
+                      "mutability": "mutable",
+                      "name": "oldBalance",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 20287,
+                      "src": "2155:37:69",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 20249,
+                        "name": "FixedPoint.Unsigned",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 887,
+                        "src": "2155:19:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                          "typeString": "struct FixedPoint.Unsigned"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 20259,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 20255,
+                            "name": "tokenHolder",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20230,
+                            "src": "2236:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 20256,
+                            "name": "snapshotId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20180,
+                            "src": "2249:10:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 20253,
+                            "name": "oldToken",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20176,
+                            "src": "2215:8:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_VotingToken_$22882",
+                              "typeString": "contract VotingToken"
+                            }
+                          },
+                          "id": 20254,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "balanceOfAt",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 27006,
+                          "src": "2215:20:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (address,uint256) view external returns (uint256)"
+                          }
+                        },
+                        "id": 20257,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2215:45:69",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 20251,
+                        "name": "FixedPoint",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2373,
+                        "src": "2195:10:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_FixedPoint_$2373_$",
+                          "typeString": "type(library FixedPoint)"
+                        }
+                      },
+                      "id": 20252,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "Unsigned",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 887,
+                      "src": "2195:19:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Unsigned_$887_storage_ptr_$",
+                        "typeString": "type(struct FixedPoint.Unsigned storage pointer)"
+                      }
+                    },
+                    "id": 20258,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2195:66:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2155:106:69"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 20264,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "!",
+                    "prefix": true,
+                    "src": "2276:28:69",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 20262,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2302:1:69",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 20260,
+                          "name": "oldBalance",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20250,
+                          "src": "2277:10:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                            "typeString": "struct FixedPoint.Unsigned memory"
+                          }
+                        },
+                        "id": 20261,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "isGreaterThan",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 975,
+                        "src": "2277:24:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$887_memory_ptr_$_t_uint256_$returns$_t_bool_$bound_to$_t_struct$_Unsigned_$887_memory_ptr_$",
+                          "typeString": "function (struct FixedPoint.Unsigned memory,uint256) pure returns (bool)"
+                        }
+                      },
+                      "id": 20263,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2277:27:69",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 20267,
+                  "nodeType": "IfStatement",
+                  "src": "2272:65:69",
+                  "trueBody": {
+                    "id": 20266,
+                    "nodeType": "Block",
+                    "src": "2306:31:69",
+                    "statements": [
+                      {
+                        "expression": null,
+                        "functionReturnParameters": 20232,
+                        "id": 20265,
+                        "nodeType": "Return",
+                        "src": "2320:7:69"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "assignments": [
+                    20271
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 20271,
+                      "mutability": "mutable",
+                      "name": "newBalance",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 20287,
+                      "src": "2347:37:69",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 20270,
+                        "name": "FixedPoint.Unsigned",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 887,
+                        "src": "2347:19:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                          "typeString": "struct FixedPoint.Unsigned"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 20276,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 20274,
+                        "name": "rate",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20182,
+                        "src": "2402:4:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 20272,
+                        "name": "oldBalance",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20250,
+                        "src": "2387:10:69",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      },
+                      "id": 20273,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "div",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1426,
+                      "src": "2387:14:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$887_memory_ptr_$_t_struct$_Unsigned_$887_memory_ptr_$returns$_t_struct$_Unsigned_$887_memory_ptr_$bound_to$_t_struct$_Unsigned_$887_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 20275,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2387:20:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2347:60:69"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 20280,
+                            "name": "tokenHolder",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20230,
+                            "src": "2439:11:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 20281,
+                              "name": "newBalance",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 20271,
+                              "src": "2452:10:69",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                                "typeString": "struct FixedPoint.Unsigned memory"
+                              }
+                            },
+                            "id": 20282,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "rawValue",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 886,
+                            "src": "2452:19:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 20278,
+                            "name": "newToken",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 20178,
+                            "src": "2425:8:69",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ExpandedIERC20_$3333",
+                              "typeString": "contract ExpandedIERC20"
+                            }
+                          },
+                          "id": 20279,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "mint",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 3317,
+                          "src": "2425:13:69",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
+                            "typeString": "function (address,uint256) external returns (bool)"
+                          }
+                        },
+                        "id": 20283,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2425:47:69",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "4d696e74206661696c6564",
+                        "id": 20284,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2474:13:69",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_28c39b78ba029f0fc13f1547f14e04b4ee342add2eb73cbd87e27098ff34658b",
+                          "typeString": "literal_string \"Mint failed\""
+                        },
+                        "value": "Mint failed"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_28c39b78ba029f0fc13f1547f14e04b4ee342add2eb73cbd87e27098ff34658b",
+                          "typeString": "literal_string \"Mint failed\""
+                        }
+                      ],
+                      "id": 20277,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2417:7:69",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 20285,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2417:71:69",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 20286,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2417:71:69"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 20228,
+              "nodeType": "StructuredDocumentation",
+              "src": "1625:349:69",
+              "text": " @notice Migrates the tokenHolder's old tokens to new tokens.\n @dev This function can only be called once per `tokenHolder`. Anyone can call this method\n on behalf of any other token holder since there is no disadvantage to receiving the tokens earlier.\n @param tokenHolder address of the token holder to migrate."
+            },
+            "functionSelector": "c1684711",
+            "id": 20288,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "migrateTokens",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 20231,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 20230,
+                  "mutability": "mutable",
+                  "name": "tokenHolder",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 20288,
+                  "src": "2002:19:69",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 20229,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2002:7:69",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2001:21:69"
+            },
+            "returnParameters": {
+              "id": 20232,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2032:0:69"
+            },
+            "scope": 20289,
+            "src": "1979:516:69",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 20290,
+        "src": "360:2137:69"
+      }
+    ],
+    "src": "42:2456:69"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2021-02-26T22:07:27.815Z",
+  "devdoc": {
+    "details": "Handles migrating token holders from one token to the next.",
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "details": "This function triggers the snapshot upon which all migrations will be based.",
+        "params": {
+          "_newToken": "address of the token being migrated to.",
+          "_oldToken": "address of the token being migrated from.",
+          "_rate": "the number of old tokens it takes to generate one new token."
+        }
+      },
+      "migrateTokens(address)": {
+        "details": "This function can only be called once per `tokenHolder`. Anyone can call this method on behalf of any other token holder since there is no disadvantage to receiving the tokens earlier.",
+        "params": {
+          "tokenHolder": "address of the token holder to migrate."
+        }
+      }
+    },
+    "title": "Migration contract for VotingTokens.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "constructor": "Construct the TokenMigrator contract.",
+      "migrateTokens(address)": {
+        "notice": "Migrates the tokenHolder's old tokens to new tokens."
+      }
+    },
+    "version": 1
+  }
+}

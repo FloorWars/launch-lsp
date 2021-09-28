@@ -1,0 +1,1375 @@
+{
+  "contractName": "FinancialProductLibraryTest",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "_scalar",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "scalar",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "rawValue",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "oraclePrice",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "requestTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "transformPrice",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "collateralRequirement",
+          "type": "tuple"
+        }
+      ],
+      "name": "transformCollateralRequirement",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"_scalar\",\"type\":\"tuple\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"scalar\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"collateralRequirement\",\"type\":\"tuple\"}],\"name\":\"transformCollateralRequirement\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"oraclePrice\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"requestTime\",\"type\":\"uint256\"}],\"name\":\"transformPrice\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"transformCollateralRequirement((uint256))\":{\"params\":{\"collateralRequirement\":\"input collateral requirement to be transformed.\"},\"returns\":{\"_0\":\"transformedCollateralRequirement input collateral requirement with the transformation function applied.\"}},\"transformPrice((uint256),uint256)\":{\"params\":{\"oraclePrice\":\"input price to be transformed.\",\"requestTime\":\"timestamp the oraclePrice was requested at.\"},\"returns\":{\"_0\":\"transformedPrice input oraclePrice with the transformation function applied.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"transformCollateralRequirement((uint256))\":{\"notice\":\"Transforms a given collateral requirement using the financial product libraries transformation logic.\"},\"transformPrice((uint256),uint256)\":{\"notice\":\"Transforms a given oracle price using the financial product libraries transformation logic.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/financial-templates/test/FinancialProductLibaryTest.sol\":\"FinancialProductLibraryTest\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0x15636c4d1914553c95712ef01d59e73a2ce6efacbe1a20bab8a513d5897cf96d\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://8b942ab427bf0c45a3d5b3701a8c509fcf01f2aa0ec525fc74f7f01a2aaa18cf\",\"dweb:/ipfs/QmPoSCBrBUQTiaKR6baSYchK863Lu7RY6gqMPEeUbwsgQV\"]},\"/home/circleci/protocol/packages/core/contracts/financial-templates/common/financial-product-libraries/FinancialProductLibrary.sol\":{\"keccak256\":\"0x6874e9f8aad84fe12136c6054051a6d55d798e8772e008aec0b01588253a0888\",\"urls\":[\"bzz-raw://e165e9f2e8ad1a5353ff2c201c3beb33d65f738db0b29a10291b0bb1f001c04d\",\"dweb:/ipfs/QmcAwbvh5dQr3vH4qRyiDEoVHv5hJnHZNQ1uPjaARUgH8i\"]},\"/home/circleci/protocol/packages/core/contracts/financial-templates/test/FinancialProductLibaryTest.sol\":{\"keccak256\":\"0x0744c760ec4c10717f6a15ec86740d77f0c132e7c07e29b704c71f6591abd3ba\",\"urls\":[\"bzz-raw://a59010f067987231b37221103168bac7eea6d655da983014c29078d7d033c8a8\",\"dweb:/ipfs/QmPpBMX3xNQszPtAMQp8SdydoRF2a1LkdrHpN6YHEFhN2z\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405161030e38038061030e83398101604081905261002f91610038565b51600055610074565b600060208284031215610049578081fd5b604051602081016001600160401b0381118282101715610067578283fd5b6040529151825250919050565b61028b806100836000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80630ff49b9014610046578063197f78481461006f578063f45e65d814610082575b600080fd5b6100596100543660046101d7565b610097565b6040516100669190610242565b60405180910390f35b61005961007d3660046101bc565b6100c3565b61008a6100e6565b604051610066919061024c565b61009f61016c565b604080516020810190915260005481526100ba9084906100ec565b90505b92915050565b6100cb61016c565b604080516020810190915260005481526100bd9083906100ec565b60005481565b6100f461016c565b6040805160208101909152825184518291670de0b6b3a76400009161011891610129565b8161011f57fe5b0490529392505050565b600082610138575060006100bd565b8282028284828161014557fe5b04146100ba5760405162461bcd60e51b815260040161016390610201565b60405180910390fd5b6040518060200160405280600081525090565b600060208284031215610190578081fd5b6040516020810181811067ffffffffffffffff821117156101af578283fd5b6040529135825250919050565b6000602082840312156101cd578081fd5b6100ba838361017f565b600080604083850312156101e9578081fd5b6101f3848461017f565b946020939093013593505050565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b9051815260200190565b9081526020019056fea2646970667358221220204d01407a44cf50516fb4f90d961d921e1143686a6a0931908d41c60437ad6d64736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c80630ff49b9014610046578063197f78481461006f578063f45e65d814610082575b600080fd5b6100596100543660046101d7565b610097565b6040516100669190610242565b60405180910390f35b61005961007d3660046101bc565b6100c3565b61008a6100e6565b604051610066919061024c565b61009f61016c565b604080516020810190915260005481526100ba9084906100ec565b90505b92915050565b6100cb61016c565b604080516020810190915260005481526100bd9083906100ec565b60005481565b6100f461016c565b6040805160208101909152825184518291670de0b6b3a76400009161011891610129565b8161011f57fe5b0490529392505050565b600082610138575060006100bd565b8282028284828161014557fe5b04146100ba5760405162461bcd60e51b815260040161016390610201565b60405180910390fd5b6040518060200160405280600081525090565b600060208284031215610190578081fd5b6040516020810181811067ffffffffffffffff821117156101af578283fd5b6040529135825250919050565b6000602082840312156101cd578081fd5b6100ba838361017f565b600080604083850312156101e9578081fd5b6101f3848461017f565b946020939093013593505050565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b9051815260200190565b9081526020019056fea2646970667358221220204d01407a44cf50516fb4f90d961d921e1143686a6a0931908d41c60437ad6d64736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "241:925:52:-:0;;;351:88;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;416:16;:6;:16;241:925;;535:313:-1;;675:2;663:9;654:7;650:23;646:32;643:2;;;-1:-1;;681:12;643:2;917;911:9;675:2;943:17;;-1:-1;;;;;1003:34;;1039:22;;;1000:62;997:2;;;-1:-1;;1065:12;997:2;917;1084:22;472:13;;280:86;;-1:-1;287:16;637:211;-1:-1;637:211::o;:::-;241:925:52;;;;;;",
+  "deployedSourceMap": "241:925:52:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;553:226;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;923:241;;;;;;:::i;:::-;;:::i;311:33::-;;;:::i;:::-;;;;;;;:::i;553:226::-;700:26;;:::i;:::-;749:23;;;;;;;;;765:6;749:23;;;;;:11;;:15;:23::i;:::-;742:30;;553:226;;;;;:::o;923:241::-;1075:26;;:::i;:::-;1124:33;;;;;;;;;1150:6;1124:33;;;;;:21;;:25;:33::i;311:::-;;;;:::o;8181:650:3:-;8255:15;;:::i;:::-;8768:56;;;;;;;;;8792:10;;8777;;8768:56;;607:6;;8777:26;;:14;:26::i;:::-;:46;;;;;;8768:56;;8761:63;8181:650;-1:-1:-1;;;8181:650:3:o;2119:459:89:-;2177:7;2418:6;2414:45;;-1:-1:-1;2447:1:89;2440:8;;2414:45;2481:5;;;2485:1;2481;:5;:1;2504:5;;;;;:10;2496:56;;;;-1:-1:-1;;;2496:56:89;;;;;;;:::i;:::-;;;;;;;;-1:-1:-1;;;;;;;;;;;;;;:::o;38:327::-;;152:4;140:9;135:3;131:19;127:30;124:2;;;-1:-1;;160:12;124:2;3278;3272:9;152:4;3308:6;3304:17;3415:6;3403:10;3400:22;3379:18;3367:10;3364:34;3361:62;3358:2;;;-1:-1;;3426:12;3358:2;3278;3445:22;439:20;;269:75;;-1:-1;179:29;118:247;-1:-1;118:247::o;509:291::-;;638:2;626:9;617:7;613:23;609:32;606:2;;;-1:-1;;644:12;606:2;706:78;776:7;752:22;706:78;:::i;807:416::-;;;953:2;941:9;932:7;928:23;924:32;921:2;;;-1:-1;;959:12;921:2;1021:78;1091:7;1067:22;1021:78;:::i;:::-;1011:88;1136:2;1175:22;;;;439:20;;-1:-1;;;915:308::o;2235:416::-;2435:2;2449:47;;;1455:2;2420:18;;;3583:19;1491:34;3623:14;;;1471:55;-1:-1;;;1546:12;;;1539:25;1583:12;;;2406:245::o;2658:322::-;1885:23;;2066:37;;2835:2;2820:18;;2806:174::o;2987:222::-;2066:37;;;3114:2;3099:18;;3085:124::o",
+  "source": "pragma solidity ^0.6.0;\npragma experimental ABIEncoderV2;\nimport \"../common/financial-product-libraries/FinancialProductLibrary.sol\";\n\n// Implements a simple FinancialProductLibrary to test price and collateral requirement transoformations.\ncontract FinancialProductLibraryTest is FinancialProductLibrary {\n    FixedPoint.Unsigned public scalar;\n\n    constructor(FixedPoint.Unsigned memory _scalar) public {\n        scalar = _scalar;\n    }\n\n    // Create a simple price transformation function that scales the input price by the scalar for testing.\n    function transformPrice(FixedPoint.Unsigned memory oraclePrice, uint256 requestTime)\n        public\n        view\n        override\n        returns (FixedPoint.Unsigned memory)\n    {\n        return oraclePrice.mul(scalar);\n    }\n\n    // Create a simple price transformation that doubles the input number.\n    // TODO: add intergration to liquidatable for this method.\n    function transformCollateralRequirement(FixedPoint.Unsigned memory collateralRequirement)\n        public\n        view\n        override\n        returns (FixedPoint.Unsigned memory)\n    {\n        return collateralRequirement.mul(scalar);\n    }\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/test/FinancialProductLibaryTest.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/test/FinancialProductLibaryTest.sol",
+    "exportedSymbols": {
+      "FinancialProductLibraryTest": [
+        16320
+      ]
+    },
+    "id": 16321,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 16273,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:52"
+      },
+      {
+        "id": 16274,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:52"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/common/financial-product-libraries/FinancialProductLibrary.sol",
+        "file": "../common/financial-product-libraries/FinancialProductLibrary.sol",
+        "id": 16275,
+        "nodeType": "ImportDirective",
+        "scope": 16321,
+        "sourceUnit": 6651,
+        "src": "58:75:52",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 16276,
+              "name": "FinancialProductLibrary",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6650,
+              "src": "281:23:52",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FinancialProductLibrary_$6650",
+                "typeString": "contract FinancialProductLibrary"
+              }
+            },
+            "id": 16277,
+            "nodeType": "InheritanceSpecifier",
+            "src": "281:23:52"
+          }
+        ],
+        "contractDependencies": [
+          6650
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 16320,
+        "linearizedBaseContracts": [
+          16320,
+          6650
+        ],
+        "name": "FinancialProductLibraryTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "f45e65d8",
+            "id": 16279,
+            "mutability": "mutable",
+            "name": "scalar",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 16320,
+            "src": "311:33:52",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+              "typeString": "struct FixedPoint.Unsigned"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 16278,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 471,
+              "src": "311:19:52",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 16288,
+              "nodeType": "Block",
+              "src": "406:33:52",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 16286,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 16284,
+                      "name": "scalar",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16279,
+                      "src": "416:6:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                        "typeString": "struct FixedPoint.Unsigned storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 16285,
+                      "name": "_scalar",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16281,
+                      "src": "425:7:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned memory"
+                      }
+                    },
+                    "src": "416:16:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                      "typeString": "struct FixedPoint.Unsigned storage ref"
+                    }
+                  },
+                  "id": 16287,
+                  "nodeType": "ExpressionStatement",
+                  "src": "416:16:52"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16289,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 16282,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16281,
+                  "mutability": "mutable",
+                  "name": "_scalar",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16289,
+                  "src": "363:34:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16280,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "363:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "362:36:52"
+            },
+            "returnParameters": {
+              "id": 16283,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "406:0:52"
+            },
+            "scope": 16320,
+            "src": "351:88:52",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6638
+            ],
+            "body": {
+              "id": 16304,
+              "nodeType": "Block",
+              "src": "732:47:52",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16301,
+                        "name": "scalar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16279,
+                        "src": "765:6:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 16299,
+                        "name": "oraclePrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16291,
+                        "src": "749:11:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      },
+                      "id": 16300,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "mul",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 899,
+                      "src": "749:15:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$471_memory_ptr_$_t_struct$_Unsigned_$471_memory_ptr_$returns$_t_struct$_Unsigned_$471_memory_ptr_$bound_to$_t_struct$_Unsigned_$471_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 16302,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "749:23:52",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16298,
+                  "id": 16303,
+                  "nodeType": "Return",
+                  "src": "742:30:52"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "0ff49b90",
+            "id": 16305,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "transformPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16295,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "674:8:52"
+            },
+            "parameters": {
+              "id": 16294,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16291,
+                  "mutability": "mutable",
+                  "name": "oraclePrice",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16305,
+                  "src": "577:38:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16290,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "577:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16293,
+                  "mutability": "mutable",
+                  "name": "requestTime",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16305,
+                  "src": "617:19:52",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 16292,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "617:7:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "576:61:52"
+            },
+            "returnParameters": {
+              "id": 16298,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16297,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16305,
+                  "src": "700:26:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16296,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "700:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "699:28:52"
+            },
+            "scope": 16320,
+            "src": "553:226:52",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6649
+            ],
+            "body": {
+              "id": 16318,
+              "nodeType": "Block",
+              "src": "1107:57:52",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16315,
+                        "name": "scalar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16279,
+                        "src": "1150:6:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 16313,
+                        "name": "collateralRequirement",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16307,
+                        "src": "1124:21:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      },
+                      "id": 16314,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "mul",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 899,
+                      "src": "1124:25:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$471_memory_ptr_$_t_struct$_Unsigned_$471_memory_ptr_$returns$_t_struct$_Unsigned_$471_memory_ptr_$bound_to$_t_struct$_Unsigned_$471_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 16316,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1124:33:52",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16312,
+                  "id": 16317,
+                  "nodeType": "Return",
+                  "src": "1117:40:52"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "197f7848",
+            "id": 16319,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "transformCollateralRequirement",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16309,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1049:8:52"
+            },
+            "parameters": {
+              "id": 16308,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16307,
+                  "mutability": "mutable",
+                  "name": "collateralRequirement",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16319,
+                  "src": "963:48:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16306,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "963:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "962:50:52"
+            },
+            "returnParameters": {
+              "id": 16312,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16311,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16319,
+                  "src": "1075:26:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16310,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1075:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1074:28:52"
+            },
+            "scope": 16320,
+            "src": "923:241:52",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 16321,
+        "src": "241:925:52"
+      }
+    ],
+    "src": "0:1167:52"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/test/FinancialProductLibaryTest.sol",
+    "exportedSymbols": {
+      "FinancialProductLibraryTest": [
+        16320
+      ]
+    },
+    "id": 16321,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 16273,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:52"
+      },
+      {
+        "id": 16274,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:52"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/common/financial-product-libraries/FinancialProductLibrary.sol",
+        "file": "../common/financial-product-libraries/FinancialProductLibrary.sol",
+        "id": 16275,
+        "nodeType": "ImportDirective",
+        "scope": 16321,
+        "sourceUnit": 6651,
+        "src": "58:75:52",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 16276,
+              "name": "FinancialProductLibrary",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6650,
+              "src": "281:23:52",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FinancialProductLibrary_$6650",
+                "typeString": "contract FinancialProductLibrary"
+              }
+            },
+            "id": 16277,
+            "nodeType": "InheritanceSpecifier",
+            "src": "281:23:52"
+          }
+        ],
+        "contractDependencies": [
+          6650
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 16320,
+        "linearizedBaseContracts": [
+          16320,
+          6650
+        ],
+        "name": "FinancialProductLibraryTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "f45e65d8",
+            "id": 16279,
+            "mutability": "mutable",
+            "name": "scalar",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 16320,
+            "src": "311:33:52",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+              "typeString": "struct FixedPoint.Unsigned"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 16278,
+              "name": "FixedPoint.Unsigned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 471,
+              "src": "311:19:52",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                "typeString": "struct FixedPoint.Unsigned"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 16288,
+              "nodeType": "Block",
+              "src": "406:33:52",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 16286,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 16284,
+                      "name": "scalar",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16279,
+                      "src": "416:6:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                        "typeString": "struct FixedPoint.Unsigned storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 16285,
+                      "name": "_scalar",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16281,
+                      "src": "425:7:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                        "typeString": "struct FixedPoint.Unsigned memory"
+                      }
+                    },
+                    "src": "416:16:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                      "typeString": "struct FixedPoint.Unsigned storage ref"
+                    }
+                  },
+                  "id": 16287,
+                  "nodeType": "ExpressionStatement",
+                  "src": "416:16:52"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16289,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 16282,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16281,
+                  "mutability": "mutable",
+                  "name": "_scalar",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16289,
+                  "src": "363:34:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16280,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "363:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "362:36:52"
+            },
+            "returnParameters": {
+              "id": 16283,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "406:0:52"
+            },
+            "scope": 16320,
+            "src": "351:88:52",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6638
+            ],
+            "body": {
+              "id": 16304,
+              "nodeType": "Block",
+              "src": "732:47:52",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16301,
+                        "name": "scalar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16279,
+                        "src": "765:6:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 16299,
+                        "name": "oraclePrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16291,
+                        "src": "749:11:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      },
+                      "id": 16300,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "mul",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 899,
+                      "src": "749:15:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$471_memory_ptr_$_t_struct$_Unsigned_$471_memory_ptr_$returns$_t_struct$_Unsigned_$471_memory_ptr_$bound_to$_t_struct$_Unsigned_$471_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 16302,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "749:23:52",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16298,
+                  "id": 16303,
+                  "nodeType": "Return",
+                  "src": "742:30:52"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "0ff49b90",
+            "id": 16305,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "transformPrice",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16295,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "674:8:52"
+            },
+            "parameters": {
+              "id": 16294,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16291,
+                  "mutability": "mutable",
+                  "name": "oraclePrice",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16305,
+                  "src": "577:38:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16290,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "577:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16293,
+                  "mutability": "mutable",
+                  "name": "requestTime",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16305,
+                  "src": "617:19:52",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 16292,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "617:7:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "576:61:52"
+            },
+            "returnParameters": {
+              "id": 16298,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16297,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16305,
+                  "src": "700:26:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16296,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "700:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "699:28:52"
+            },
+            "scope": 16320,
+            "src": "553:226:52",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6649
+            ],
+            "body": {
+              "id": 16318,
+              "nodeType": "Block",
+              "src": "1107:57:52",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16315,
+                        "name": "scalar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16279,
+                        "src": "1150:6:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_storage",
+                          "typeString": "struct FixedPoint.Unsigned storage ref"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 16313,
+                        "name": "collateralRequirement",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16307,
+                        "src": "1124:21:52",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      },
+                      "id": 16314,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "mul",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 899,
+                      "src": "1124:25:52",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Unsigned_$471_memory_ptr_$_t_struct$_Unsigned_$471_memory_ptr_$returns$_t_struct$_Unsigned_$471_memory_ptr_$bound_to$_t_struct$_Unsigned_$471_memory_ptr_$",
+                        "typeString": "function (struct FixedPoint.Unsigned memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 16316,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1124:33:52",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16312,
+                  "id": 16317,
+                  "nodeType": "Return",
+                  "src": "1117:40:52"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "197f7848",
+            "id": 16319,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "transformCollateralRequirement",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16309,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1049:8:52"
+            },
+            "parameters": {
+              "id": 16308,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16307,
+                  "mutability": "mutable",
+                  "name": "collateralRequirement",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16319,
+                  "src": "963:48:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16306,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "963:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "962:50:52"
+            },
+            "returnParameters": {
+              "id": 16312,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16311,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16319,
+                  "src": "1075:26:52",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16310,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 471,
+                    "src": "1075:19:52",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1074:28:52"
+            },
+            "scope": 16320,
+            "src": "923:241:52",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 16321,
+        "src": "241:925:52"
+      }
+    ],
+    "src": "0:1167:52"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-11-23T23:49:10.164Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "transformCollateralRequirement((uint256))": {
+        "params": {
+          "collateralRequirement": "input collateral requirement to be transformed."
+        },
+        "returns": {
+          "_0": "transformedCollateralRequirement input collateral requirement with the transformation function applied."
+        }
+      },
+      "transformPrice((uint256),uint256)": {
+        "params": {
+          "oraclePrice": "input price to be transformed.",
+          "requestTime": "timestamp the oraclePrice was requested at."
+        },
+        "returns": {
+          "_0": "transformedPrice input oraclePrice with the transformation function applied."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "transformCollateralRequirement((uint256))": {
+        "notice": "Transforms a given collateral requirement using the financial product libraries transformation logic."
+      },
+      "transformPrice((uint256),uint256)": {
+        "notice": "Transforms a given oracle price using the financial product libraries transformation logic."
+      }
+    },
+    "version": 1
+  }
+}

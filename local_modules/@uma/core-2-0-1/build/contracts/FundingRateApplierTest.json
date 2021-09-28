@@ -1,0 +1,2821 @@
+{
+  "contractName": "FundingRateApplierTest",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_fundingRateIdentifier",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "_collateralAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_finderAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_configStoreAddress",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "_tokenScaling",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "_timerAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "FinalFeesPaid",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "newFundingRate",
+          "type": "int256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "updateTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reward",
+          "type": "uint256"
+        }
+      ],
+      "name": "FundingRateUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "regularFee",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "lateFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "RegularFeesPaid",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "applyFundingRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "collateralCurrency",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "configStore",
+      "outputs": [
+        {
+          "internalType": "contract ConfigStoreInterface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "cumulativeFeeMultiplier",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "rawValue",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "emergencyShutdownTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "finder",
+      "outputs": [
+        {
+          "internalType": "contract FinderInterface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "fundingRate",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "rawValue",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Signed",
+          "name": "rate",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "identifier",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "cumulativeMultiplier",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "updateTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "applicationTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "proposalTime",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCurrentTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "getOutstandingRegularFees",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "regularFee",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "latePenalty",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "totalPaid",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "gulp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "payRegularFees",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pfc",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "rawValue",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Signed",
+          "name": "rate",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "proposeFundingRate",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "totalBond",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCurrentTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "timerAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "paymentPeriodSeconds",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "rawValue",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Signed",
+          "name": "fundingRatePerSecond",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "currentCumulativeFundingRateMultiplier",
+          "type": "tuple"
+        }
+      ],
+      "name": "calculateEffectiveFundingRate",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rawValue",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct FixedPoint.Unsigned",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "emergencyShutdown",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "remargin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_fundingRateIdentifier\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_collateralAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_finderAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_configStoreAddress\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"_tokenScaling\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"_timerAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"FinalFeesPaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"newFundingRate\",\"type\":\"int256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"updateTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"reward\",\"type\":\"uint256\"}],\"name\":\"FundingRateUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"regularFee\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"lateFee\",\"type\":\"uint256\"}],\"name\":\"RegularFeesPaid\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"applyFundingRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"paymentPeriodSeconds\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"int256\",\"name\":\"rawValue\",\"type\":\"int256\"}],\"internalType\":\"struct FixedPoint.Signed\",\"name\":\"fundingRatePerSecond\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"currentCumulativeFundingRateMultiplier\",\"type\":\"tuple\"}],\"name\":\"calculateEffectiveFundingRate\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"collateralCurrency\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"configStore\",\"outputs\":[{\"internalType\":\"contract ConfigStoreInterface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cumulativeFeeMultiplier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emergencyShutdown\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emergencyShutdownTimestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"finder\",\"outputs\":[{\"internalType\":\"contract FinderInterface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"fundingRate\",\"outputs\":[{\"components\":[{\"internalType\":\"int256\",\"name\":\"rawValue\",\"type\":\"int256\"}],\"internalType\":\"struct FixedPoint.Signed\",\"name\":\"rate\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"identifier\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"cumulativeMultiplier\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"updateTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"applicationTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalTime\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"getOutstandingRegularFees\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"regularFee\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"latePenalty\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"totalPaid\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"gulp\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"payRegularFees\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pfc\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"int256\",\"name\":\"rawValue\",\"type\":\"int256\"}],\"internalType\":\"struct FixedPoint.Signed\",\"name\":\"rate\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"proposeFundingRate\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"totalBond\",\"type\":\"tuple\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"remargin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"setCurrentTime\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"timerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"getCurrentTime()\":{\"returns\":{\"_0\":\"uint for the current Testable timestamp.\"}},\"getOutstandingRegularFees(uint256)\":{\"details\":\"This returns 0 and exit early if there is no pfc, fees were already paid during the current block, or the fee rate is 0.\",\"returns\":{\"latePenalty\":\"outstanding unpaid late fee for being late in previous fee payments.\",\"regularFee\":\"outstanding unpaid regular fee.\",\"totalPaid\":\"Amount of collateral that the contract paid (sum of the amount paid to the Store and caller).\"}},\"gulp()\":{\"details\":\"Multiplying the `cumulativeFeeMultiplier` by the ratio of non-PfC-collateral :: PfC-collateral effectively pays all sponsors a pro-rata portion of the excess collateral.This will revert if PfC is 0 and this contract's collateral balance > 0.\"},\"payRegularFees()\":{\"details\":\"These must be paid periodically for the life of the contract. If the contract has not paid its regular fee in a week or more then a late penalty is applied which is sent to the caller. If the amount of fees owed are greater than the pfc, then this will pay as much as possible from the available collateral. An event is only fired if the fees charged are greater than 0.\",\"returns\":{\"_0\":\"totalPaid Amount of collateral that the contract paid (sum of the amount paid to the Store and caller). This returns 0 and exit early if there is no pfc, fees were already paid during the current block, or the fee rate is 0.\"}},\"pfc()\":{\"details\":\"This is equivalent to the collateral pool available from which to pay fees. Therefore, derived contracts are expected to implement this so that pay-fee methods can correctly compute the owed fees as a % of PfC.\",\"returns\":{\"_0\":\"pfc value for equal to the current profit from corruption denominated in collateral currency.\"}},\"proposeFundingRate((int256),uint256)\":{\"params\":{\"rate\":\"funding rate being proposed.\",\"timestamp\":\"time at which the funding rate was computed.\"}},\"remargin()\":{\"details\":\"It pays fees and moves money between margin accounts to make sure they reflect the NAV of the contract.\"},\"setCurrentTime(uint256)\":{\"details\":\"Will revert if not running in test mode.\",\"params\":{\"time\":\"timestamp to set current Testable time to.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"applyFundingRate()\":{\"notice\":\"This method takes 3 distinct actions: 1. Pays out regular fees. 2. If possible, resolves the outstanding funding rate proposal, pulling the result in and paying out the rewards. 3. Applies the prevailing funding rate over the most recent period.\"},\"emergencyShutdown()\":{\"notice\":\"Initiates the shutdown process, in case of an emergency.\"},\"getCurrentTime()\":{\"notice\":\"Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp.\"},\"getOutstandingRegularFees(uint256)\":{\"notice\":\"Fetch any regular fees that the contract has pending but has not yet paid. If the fees to be paid are more than the total collateral within the contract then the totalPaid returned is full contract collateral amount.\"},\"gulp()\":{\"notice\":\"Removes excess collateral balance not counted in the PfC by distributing it out pro-rata to all sponsors.\"},\"payRegularFees()\":{\"notice\":\"Pays UMA DVM regular fees (as a % of the collateral pool) to the Store contract.\"},\"pfc()\":{\"notice\":\"Gets the current profit from corruption for this contract in terms of the collateral currency.\"},\"proposeFundingRate((int256),uint256)\":{\"notice\":\"Proposes a new funding rate. Proposer receives a reward if correct.\"},\"remargin()\":{\"notice\":\"A core contract method called independently or as a part of other financial contract transactions.\"},\"setCurrentTime(uint256)\":{\"notice\":\"Sets the current time.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/circleci/protocol/packages/core/contracts/financial-templates/test/FundingRateApplierTest.sol\":\"FundingRateApplierTest\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/home/circleci/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0xab45bbd5979790b9f84b2f741fc5476d7196f5fd924704d38798540fa1b2e2f3\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://24affc9dbe1fa7c73ed6e1f46f8e1f9f46b83954d43d0bb2ef15ed80fe7e1fc2\",\"dweb:/ipfs/Qmbddhukgu2FdV1VKpACsuterX2kcq2X9jJs6usPqXLSqE\"]},\"/home/circleci/protocol/packages/core/contracts/common/implementation/Lockable.sol\":{\"keccak256\":\"0xe766fe78267c8f589f9510a6e258b69287ed455c18d6b3f393d8e9d96f2d71cf\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://2e78bb200ecd01e863bfd57583941561f09993f902b83aa5d362387746578209\",\"dweb:/ipfs/QmNX2pLdH4p4HtJTKqSY4LwenRUPwJKa22ZSF2yc3cTMq4\"]},\"/home/circleci/protocol/packages/core/contracts/common/implementation/Testable.sol\":{\"keccak256\":\"0xd7c14c59b0f4325ccc5feea6cf9acf45eefb169cbf48ffd4a265a3267b815cfa\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://b8b49c6c76f0458a196b11b0dc03f9bcc8f26851fdb51888b2a7cb9034a96493\",\"dweb:/ipfs/QmY4JDiPDcZbW8j3PWRd9YwRP28WdnSPGA1Yknj5gkWJWH\"]},\"/home/circleci/protocol/packages/core/contracts/common/implementation/Timer.sol\":{\"keccak256\":\"0x4ce613d5032aefb04a64fd623c216a6f68a1b903a4a7aa72721323dc988a6c90\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://6b557f3da4d90ec171cba84a2d85202c2327028a081552fe36440cdbbef6396d\",\"dweb:/ipfs/QmcLdrkekhH1VXN5jEuiqbkTzX7doz1KuVp6KQfCnyQ8C4\"]},\"/home/circleci/protocol/packages/core/contracts/financial-templates/common/EmergencyShutdownable.sol\":{\"keccak256\":\"0x52869dd38db0e30158a2399bbcae2613aaf236a65ed2b51cb74b0d840cc19e8c\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://8cc215fbe3722907fc591ec2f96c101cac28f7c8a8fd34d180cb3385e845f406\",\"dweb:/ipfs/QmTEuAbPYEzNgH3MMhWqgDtnGKRu6UY9MyJUwhnwiTK6tT\"]},\"/home/circleci/protocol/packages/core/contracts/financial-templates/common/FeePayer.sol\":{\"keccak256\":\"0x27b97b55a26f3bb6cc7c3ffab2ac287bede1170aee7c1cc80fdd57bdfc059799\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://eea3cd53ef1999bff561fdce50790cf411044e62a6f875e043754727868649ae\",\"dweb:/ipfs/QmfWNdEK9aFdxFrP32f9mNgVmikMX6RnFYrewXfiXbL69i\"]},\"/home/circleci/protocol/packages/core/contracts/financial-templates/common/FundingRateApplier.sol\":{\"keccak256\":\"0xd3617249543c9da1c318a464d5708020c4f90fa4616beef60cd1488e96f85383\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://258df40374b4079597dc80f78ce3d27941b09fc7f0990a8ee4ff8a47b1a12d92\",\"dweb:/ipfs/QmXBoTiPsgCiqQZcWrz4YYPDLWD8xdahmqnU4AdrCVFfFM\"]},\"/home/circleci/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/ConfigStoreInterface.sol\":{\"keccak256\":\"0xd911ef5bf3a3b33f784e34e51c1cf40e5bef8c6b1766c0041887bc947f22a825\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://0dec5760b3c706154dbaa7ce70b221f39013f70d74ac4dc4e3a9ad54b63b2c26\",\"dweb:/ipfs/QmbDRxBQgU9W1ZZTB9pJVcHXh6qHbtFa24hdHmTxTrtMy3\"]},\"/home/circleci/protocol/packages/core/contracts/financial-templates/test/FundingRateApplierTest.sol\":{\"keccak256\":\"0xb9f7f25c58895cad8662d0e01533e3f8d09aa920aaaa7a3c10ad260512e335b6\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://d679e5e356f76dd0d21c5bfe3d0887aeb126f0ca5dd3c5c5a4975db71add6666\",\"dweb:/ipfs/QmSCRikxMLhbYfs2H2XwzdxQJfC76dvQMj3ScEp9tsNJnq\"]},\"/home/circleci/protocol/packages/core/contracts/oracle/implementation/Constants.sol\":{\"keccak256\":\"0xdbb681274d3d1582bdeea2d5e09739d0f30fd37bafdfa37ac17b01dd05e1b12c\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://e07d0801e26cc117bb89113125faf54c730137a18b3dd3e7237a0422972c203b\",\"dweb:/ipfs/QmQntQCNR1hYPqUq3cKasTPV7BsCC8Xm3gJ4YfZKpZsNGh\"]},\"/home/circleci/protocol/packages/core/contracts/oracle/interfaces/AdministrateeInterface.sol\":{\"keccak256\":\"0x7d8ea8237206ab15d984ab08a9af9facefd46799a053b94a8937dfe88b66a044\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://e6f456171b754253b66558d35597377631658b1a8c72189f854b7111567a3d33\",\"dweb:/ipfs/QmW7yfuXjUMp8TfKFYP62uscJJHqt9g42Ff1FthivQACoJ\"]},\"/home/circleci/protocol/packages/core/contracts/oracle/interfaces/FinderInterface.sol\":{\"keccak256\":\"0x22ad0329b3a6e55e30fb8391aa69310966cdbc06047ea7d031a2d14450a54d2f\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://5341487810effd6dddd567cd0bf8cd67e369ac69740bd1113ce197fa42bf1a90\",\"dweb:/ipfs/QmYoXoAFTkUdxmoU6AAdHFMpKQtgGi9xaUrQrBR1h7Q7ZR\"]},\"/home/circleci/protocol/packages/core/contracts/oracle/interfaces/OptimisticOracleInterface.sol\":{\"keccak256\":\"0x479a8f911d10d1427c875a717c5cfaf8f21a7af2640fc8a76b17ca2d4df4b5e1\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://dbe6a0287c2ec980ec213973b3c357107528c4fb0d1d34a3f4146d34ca6bea2b\",\"dweb:/ipfs/QmUUWvU6UXVxf5yuTCuwEH8TY9wgKcDSrSjBYnQyfDVYcu\"]},\"/home/circleci/protocol/packages/core/contracts/oracle/interfaces/StoreInterface.sol\":{\"keccak256\":\"0x94ceb4286b9e214c3393f9995610eddec86aec3d9ec38814771363a40e783a03\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://da576e60ac5aa79d75bbd6c22aa19173822383136d391a7d22be8af49e3843a4\",\"dweb:/ipfs/QmPQ7pbkduyUkkQ4kJuVx3as6gHKxroG7NrwNtdbsPe2S7\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x6cc1cb934a3ac2137a7dcaed018af9e235392236ceecfd3687259702b9c767ad\",\"urls\":[\"bzz-raw://0055fa88138cd1c3c6440370f8580f85857f8fe9dec41c99af9eafbeb8d9c3ce\",\"dweb:/ipfs/QmX1xDh8vwGLLCH8ti45eXjQ7Wcxv1FEGTR3jkFnd5Nv6F\"]},\"@openzeppelin/contracts/token/ERC20/SafeERC20.sol\":{\"keccak256\":\"0xa27d8d0bf389702f2b124fff3d86238b17ec0abd47d1401e81dc48a1509dbb9a\",\"urls\":[\"bzz-raw://899c25b79e783c1e4ccdd06928e332e2b37f3ecaa487f49ef68ef9fde6b18f82\",\"dweb:/ipfs/QmV3rZDWabetVSmZ2iviS5tajKzvR3AEwsicKZao4ptTg2\"]},\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x5f7da58ee3d9faa9b8999a93d49c8ff978f1afc88ae9bcfc6f9cbb44da011c2b\",\"urls\":[\"bzz-raw://4f089d954b3ecaa26949412fe63e9a184b056562c6c13dd4a0529a5d9a2e685a\",\"dweb:/ipfs/QmVK5iCNAMcEJQxT59bsC5E53JQASDQPU6khHox3d5ZXCn\"]},\"@openzeppelin/contracts/utils/SafeCast.sol\":{\"keccak256\":\"0x2605c02f94103e804421170c049db81c65a47dee0c8989550c58000fbdb8b011\",\"urls\":[\"bzz-raw://bc7733438ff5dfcf8eeb547f3d05e8b7d8183db1e8f8f96b8d5c97915fb614fe\",\"dweb:/ipfs/QmQViRoEaEWDuxpMer2tcDau8V31ah7rLQ5Hw4VHns1bGC\"]}},\"version\":1}",
+  "bytecode": "0x60806040523480156200001157600080fd5b50604051620026a3380380620026a3833981016040819052620000349162000275565b600080556001805460ff60a01b196001600160a01b038085166001600160a01b03199384161791909116600160a01b17909255600280548389169083161790556003805492871692909116919091179055858585858585848482620000986200010c565b600481905550620000b56001620001b960201b62000a271760201c565b516005555060009150620000ca90506200010c565b6009819055600a555050516008556007939093555050600c80546001600160a01b0319166001600160a01b039092169190911790555062000379945050505050565b6001546000906001600160a01b031615620001b357600160009054906101000a90046001600160a01b03166001600160a01b03166329cb924d6040518163ffffffff1660e01b815260040160206040518083038186803b1580156200017057600080fd5b505afa15801562000185573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190620001ab91906200031f565b9050620001b6565b50425b90565b620001c36200024a565b6040518060200160405280620001f0670de0b6b3a764000085620001f860201b62000a551790919060201c565b905292915050565b600082620002095750600062000244565b828202828482816200021757fe5b0414620002415760405162461bcd60e51b8152600401620002389062000338565b60405180910390fd5b90505b92915050565b6040518060200160405280600081525090565b80516001600160a01b03811681146200024457600080fd5b60008060008060008086880360c08112156200028f578283fd5b87519650620002a28960208a016200025d565b9550620002b38960408a016200025d565b9450620002c48960608a016200025d565b93506020607f1982011215620002d8578283fd5b50604051602081016001600160401b0381118282101715620002f8578384fd5b604052608088015181529150620003138860a089016200025d565b90509295509295509295565b60006020828403121562000331578081fd5b5051919050565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b61231a80620003896000396000f3fe608060405234801561001057600080fd5b50600436106101165760003560e01c806371f3c1b7116100a25780639e4efaa0116100715780639e4efaa0146101dd578063b9a3c84c146101ff578063bda02e771461016b578063c8aa07bd14610207578063dd0eef3d1461021a57610116565b806371f3c1b7146101bd57806381a10ae1146101c557806394909e62146101cd5780639d69dc4e146101d557610116565b80633403c2fc116100e95780633403c2fc1461016b57806334c49556146101735780633cb6ce831461019357806341d3c84c1461019b5780636cf1be29146101b557610116565b80630de15fd91461011b5780631c39c38d1461013957806322f8e5661461014157806329cb924d14610156575b600080fd5b610123610222565b6040516101309190611d92565b60405180910390f35b610123610231565b61015461014f366004611cc0565b610240565b005b61015e6102ba565b6040516101309190611e9b565b610154610361565b610186610181366004611c62565b610363565b6040516101309190612244565b61018661064e565b6101a36107de565b6040516101309695949392919061221c565b61015e61080d565b610154610813565b61018661083c565b610154610859565b610123610871565b6101f06101eb366004611cc0565b610880565b6040516101309392919061224e565b6101236109f7565b610186610215366004611cd8565b610a06565b61015e610a21565b6002546001600160a01b031681565b6001546001600160a01b031681565b6001546001600160a01b031661025557600080fd5b60015460405163117c72b360e11b81526001600160a01b03909116906322f8e56690610285908490600401611e9b565b600060405180830381600087803b15801561029f57600080fd5b505af11580156102b3573d6000803e3d6000fd5b5050505050565b6001546000906001600160a01b03161561035b57600160009054906101000a90046001600160a01b03166001600160a01b03166329cb924d6040518163ffffffff1660e01b815260040160206040518083038186803b15801561031c57600080fd5b505afa158015610330573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103549190611b0a565b905061035e565b50425b90565b565b61036b611988565b610373610813565b61037b610a96565b610383610abf565b600b54156103ac5760405162461bcd60e51b81526004016103a3906120ee565b60405180910390fd5b6103b583610ace565b60006103bf6102ba565b60095490915080841180156103e957506103e56103da610b0d565b60a001518390610b9d565b8410155b6104055760405162461bcd60e51b81526004016103a390612037565b600b8490556000610414610bdf565b6007549091506060610424610c73565b6002546040516311df92f160e01b81529192506001600160a01b03808616926311df92f1926104609287928d9288921690600090600401611ecc565b602060405180830381600087803b15801561047a57600080fd5b505af115801561048e573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104b29190611b0a565b506040518060200160405280846001600160a01b031663ad5a755a858b866104ed6104db610b0d565b604001516104e7610ca1565b90610d38565b516040516001600160e01b031960e087901b1681526105129493929190600401611f08565b602060405180830381600087803b15801561052c57600080fd5b505af1158015610540573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105649190611b0a565b90529550610573866000610d75565b156105b2578551600254610596916001600160a01b039091169033903090610d8c565b85516002546105b2916001600160a01b03909116908590610dea565b8751604051637c82288f60e01b81526001600160a01b03851691637c82288f916105e8913391309188918e918991600401611da6565b602060405180830381600087803b15801561060257600080fd5b505af1158015610616573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061063a9190611b0a565b505050505050610648610e95565b92915050565b610656611988565b61065e610a96565b610666610abf565b60006106706102ba565b905061067a611988565b610682610ca1565b905061068c611988565b610694611988565b61069c611988565b6106a585610880565b6004889055919450925090506106bc816000610eaa565b156106cd5794506107d69350505050565b815183516040517f19b92e73d08d517d71ec46136266e4f5d526a8cd4f8501d73713cebfe4f335ef90600090a36107048185610ec1565b61070f836000610d75565b156107a357600061071e610f0b565b845160025491925061073b916001600160a01b0316908390610dea565b60025460405163432ce91960e11b81526001600160a01b0383811692638659d2329261076f92909116908890600401611e68565b600060405180830381600087803b15801561078957600080fd5b505af115801561079d573d6000803e3d6000fd5b50505050505b6107ae826000610d75565b156107cf5781516002546107cf916001600160a01b03909116903390610f44565b9450505050505b61035e610e95565b6040805160208082018352600654825260075483519182019093526008548152600954600a54600b5493949386565b60005481565b61081b61064e565b50610824610a96565b61082c610abf565b610834610f68565b610361610e95565b610844611988565b61084c610a96565b610854610ca1565b905090565b610861610a96565b610869610abf565b610834610fd0565b600c546001600160a01b031681565b610888611988565b610890611988565b610898611988565b60006108a2610f0b565b90506108ac611988565b6108b4610ca1565b90506108c1816000610eaa565b806108cd575085600454145b156108d95750506109f0565b600480546040516374201feb60e01b81526001600160a01b038516926374201feb9261090b9290918b91879101612265565b604080518083038186803b15801561092257600080fd5b505afa158015610936573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061095a9190611c8c565b9095509350610969858561109b565b9250610976836000610eaa565b156109825750506109f0565b61098c83826110c7565b156109ed57610999611988565b6109a384836110ce565b90506109ad611988565b6109b786836110f1565b90506109c386826110ce565b95506109cf82826110ce565b91506109e56109de88846110f1565b88906110ce565b965082945050505b50505b9193909250565b6003546001600160a01b031681565b610a0e611988565b610a1984848461110f565b949350505050565b60055481565b610a2f611988565b604080516020810190915280610a4d84670de0b6b3a7640000610a55565b905292915050565b600082610a6457506000610648565b82820282848281610a7157fe5b0414610a8f5760405162461bcd60e51b81526004016103a390612066565b9392505050565b600154600160a01b900460ff166103615760405162461bcd60e51b81526004016103a3906121ae565b6001805460ff60a01b19169055565b610ae4610ad9610b0d565b606001518290611197565b8015610b015750610b01610af6610b0d565b60800151829061119f565b610b0a57600080fd5b50565b610b1561199b565b600c60009054906101000a90046001600160a01b03166001600160a01b031663145701f86040518163ffffffff1660e01b815260040160c060405180830381600087803b158015610b6557600080fd5b505af1158015610b79573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906108549190611b22565b6000610a8f83836040518060400160405280601e81526020017f536166654d6174683a207375627472616374696f6e206f766572666c6f7700008152506111a7565b6003546040516302abf57960e61b81526000916001600160a01b03169063aafd5e4090610c23906f4f7074696d69737469634f7261636c6560801b90600401611e9b565b60206040518083038186803b158015610c3b57600080fd5b505afa158015610c4f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906108549190611ace565b6060610c7d6111d3565b604051602001610c8d9190611d59565b604051602081830303815290604052905090565b610ca9611988565b6040805160208101918290526002546370a0823160e01b9092529081906001600160a01b03166370a08231610ce13060248501611d92565b60206040518083038186803b158015610cf957600080fd5b505afa158015610d0d573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610d319190611b0a565b9052905090565b610d40611988565b6040805160208101909152825184518291670de0b6b3a764000091610d6491610a55565b81610d6b57fe5b0490529392505050565b6000610d8082610a27565b51835111905092915050565b610de4846323b872dd60e01b858585604051602401610dad93929190611e0d565b60408051601f198184030181529190526020810180516001600160e01b03166001600160e01b0319909316929092179091526111e2565b50505050565b6000610e7482856001600160a01b031663dd62ed3e30876040518363ffffffff1660e01b8152600401610e1e929190611df3565b60206040518083038186803b158015610e3657600080fd5b505afa158015610e4a573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610e6e9190611b0a565b906112c7565b9050610de48463095ea7b360e01b8584604051602401610dad929190611e82565b6001805460ff60a01b1916600160a01b179055565b6000610eb582610a27565b51835114905092915050565b610ec9611988565b610ed383836112ec565b9050610f02610eec82610ee66001610a27565b906110ce565b6040805160208101909152600554815290610d38565b51600555505050565b6003546040516302abf57960e61b81526000916001600160a01b03169063aafd5e4090610c23906453746f726560d81b90600401611e9b565b610f638363a9059cbb60e01b8484604051602401610dad929190611e82565b505050565b60005415610f7557610361565b6000610f7f6102ba565b600a54909150600090610f93908390610b9d565b9050610f9d611376565b6040805160208082018352600654825282519081019092526008548252610fc69183919061110f565b5160085550600a55565b610fd8611988565b610fe0610ca1565b9050610fea611988565b6040805160208101918290526002546370a0823160e01b9092529081906001600160a01b03166370a082316110223060248501611d92565b60206040518083038186803b15801561103a57600080fd5b505afa15801561104e573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906110729190611b0a565b90529050611080828261166b565b1561109757611092610eec8284611672565b516005555b5050565b6110a3611988565b60408051602081019091528251845182916110be91906112c7565b90529392505050565b5190511190565b6110d6611988565b60408051602081019091528251845182916110be9190610b9d565b6110f9611988565b81518351106111085781610a8f565b5090919050565b611117611988565b61111f611988565b61112960016116a7565b9050611133611988565b61114661113f876116cd565b86906116f6565b9050611150611988565b61115a8383611717565b9050611164611988565b61117f61117a8361117560006116a7565b61173a565b611751565b905061118b8682610d38565b98975050505050505050565b519051131590565b519051121590565b600081848411156111cb5760405162461bcd60e51b81526004016103a39190611f46565b505050900390565b6002546001600160a01b031690565b6111f4826001600160a01b031661178e565b6112105760405162461bcd60e51b81526004016103a3906121e5565b60006060836001600160a01b03168360405161122c9190611d76565b6000604051808303816000865af19150503d8060008114611269576040519150601f19603f3d011682016040523d82523d6000602084013e61126e565b606091505b5091509150816112905760405162461bcd60e51b81526004016103a390611fd1565b805115610de457808060200190518101906112ab9190611aea565b610de45760405162461bcd60e51b81526004016103a390612164565b600082820183811015610a8f5760405162461bcd60e51b81526004016103a390611f59565b6112f4611988565b825160009061130b90670de0b6b3a7640000610a55565b835190915060009061131e9083906117c7565b8451909150600090611331908490611809565b9050801561135d576040805160208101909152806113508460016112c7565b8152509350505050610648565b6040518060200160405280838152509350505050610648565b600b548015610b0a576000611389610bdf565b6007549091506060611399610c73565b6040516353b5923960e01b81529091506001600160a01b038416906353b59239906113cc90859088908690600401611ea4565b602060405180830381600087803b1580156113e657600080fd5b505af1925050508015611416575060408051601f3d908101601f1916820190925261141391810190611b0a565b60015b6114dc576114226119e9565b60405163a9904f9b60e01b81526001600160a01b0385169063a9904f9b9061145490309087908a908890600401611e31565b6101806040518083038186803b15801561146d57600080fd5b505afa158015611481573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906114a59190611b9d565b60208101519091506001600160a01b03161515806114cb575080516001600160a01b0316155b156114d6576000600b555b50610de4565b60095480861061165e57604080516020810190915282905260068290556009869055611506611988565b6115106000610a27565b905061151a6119e9565b60405163a9904f9b60e01b81526001600160a01b0388169063a9904f9b9061154c9030908a908d908b90600401611e31565b6101806040518083038186803b15801561156557600080fd5b505afa158015611579573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061159d9190611b9d565b60208101519091506001600160a01b031661161b576115dc6115bf8985610b9d565b6115d66115ca610b0d565b602001516104e7610ca1565b9061184b565b91506115e9826000610d75565b1561161b576115ff826115fa610ca1565b610ec1565b8051825160025461161b926001600160a01b0390911691610f44565b60095460065483516040517fee568d08fdf25d8d2f01948f7ba3dc157176924ef7312d148584409333f0d8cd92611653929091611f38565b60405180910390a250505b50506000600b5550505050565b5190511090565b61167a611988565b60408051602081019091528251845182916110be916116a190670de0b6b3a7640000610a55565b906117c7565b6116af611988565b604080516020810190915280610a4d84670de0b6b3a764000061186c565b6000600160ff1b82106116f25760405162461bcd60e51b81526004016103a39061211c565b5090565b6116fe611988565b6040805160208101909152835181906110be908561186c565b61171f611988565b60408051602081019091528251845182916110be91906118d7565b611742611988565b81518351136111085781610a8f565b611759611988565b81516000131561177b5760405162461bcd60e51b81526004016103a390612006565b5060408051602081019091529051815290565b6000813f7fc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470818114801590610a19575050151592915050565b6000610a8f83836040518060400160405280601a81526020017f536166654d6174683a206469766973696f6e206279207a65726f00000000000081525061191d565b6000610a8f83836040518060400160405280601881526020017f536166654d6174683a206d6f64756c6f206279207a65726f0000000000000000815250611954565b611853611988565b6040805160208101909152835181906110be9085610a55565b60008261187b57506000610648565b8260001914801561188f5750600160ff1b82145b156118ac5760405162461bcd60e51b81526004016103a3906120a7565b828202828482816118b957fe5b0514610a8f5760405162461bcd60e51b81526004016103a3906120a7565b60008282018183128015906118ec5750838112155b80611901575060008312801561190157508381125b610a8f5760405162461bcd60e51b81526004016103a390611f90565b6000818361193e5760405162461bcd60e51b81526004016103a39190611f46565b50600083858161194a57fe5b0495945050505050565b600081836119755760405162461bcd60e51b81526004016103a39190611f46565b5082848161197f57fe5b06949350505050565b6040518060200160405280600081525090565b6040518060c00160405280600081526020016119b5611988565b81526020016119c2611988565b81526020016119cf611988565b81526020016119dc611988565b8152602001600081525090565b60405180610180016040528060006001600160a01b0316815260200160006001600160a01b0316815260200160006001600160a01b03168152602001600015158152602001600015158152602001600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081525090565b8051610648816122cf565b8051801515811461064857600080fd5b600060208284031215611a95578081fd5b611a9f602061227c565b9135825250919050565b600060208284031215611aba578081fd5b611ac4602061227c565b9151825250919050565b600060208284031215611adf578081fd5b8151610a8f816122cf565b600060208284031215611afb578081fd5b81518015158114610a8f578182fd5b600060208284031215611b1b578081fd5b5051919050565b600060c08284031215611b33578081fd5b611b3d60c061227c565b82518152611b4e8460208501611aa9565b6020820152611b608460408501611aa9565b6040820152611b728460608501611aa9565b6060820152611b848460808501611aa9565b608082015260a083015160a08201528091505092915050565b6000610180808385031215611bb0578182fd5b611bb98161227c565b9050611bc58484611a69565b8152611bd48460208501611a69565b6020820152611be68460408501611a69565b6040820152611bf88460608501611a74565b6060820152611c0a8460808501611a74565b608082015260a0838101519082015260c0808401519082015260e08084015190820152610100808401519082015261012080840151908201526101408084015190820152610160928301519281019290925250919050565b60008060408385031215611c74578081fd5b611c7e8484611a84565b946020939093013593505050565b60008060408385031215611c9e578182fd5b611ca88484611aa9565b9150611cb78460208501611aa9565b90509250929050565b600060208284031215611cd1578081fd5b5035919050565b60008060008385036060811215611ced578182fd5b84359350611cfe8660208701611a84565b92506020603f1982011215611d11578182fd5b50611d1c602061227c565b604094909401358452509093909250565b60008151808452611d458160208601602086016122a3565b601f01601f19169290920160200192915050565b60609190911b6bffffffffffffffffffffffff1916815260140190565b60008251611d888184602087016122a3565b9190910192915050565b6001600160a01b0391909116815260200190565b6001600160a01b03878116825286166020820152604081018590526060810184905260c060808201819052600090611de090830185611d2d565b90508260a0830152979650505050505050565b6001600160a01b0392831681529116602082015260400190565b6001600160a01b039384168152919092166020820152604081019190915260600190565b600060018060a01b038616825284602083015283604083015260806060830152611e5e6080830184611d2d565b9695505050505050565b6001600160a01b0392909216825251602082015260400190565b6001600160a01b03929092168252602082015260400190565b90815260200190565b600084825283602083015260606040830152611ec36060830184611d2d565b95945050505050565b600086825285602083015260a06040830152611eeb60a0830186611d2d565b6001600160a01b0394909416606083015250608001529392505050565b600085825284602083015260806040830152611f276080830185611d2d565b905082606083015295945050505050565b918252602082015260400190565b600060208252610a8f6020830184611d2d565b6020808252601b908201527f536166654d6174683a206164646974696f6e206f766572666c6f770000000000604082015260600190565b60208082526021908201527f5369676e6564536166654d6174683a206164646974696f6e206f766572666c6f6040820152607760f81b606082015260800190565b6020808252818101527f5361666545524332303a206c6f772d6c6576656c2063616c6c206661696c6564604082015260600190565b602080825260179082015276139959d85d1a5d99481d985b1d59481c1c9bdd9a591959604a1b604082015260600190565b602080825260159082015274496e76616c69642070726f706f73616c2074696d6560581b604082015260600190565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b60208082526027908201527f5369676e6564536166654d6174683a206d756c7469706c69636174696f6e206f604082015266766572666c6f7760c81b606082015260800190565b60208082526014908201527350726f706f73616c20696e2070726f677265737360601b604082015260600190565b60208082526028908201527f53616665436173743a2076616c756520646f65736e27742066697420696e2061604082015267371034b73a191a9b60c11b606082015260800190565b6020808252602a908201527f5361666545524332303a204552433230206f7065726174696f6e20646964206e6040820152691bdd081cdd58d8d9595960b21b606082015260800190565b6020808252601f908201527f5265656e7472616e637947756172643a207265656e7472616e742063616c6c00604082015260600190565b6020808252601f908201527f5361666545524332303a2063616c6c20746f206e6f6e2d636f6e747261637400604082015260600190565b955186526020860194909452915160408501526060840152608083015260a082015260c00190565b9051815260200190565b925183529051602083015251604082015260600190565b928352602083019190915251604082015260600190565b60405181810167ffffffffffffffff8111828210171561229b57600080fd5b604052919050565b60005b838110156122be5781810151838201526020016122a6565b83811115610de45750506000910152565b6001600160a01b0381168114610b0a57600080fdfea264697066735822122095441cf0540ee3b07b7563cf2d2379ab595b7e6cbe4c5c195a6638cba6b2a18f64736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106101165760003560e01c806371f3c1b7116100a25780639e4efaa0116100715780639e4efaa0146101dd578063b9a3c84c146101ff578063bda02e771461016b578063c8aa07bd14610207578063dd0eef3d1461021a57610116565b806371f3c1b7146101bd57806381a10ae1146101c557806394909e62146101cd5780639d69dc4e146101d557610116565b80633403c2fc116100e95780633403c2fc1461016b57806334c49556146101735780633cb6ce831461019357806341d3c84c1461019b5780636cf1be29146101b557610116565b80630de15fd91461011b5780631c39c38d1461013957806322f8e5661461014157806329cb924d14610156575b600080fd5b610123610222565b6040516101309190611d92565b60405180910390f35b610123610231565b61015461014f366004611cc0565b610240565b005b61015e6102ba565b6040516101309190611e9b565b610154610361565b610186610181366004611c62565b610363565b6040516101309190612244565b61018661064e565b6101a36107de565b6040516101309695949392919061221c565b61015e61080d565b610154610813565b61018661083c565b610154610859565b610123610871565b6101f06101eb366004611cc0565b610880565b6040516101309392919061224e565b6101236109f7565b610186610215366004611cd8565b610a06565b61015e610a21565b6002546001600160a01b031681565b6001546001600160a01b031681565b6001546001600160a01b031661025557600080fd5b60015460405163117c72b360e11b81526001600160a01b03909116906322f8e56690610285908490600401611e9b565b600060405180830381600087803b15801561029f57600080fd5b505af11580156102b3573d6000803e3d6000fd5b5050505050565b6001546000906001600160a01b03161561035b57600160009054906101000a90046001600160a01b03166001600160a01b03166329cb924d6040518163ffffffff1660e01b815260040160206040518083038186803b15801561031c57600080fd5b505afa158015610330573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103549190611b0a565b905061035e565b50425b90565b565b61036b611988565b610373610813565b61037b610a96565b610383610abf565b600b54156103ac5760405162461bcd60e51b81526004016103a3906120ee565b60405180910390fd5b6103b583610ace565b60006103bf6102ba565b60095490915080841180156103e957506103e56103da610b0d565b60a001518390610b9d565b8410155b6104055760405162461bcd60e51b81526004016103a390612037565b600b8490556000610414610bdf565b6007549091506060610424610c73565b6002546040516311df92f160e01b81529192506001600160a01b03808616926311df92f1926104609287928d9288921690600090600401611ecc565b602060405180830381600087803b15801561047a57600080fd5b505af115801561048e573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104b29190611b0a565b506040518060200160405280846001600160a01b031663ad5a755a858b866104ed6104db610b0d565b604001516104e7610ca1565b90610d38565b516040516001600160e01b031960e087901b1681526105129493929190600401611f08565b602060405180830381600087803b15801561052c57600080fd5b505af1158015610540573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105649190611b0a565b90529550610573866000610d75565b156105b2578551600254610596916001600160a01b039091169033903090610d8c565b85516002546105b2916001600160a01b03909116908590610dea565b8751604051637c82288f60e01b81526001600160a01b03851691637c82288f916105e8913391309188918e918991600401611da6565b602060405180830381600087803b15801561060257600080fd5b505af1158015610616573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061063a9190611b0a565b505050505050610648610e95565b92915050565b610656611988565b61065e610a96565b610666610abf565b60006106706102ba565b905061067a611988565b610682610ca1565b905061068c611988565b610694611988565b61069c611988565b6106a585610880565b6004889055919450925090506106bc816000610eaa565b156106cd5794506107d69350505050565b815183516040517f19b92e73d08d517d71ec46136266e4f5d526a8cd4f8501d73713cebfe4f335ef90600090a36107048185610ec1565b61070f836000610d75565b156107a357600061071e610f0b565b845160025491925061073b916001600160a01b0316908390610dea565b60025460405163432ce91960e11b81526001600160a01b0383811692638659d2329261076f92909116908890600401611e68565b600060405180830381600087803b15801561078957600080fd5b505af115801561079d573d6000803e3d6000fd5b50505050505b6107ae826000610d75565b156107cf5781516002546107cf916001600160a01b03909116903390610f44565b9450505050505b61035e610e95565b6040805160208082018352600654825260075483519182019093526008548152600954600a54600b5493949386565b60005481565b61081b61064e565b50610824610a96565b61082c610abf565b610834610f68565b610361610e95565b610844611988565b61084c610a96565b610854610ca1565b905090565b610861610a96565b610869610abf565b610834610fd0565b600c546001600160a01b031681565b610888611988565b610890611988565b610898611988565b60006108a2610f0b565b90506108ac611988565b6108b4610ca1565b90506108c1816000610eaa565b806108cd575085600454145b156108d95750506109f0565b600480546040516374201feb60e01b81526001600160a01b038516926374201feb9261090b9290918b91879101612265565b604080518083038186803b15801561092257600080fd5b505afa158015610936573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061095a9190611c8c565b9095509350610969858561109b565b9250610976836000610eaa565b156109825750506109f0565b61098c83826110c7565b156109ed57610999611988565b6109a384836110ce565b90506109ad611988565b6109b786836110f1565b90506109c386826110ce565b95506109cf82826110ce565b91506109e56109de88846110f1565b88906110ce565b965082945050505b50505b9193909250565b6003546001600160a01b031681565b610a0e611988565b610a1984848461110f565b949350505050565b60055481565b610a2f611988565b604080516020810190915280610a4d84670de0b6b3a7640000610a55565b905292915050565b600082610a6457506000610648565b82820282848281610a7157fe5b0414610a8f5760405162461bcd60e51b81526004016103a390612066565b9392505050565b600154600160a01b900460ff166103615760405162461bcd60e51b81526004016103a3906121ae565b6001805460ff60a01b19169055565b610ae4610ad9610b0d565b606001518290611197565b8015610b015750610b01610af6610b0d565b60800151829061119f565b610b0a57600080fd5b50565b610b1561199b565b600c60009054906101000a90046001600160a01b03166001600160a01b031663145701f86040518163ffffffff1660e01b815260040160c060405180830381600087803b158015610b6557600080fd5b505af1158015610b79573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906108549190611b22565b6000610a8f83836040518060400160405280601e81526020017f536166654d6174683a207375627472616374696f6e206f766572666c6f7700008152506111a7565b6003546040516302abf57960e61b81526000916001600160a01b03169063aafd5e4090610c23906f4f7074696d69737469634f7261636c6560801b90600401611e9b565b60206040518083038186803b158015610c3b57600080fd5b505afa158015610c4f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906108549190611ace565b6060610c7d6111d3565b604051602001610c8d9190611d59565b604051602081830303815290604052905090565b610ca9611988565b6040805160208101918290526002546370a0823160e01b9092529081906001600160a01b03166370a08231610ce13060248501611d92565b60206040518083038186803b158015610cf957600080fd5b505afa158015610d0d573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610d319190611b0a565b9052905090565b610d40611988565b6040805160208101909152825184518291670de0b6b3a764000091610d6491610a55565b81610d6b57fe5b0490529392505050565b6000610d8082610a27565b51835111905092915050565b610de4846323b872dd60e01b858585604051602401610dad93929190611e0d565b60408051601f198184030181529190526020810180516001600160e01b03166001600160e01b0319909316929092179091526111e2565b50505050565b6000610e7482856001600160a01b031663dd62ed3e30876040518363ffffffff1660e01b8152600401610e1e929190611df3565b60206040518083038186803b158015610e3657600080fd5b505afa158015610e4a573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610e6e9190611b0a565b906112c7565b9050610de48463095ea7b360e01b8584604051602401610dad929190611e82565b6001805460ff60a01b1916600160a01b179055565b6000610eb582610a27565b51835114905092915050565b610ec9611988565b610ed383836112ec565b9050610f02610eec82610ee66001610a27565b906110ce565b6040805160208101909152600554815290610d38565b51600555505050565b6003546040516302abf57960e61b81526000916001600160a01b03169063aafd5e4090610c23906453746f726560d81b90600401611e9b565b610f638363a9059cbb60e01b8484604051602401610dad929190611e82565b505050565b60005415610f7557610361565b6000610f7f6102ba565b600a54909150600090610f93908390610b9d565b9050610f9d611376565b6040805160208082018352600654825282519081019092526008548252610fc69183919061110f565b5160085550600a55565b610fd8611988565b610fe0610ca1565b9050610fea611988565b6040805160208101918290526002546370a0823160e01b9092529081906001600160a01b03166370a082316110223060248501611d92565b60206040518083038186803b15801561103a57600080fd5b505afa15801561104e573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906110729190611b0a565b90529050611080828261166b565b1561109757611092610eec8284611672565b516005555b5050565b6110a3611988565b60408051602081019091528251845182916110be91906112c7565b90529392505050565b5190511190565b6110d6611988565b60408051602081019091528251845182916110be9190610b9d565b6110f9611988565b81518351106111085781610a8f565b5090919050565b611117611988565b61111f611988565b61112960016116a7565b9050611133611988565b61114661113f876116cd565b86906116f6565b9050611150611988565b61115a8383611717565b9050611164611988565b61117f61117a8361117560006116a7565b61173a565b611751565b905061118b8682610d38565b98975050505050505050565b519051131590565b519051121590565b600081848411156111cb5760405162461bcd60e51b81526004016103a39190611f46565b505050900390565b6002546001600160a01b031690565b6111f4826001600160a01b031661178e565b6112105760405162461bcd60e51b81526004016103a3906121e5565b60006060836001600160a01b03168360405161122c9190611d76565b6000604051808303816000865af19150503d8060008114611269576040519150601f19603f3d011682016040523d82523d6000602084013e61126e565b606091505b5091509150816112905760405162461bcd60e51b81526004016103a390611fd1565b805115610de457808060200190518101906112ab9190611aea565b610de45760405162461bcd60e51b81526004016103a390612164565b600082820183811015610a8f5760405162461bcd60e51b81526004016103a390611f59565b6112f4611988565b825160009061130b90670de0b6b3a7640000610a55565b835190915060009061131e9083906117c7565b8451909150600090611331908490611809565b9050801561135d576040805160208101909152806113508460016112c7565b8152509350505050610648565b6040518060200160405280838152509350505050610648565b600b548015610b0a576000611389610bdf565b6007549091506060611399610c73565b6040516353b5923960e01b81529091506001600160a01b038416906353b59239906113cc90859088908690600401611ea4565b602060405180830381600087803b1580156113e657600080fd5b505af1925050508015611416575060408051601f3d908101601f1916820190925261141391810190611b0a565b60015b6114dc576114226119e9565b60405163a9904f9b60e01b81526001600160a01b0385169063a9904f9b9061145490309087908a908890600401611e31565b6101806040518083038186803b15801561146d57600080fd5b505afa158015611481573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906114a59190611b9d565b60208101519091506001600160a01b03161515806114cb575080516001600160a01b0316155b156114d6576000600b555b50610de4565b60095480861061165e57604080516020810190915282905260068290556009869055611506611988565b6115106000610a27565b905061151a6119e9565b60405163a9904f9b60e01b81526001600160a01b0388169063a9904f9b9061154c9030908a908d908b90600401611e31565b6101806040518083038186803b15801561156557600080fd5b505afa158015611579573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061159d9190611b9d565b60208101519091506001600160a01b031661161b576115dc6115bf8985610b9d565b6115d66115ca610b0d565b602001516104e7610ca1565b9061184b565b91506115e9826000610d75565b1561161b576115ff826115fa610ca1565b610ec1565b8051825160025461161b926001600160a01b0390911691610f44565b60095460065483516040517fee568d08fdf25d8d2f01948f7ba3dc157176924ef7312d148584409333f0d8cd92611653929091611f38565b60405180910390a250505b50506000600b5550505050565b5190511090565b61167a611988565b60408051602081019091528251845182916110be916116a190670de0b6b3a7640000610a55565b906117c7565b6116af611988565b604080516020810190915280610a4d84670de0b6b3a764000061186c565b6000600160ff1b82106116f25760405162461bcd60e51b81526004016103a39061211c565b5090565b6116fe611988565b6040805160208101909152835181906110be908561186c565b61171f611988565b60408051602081019091528251845182916110be91906118d7565b611742611988565b81518351136111085781610a8f565b611759611988565b81516000131561177b5760405162461bcd60e51b81526004016103a390612006565b5060408051602081019091529051815290565b6000813f7fc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470818114801590610a19575050151592915050565b6000610a8f83836040518060400160405280601a81526020017f536166654d6174683a206469766973696f6e206279207a65726f00000000000081525061191d565b6000610a8f83836040518060400160405280601881526020017f536166654d6174683a206d6f64756c6f206279207a65726f0000000000000000815250611954565b611853611988565b6040805160208101909152835181906110be9085610a55565b60008261187b57506000610648565b8260001914801561188f5750600160ff1b82145b156118ac5760405162461bcd60e51b81526004016103a3906120a7565b828202828482816118b957fe5b0514610a8f5760405162461bcd60e51b81526004016103a3906120a7565b60008282018183128015906118ec5750838112155b80611901575060008312801561190157508381125b610a8f5760405162461bcd60e51b81526004016103a390611f90565b6000818361193e5760405162461bcd60e51b81526004016103a39190611f46565b50600083858161194a57fe5b0495945050505050565b600081836119755760405162461bcd60e51b81526004016103a39190611f46565b5082848161197f57fe5b06949350505050565b6040518060200160405280600081525090565b6040518060c00160405280600081526020016119b5611988565b81526020016119c2611988565b81526020016119cf611988565b81526020016119dc611988565b8152602001600081525090565b60405180610180016040528060006001600160a01b0316815260200160006001600160a01b0316815260200160006001600160a01b03168152602001600015158152602001600015158152602001600081526020016000815260200160008152602001600081526020016000815260200160008152602001600081525090565b8051610648816122cf565b8051801515811461064857600080fd5b600060208284031215611a95578081fd5b611a9f602061227c565b9135825250919050565b600060208284031215611aba578081fd5b611ac4602061227c565b9151825250919050565b600060208284031215611adf578081fd5b8151610a8f816122cf565b600060208284031215611afb578081fd5b81518015158114610a8f578182fd5b600060208284031215611b1b578081fd5b5051919050565b600060c08284031215611b33578081fd5b611b3d60c061227c565b82518152611b4e8460208501611aa9565b6020820152611b608460408501611aa9565b6040820152611b728460608501611aa9565b6060820152611b848460808501611aa9565b608082015260a083015160a08201528091505092915050565b6000610180808385031215611bb0578182fd5b611bb98161227c565b9050611bc58484611a69565b8152611bd48460208501611a69565b6020820152611be68460408501611a69565b6040820152611bf88460608501611a74565b6060820152611c0a8460808501611a74565b608082015260a0838101519082015260c0808401519082015260e08084015190820152610100808401519082015261012080840151908201526101408084015190820152610160928301519281019290925250919050565b60008060408385031215611c74578081fd5b611c7e8484611a84565b946020939093013593505050565b60008060408385031215611c9e578182fd5b611ca88484611aa9565b9150611cb78460208501611aa9565b90509250929050565b600060208284031215611cd1578081fd5b5035919050565b60008060008385036060811215611ced578182fd5b84359350611cfe8660208701611a84565b92506020603f1982011215611d11578182fd5b50611d1c602061227c565b604094909401358452509093909250565b60008151808452611d458160208601602086016122a3565b601f01601f19169290920160200192915050565b60609190911b6bffffffffffffffffffffffff1916815260140190565b60008251611d888184602087016122a3565b9190910192915050565b6001600160a01b0391909116815260200190565b6001600160a01b03878116825286166020820152604081018590526060810184905260c060808201819052600090611de090830185611d2d565b90508260a0830152979650505050505050565b6001600160a01b0392831681529116602082015260400190565b6001600160a01b039384168152919092166020820152604081019190915260600190565b600060018060a01b038616825284602083015283604083015260806060830152611e5e6080830184611d2d565b9695505050505050565b6001600160a01b0392909216825251602082015260400190565b6001600160a01b03929092168252602082015260400190565b90815260200190565b600084825283602083015260606040830152611ec36060830184611d2d565b95945050505050565b600086825285602083015260a06040830152611eeb60a0830186611d2d565b6001600160a01b0394909416606083015250608001529392505050565b600085825284602083015260806040830152611f276080830185611d2d565b905082606083015295945050505050565b918252602082015260400190565b600060208252610a8f6020830184611d2d565b6020808252601b908201527f536166654d6174683a206164646974696f6e206f766572666c6f770000000000604082015260600190565b60208082526021908201527f5369676e6564536166654d6174683a206164646974696f6e206f766572666c6f6040820152607760f81b606082015260800190565b6020808252818101527f5361666545524332303a206c6f772d6c6576656c2063616c6c206661696c6564604082015260600190565b602080825260179082015276139959d85d1a5d99481d985b1d59481c1c9bdd9a591959604a1b604082015260600190565b602080825260159082015274496e76616c69642070726f706f73616c2074696d6560581b604082015260600190565b60208082526021908201527f536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f6040820152607760f81b606082015260800190565b60208082526027908201527f5369676e6564536166654d6174683a206d756c7469706c69636174696f6e206f604082015266766572666c6f7760c81b606082015260800190565b60208082526014908201527350726f706f73616c20696e2070726f677265737360601b604082015260600190565b60208082526028908201527f53616665436173743a2076616c756520646f65736e27742066697420696e2061604082015267371034b73a191a9b60c11b606082015260800190565b6020808252602a908201527f5361666545524332303a204552433230206f7065726174696f6e20646964206e6040820152691bdd081cdd58d8d9595960b21b606082015260800190565b6020808252601f908201527f5265656e7472616e637947756172643a207265656e7472616e742063616c6c00604082015260600190565b6020808252601f908201527f5361666545524332303a2063616c6c20746f206e6f6e2d636f6e747261637400604082015260600190565b955186526020860194909452915160408501526060840152608083015260a082015260c00190565b9051815260200190565b925183529051602083015251604082015260600190565b928352602083019190915251604082015260600190565b60405181810167ffffffffffffffff8111828210171561229b57600080fd5b604052919050565b60005b838110156122be5781810151838201526020016122a6565b83811115610de45750506000910152565b6001600160a01b0381168114610b0a57600080fdfea264697066735822122095441cf0540ee3b07b7563cf2d2379ab595b7e6cbe4c5c195a6638cba6b2a18f64736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "273:1470:56:-:0;;;333:485;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1413:1:32;1384:30;;743:12:7;:28;;-1:-1:-1;;;;;;;;;743:28:7;;;-1:-1:-1;;;;;;743:28:7;;;;905:18:5;;;;-1:-1:-1;;;905:18:5;;;;3708::33::1;:47:::0;;;;::::1;::::0;;::::1;;::::0;;3765:6:::1;:40:::0;;;;::::1;::::0;;;::::1;::::0;;;::::1;::::0;;632:22:56;668:18;700:14;728:19;761:13;788;668:18;700:14;788:13;3833:16:33::1;:14;:16::i;:::-;3815:15;:34;;;;3885:30;3913:1;3885:27;;;;;:30;;:::i;:::-;3859:56:::0;:23:::1;:56:::0;-1:-1:-1;3859:56:33::1;::::0;-1:-1:-1;4727:16:34::2;::::0;-1:-1:-1;4727:14:34::2;:16::i;:::-;4753:22:::0;:36;;;4799:27;:41;-1:-1:-1;;4997:48:34;:32;:48;5056:22;:47;;;;-1:-1:-1;;5113:11:34::2;:55:::0;;-1:-1:-1;;;;;;5113:55:34::2;-1:-1:-1::0;;;;;5113:55:34;;::::2;::::0;;;::::2;::::0;;-1:-1:-1;273:1470:56;;-1:-1:-1;;;;;273:1470:56;1472:256:7;1542:12;;1519:7;;-1:-1:-1;;;;;1542:12:7;:28;1538:184;;1599:12;;;;;;;;;-1:-1:-1;;;;;1599:12:7;-1:-1:-1;;;;;1593:34:7;;:36;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1586:43;;;;1538:184;-1:-1:-1;1667:3:7;1538:184;1472:256;:::o;1032:135:4:-;1092:15;;:::i;:::-;1126:34;;;;;;;;1135:24;607:6;1135:1;:5;;;;;;:24;;;;:::i;:::-;1126:34;;1119:41;1032:135;-1:-1:-1;;1032:135:4:o;2119:459:100:-;2177:7;2418:6;2414:45;;-1:-1:-1;2447:1:100;2440:8;;2414:45;2481:5;;;2485:1;2481;:5;:1;2504:5;;;;;:10;2496:56;;;;-1:-1:-1;;;2496:56:100;;;;;;;:::i;:::-;;;;;;;;;2570:1;-1:-1:-1;2119:459:100;;;;;:::o;273:1470:56:-;;;;;;;;;;;;;;:::o;5:134:-1:-;83:13;;-1:-1;;;;;3566:54;;3770:35;;3760:2;;3819:1;;3809:12;817:996;;;;;;;1030:9;1021:7;1017:23;1042:3;1017:23;1013:33;1010:2;;;-1:-1;;1049:12;1010:2;230:6;224:13;1101:74;;1230:64;1286:7;1212:2;1266:9;1262:22;1230:64;:::i;:::-;1220:74;;1349:64;1405:7;1331:2;1385:9;1381:22;1349:64;:::i;:::-;1339:74;;1468:64;1524:7;1450:2;1504:9;1500:22;1468:64;:::i;:::-;1458:74;-1:-1;1212:2;-1:-1;;424:19;;420:30;417:2;;;-1:-1;;453:12;417:2;-1:-1;1331:2;2948:9;1212:2;2980:17;;-1:-1;;;;;3040:34;;3076:22;;;3037:62;3034:2;;;-1:-1;;3102:12;3034:2;1331;3121:22;1569:3;1645:22;;754:13;562:86;;569:16;-1:-1;1733:64;1789:7;1714:3;1765:22;;1733:64;:::i;:::-;1723:74;;1004:809;;;;;;;;:::o;1820:263::-;;1935:2;1923:9;1914:7;1910:23;1906:32;1903:2;;;-1:-1;;1941:12;1903:2;-1:-1;754:13;;1897:186;-1:-1;1897:186::o;2469:416::-;2669:2;2683:47;;;2315:2;2654:18;;;3259:19;2351:34;3299:14;;;2331:55;-1:-1;;;2406:12;;;2399:25;2443:12;;;2640:245::o;:::-;273:1470:56;;;;;;",
+  "deployedSourceMap": "273:1470:56:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1221:32:33;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;397:27:7;;;:::i;1112:115::-;;;;;;:::i;:::-;;:::i;:::-;;1472:256;;;:::i;:::-;;;;;;;:::i;1520:49:56:-;;;:::i;5814:2018:34:-;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;4831:1266:33:-;;;:::i;2338:30:34:-;;;:::i;:::-;;;;;;;;;;;;:::i;849:41:32:-;;;:::i;5479:113:34:-;;;:::i;8939:124:33:-;;;:::i;9480:64::-;;;:::i;2420:39:34:-;;;:::i;6764:1704:33:-;;;;;;:::i;:::-;;:::i;:::-;;;;;;;;;:::i;1335:29::-;;;:::i;824:474:56:-;;;;;;:::i;:::-;;:::i;1999:50:33:-;;;:::i;1221:32::-;;;-1:-1:-1;;;;;1221:32:33;;:::o;397:27:7:-;;;-1:-1:-1;;;;;397:27:7;;:::o;1112:115::-;890:12;;-1:-1:-1;;;;;890:12:7;882:37;;;;;;1186:12:::1;::::0;1180:40:::1;::::0;-1:-1:-1;;;1180:40:7;;-1:-1:-1;;;;;1186:12:7;;::::1;::::0;1180:34:::1;::::0;:40:::1;::::0;1215:4;;1180:40:::1;;;:::i;:::-;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;1112:115:::0;:::o;1472:256::-;1542:12;;1519:7;;-1:-1:-1;;;;;1542:12:7;:28;1538:184;;1599:12;;;;;;;;;-1:-1:-1;;;;;1599:12:7;-1:-1:-1;;;;;1593:34:7;;:36;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1586:43;;;;1538:184;-1:-1:-1;1667:3:7;1538:184;1472:256;:::o;1520:49:56:-;:::o;5814:2018:34:-;5964:36;;:::i;:::-;3491:18;:16;:18::i;:::-;1339:19:5::1;:17;:19::i;:::-;1368:17;:15;:17::i;:::-;6024:24:34::0;;:29;6016:62:::2;;;;-1:-1:-1::0;;;6016:62:34::2;;;;;;;:::i;:::-;;;;;;;;;6088:26;6109:4;6088:20;:26::i;:::-;6223:19;6245:16;:14;:16::i;:::-;6292:22:::0;;6223:38;;-1:-1:-1;6345:22:34;;::::2;:90:::0;::::2;;;;6384:51;6400:12;:10;:12::i;:::-;:34;;::::0;6384:11;;:15:::2;:51::i;:::-;6371:9;:64;;6345:90;6324:158;;;;-1:-1:-1::0;;;6324:158:34::2;;;;;;;:::i;:::-;6581:24:::0;:36;;;6628:42:::2;6673:22;:20;:22::i;:::-;6764::::0;;6628:67;;-1:-1:-1;6796:26:34::2;6825:19;:17;:19::i;:::-;7021:18;::::0;6953:90:::2;::::0;-1:-1:-1;;;6953:90:34;;6796:48;;-1:-1:-1;;;;;;6953:29:34;;::::2;::::0;::::2;::::0;:90:::2;::::0;6983:10;;6995:9;;6796:48;;7021:18:::2;::::0;::::2;::::0;6953:90:::2;;;:::i;:::-;;;;;;;;;;;;;;;;;;::::0;::::2;;;;;;;;;;;;::::0;::::2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;7065:241;;;;;;;;7098:16;-1:-1:-1::0;;;;;7098:24:34::2;;7140:10;7168:9;7195:13;7226:47;7237:12;:10;:12::i;:::-;:35;;;7226:6;:4;:6::i;:::-;:10:::0;::::2;:47::i;:::-;:56:::0;7098:198:::2;::::0;-1:-1:-1;;;;;;7098:198:34::2;::::0;;;;;;::::2;::::0;;;;7226:56;7098:198:::2;;;:::i;:::-;;;;;;;;;;;;;;;;;;::::0;::::2;;;;;;;;;;;;::::0;::::2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;7065:241:::0;;7053:253;-1:-1:-1;7385:26:34::2;7053:253:::0;7409:1:::2;7385:23;:26::i;:::-;7381:240;;;7490:18:::0;;7427::::2;::::0;:82:::2;::::0;-1:-1:-1;;;;;7427:18:34;;::::2;::::0;7463:10:::2;::::0;7483:4:::2;::::0;7427:35:::2;:82::i;:::-;7591:18:::0;;7523::::2;::::0;:87:::2;::::0;-1:-1:-1;;;;;7523:18:34;;::::2;::::0;7572:16;;7523:40:::2;:87::i;:::-;7802:13:::0;;7631:194:::2;::::0;-1:-1:-1;;;7631:194:34;;-1:-1:-1;;;;;7631:32:34;::::2;::::0;::::2;::::0;:194:::2;::::0;7677:10:::2;::::0;7709:4:::2;::::0;7728:10;;7752:9;;7775:13;;7631:194:::2;;;:::i;:::-;;;;;;;;;;;;;;;;;;::::0;::::2;;;;;;;;;;;;::::0;::::2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;1395:1:5;;;;;1406:20:::1;:18;:20::i;:::-;5814:2018:34::0;;;;:::o;4831:1266:33:-;4888:26;;:::i;:::-;1339:19:5;:17;:19::i;:::-;1368:17;:15;:17::i;:::-;4926:12:33::1;4941:16;:14;:16::i;:::-;4926:31;;4967:41;;:::i;:::-;5011:6;:4;:6::i;:::-;4967:50;;5168:37;;:::i;:::-;5219:38;;:::i;:::-;5271:36;;:::i;:::-;5320:31;5346:4;5320:25;:31::i;:::-;5361:15;:22:::0;;;5154:197;;-1:-1:-1;5154:197:33;-1:-1:-1;5154:197:33;-1:-1:-1;5454:20:33::1;5154:197:::0;5472:1:::1;5454:17;:20::i;:::-;5450:67;;;5497:9:::0;-1:-1:-1;5490:16:33::1;::::0;-1:-1:-1;;;;5490:16:33::1;5450:67;5569:20:::0;;5548:19;;5532:58:::1;::::0;::::1;::::0;5569:20:::1;::::0;5532:58:::1;5601:57;5632:9;5643:14;5601:30;:57::i;:::-;5673:27;:10:::0;5698:1:::1;5673:24;:27::i;:::-;5669:262;;;5716:20;5739:11;:9;:11::i;:::-;5821:19:::0;;5764:18:::1;::::0;5716:34;;-1:-1:-1;5764:77:33::1;::::0;-1:-1:-1;;;;;5764:18:33::1;::::0;5716:34;;5764:40:::1;:77::i;:::-;5888:18;::::0;5855:65:::1;::::0;-1:-1:-1;;;5855:65:33;;-1:-1:-1;;;;;5855:24:33;;::::1;::::0;::::1;::::0;:65:::1;::::0;5888:18;;::::1;::::0;5909:10;;5855:65:::1;;;:::i;:::-;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;5669:262;;5945:28;:11:::0;5971:1:::1;5945:25;:28::i;:::-;5941:124;;;6033:20:::0;;5989:18:::1;::::0;:65:::1;::::0;-1:-1:-1;;;;;5989:18:33;;::::1;::::0;6021:10:::1;::::0;5989:31:::1;:65::i;:::-;6081:9:::0;-1:-1:-1;;;;;1395:1:5::1;1406:20:::0;:18;:20::i;2338:30:34:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;849:41:32:-;;;;:::o;5479:113:34:-;3668:16;:14;:16::i;:::-;;1339:19:5::1;:17;:19::i;:::-;1368:17;:15;:17::i;:::-;5557:28:34::2;:26;:28::i;:::-;1406:20:5::1;:18;:20::i;8939:124:33:-:0;9005:26;;:::i;:::-;1625:19:5;:17;:19::i;:::-;9050:6:33::1;:4;:6::i;:::-;9043:13;;8939:124:::0;:::o;9480:64::-;1339:19:5;:17;:19::i;:::-;1368:17;:15;:17::i;:::-;9530:7:33::1;:5;:7::i;2420:39:34:-:0;;;-1:-1:-1;;;;;2420:39:34;;:::o;6764:1704:33:-;6871:37;;:::i;:::-;6922:38;;:::i;:::-;6974:36;;:::i;:::-;7035:20;7058:11;:9;:11::i;:::-;7035:34;;7079:41;;:::i;:::-;7123:6;:4;:6::i;:::-;7079:50;-1:-1:-1;7240:25:33;7079:50;7263:1;7240:22;:25::i;:::-;:52;;;;7288:4;7269:15;;:23;7240:52;7236:126;;;7308:43;;;;7236:126;7424:15;;;7400:62;;-1:-1:-1;;;7400:62:33;;-1:-1:-1;;;;;7400:23:33;;;;;:62;;7424:15;;7441:4;;7447:14;;7400:62;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;7372:90;;-1:-1:-1;7372:90:33;-1:-1:-1;7485:27:33;7372:90;;7485:14;:27::i;:::-;7473:39;-1:-1:-1;7526:20:33;7473:39;7544:1;7526:17;:20::i;:::-;7522:94;;;7562:43;;;;7522:94;7990:39;:9;8014:14;7990:23;:39::i;:::-;7986:476;;;8045:34;;:::i;:::-;8082:29;:9;8096:14;8082:13;:29::i;:::-;8045:66;;8125:47;;:::i;:::-;8175:36;8190:11;8203:7;8175:14;:36::i;:::-;8125:86;-1:-1:-1;8239:37:33;:11;8125:86;8239:15;:37::i;:::-;8225:51;-1:-1:-1;8300:33:33;:7;8312:20;8300:11;:33::i;:::-;8290:43;;8360:51;8375:35;8390:10;8402:7;8375:14;:35::i;:::-;8360:10;;:14;:51::i;:::-;8347:64;;8437:14;8425:26;;7986:476;;;6764:1704;;;;;;;;:::o;1335:29::-;;;-1:-1:-1;;;;;1335:29:33;;:::o;824:474:56:-;1058:26;;:::i;:::-;1115:176;1163:20;1201;1239:38;1115:30;:176::i;:::-;1096:195;824:474;-1:-1:-1;;;;824:474:56:o;1999:50:33:-;;;;:::o;1032:135:4:-;1092:15;;:::i;:::-;1126:34;;;;;;;;;;1135:24;:1;607:6;1135:5;:24::i;:::-;1126:34;;1119:41;1032:135;-1:-1:-1;;1032:135:4:o;2119:459:100:-;2177:7;2418:6;2414:45;;-1:-1:-1;2447:1:100;2440:8;;2414:45;2481:5;;;2485:1;2481;:5;:1;2504:5;;;;;:10;2496:56;;;;-1:-1:-1;;;2496:56:100;;;;;;;:::i;:::-;2570:1;2119:459;-1:-1:-1;;;2119:459:100:o;2158:186:5:-;2290:11;;-1:-1:-1;;;2290:11:5;;;;2282:55;;;;-1:-1:-1;;;2282:55:5;;;;;;;:::i;2350:136::-;2460:11;:19;;-1:-1:-1;;;;2460:19:5;;;2350:136::o;13056:243:34:-;13157:51;13180:12;:10;:12::i;:::-;:27;;;13157:4;;:22;:51::i;:::-;:125;;;;;13228:54;13254:12;:10;:12::i;:::-;:27;;;13228:4;;:25;:54::i;:::-;13136:156;;;;;;13056:243;:::o;8493:147::-;8533:42;;:::i;:::-;8594:11;;;;;;;;;-1:-1:-1;;;;;8594:11:34;-1:-1:-1;;;;;8594:37:34;;:39;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;1274:134:100:-;1332:7;1358:43;1362:1;1365;1358:43;;;;;;;;;;;;;;;;;:3;:43::i;8288:199:34:-;8413:6;;:66;;-1:-1:-1;;;8413:66:34;;8343:25;;-1:-1:-1;;;;;8413:6:34;;:31;;:66;;-1:-1:-1;;;8445:33:34;8413:66;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;16052:292::-;16104:12;16318:18;:16;:18::i;:::-;16301:36;;;;;;;;:::i;:::-;;;;;;;;;;;;;16294:43;;16052:292;:::o;1331:183:56:-;1387:37;;:::i;:::-;1443:64;;;;;;;;;;1463:18;;-1:-1:-1;;;1463:43:56;;;1443:64;;;-1:-1:-1;;;;;1463:18:56;:28;:43;1500:4;1463:43;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1443:64;;1436:71;-1:-1:-1;1331:183:56;:::o;8186:650:4:-;8260:15;;:::i;:::-;8773:56;;;;;;;;;8797:10;;8782;;8773:56;;607:6;;8782:26;;:14;:26::i;:::-;:46;;;;;;8773:56;;8766:63;8186:650;-1:-1:-1;;;8186:650:4:o;2248:147::-;2324:4;2360:19;2377:1;2360:16;:19::i;:::-;:28;2347:10;;:41;;-1:-1:-1;2248:147:4;;;;:::o;843:203:105:-;943:96;963:5;993:27;;;1022:4;1028:2;1032:5;970:68;;;;;;;;;;:::i;:::-;;;;-1:-1:-1;;970:68:105;;;;;;;;;;;;;;-1:-1:-1;;;;;970:68:105;-1:-1:-1;;;;;;970:68:105;;;;;;;;;;943:19;:96::i;:::-;843:203;;;;:::o;1671:283::-;1767:20;1790:50;1834:5;1790;-1:-1:-1;;;;;1790:15:105;;1814:4;1821:7;1790:39;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;:43;;:50::i;:::-;1767:73;;1850:97;1870:5;1900:22;;;1924:7;1933:12;1877:69;;;;;;;;;:::i;2492:206:5:-;2687:4;2673:18;;-1:-1:-1;;;;2673:18:5;-1:-1:-1;;;2673:18:5;;;2492:206::o;1330:142:4:-;1400:4;1437:19;1454:1;1437:16;:19::i;:::-;:28;1423:10;;:42;;-1:-1:-1;1330:142:4;;;;:::o;16449:333:33:-;16594:39;;:::i;:::-;16636:26;:6;16651:10;16636:14;:26::i;:::-;16594:68;;16698:77;16726:48;16761:12;16726:30;16754:1;16726:27;:30::i;:::-;:34;;:48::i;:::-;16698:27;;;;;;;;;:23;:27;;;;;:77::i;:::-;16672:103;:23;:103;-1:-1:-1;;;16449:333:33:o;11534:155::-;11626:6;;:55;;-1:-1:-1;;;11626:55:33;;11578:14;;-1:-1:-1;;;;;11626:6:33;;:31;;:55;;-1:-1:-1;;;11658:22:33;11626:55;;;:::i;662:175:105:-;744:86;764:5;794:23;;;819:2;823:5;771:58;;;;;;;;;:::i;744:86::-;662:175;;;:::o;13740:693:34:-;13905:26;;:31;13901:68;;13952:7;;13901:68;13979:19;14001:16;:14;:16::i;:::-;14067:27;;13979:38;;-1:-1:-1;14027:21:34;;14051:44;;13979:38;;14051:15;:44::i;:::-;14027:68;;14106:20;:18;:20::i;:::-;14231:143;;;;;;;;;14302:11;14231:143;;;;;;;;;;;14332:32;14231:143;;;;;14275:13;;14231:143;:30;:143::i;:::-;14196:178;:32;:178;-1:-1:-1;14385:27:34;:41;13740:693::o;11078:369:33:-;11114:37;;:::i;:::-;11154:6;:4;:6::i;:::-;11114:46;;11170:41;;:::i;:::-;11214:64;;;;;;;;;;11234:18;;-1:-1:-1;;;11234:43:33;;;11214:64;;;-1:-1:-1;;;;;11234:18:33;:28;:43;11271:4;11234:43;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;11214:64;;11170:108;-1:-1:-1;11292:37:33;:10;11170:108;11292:21;:37::i;:::-;11288:153;;;11371:59;11399:30;:14;11418:10;11399:18;:30::i;11371:59::-;11345:85;:23;:85;11288:153;11078:369;;:::o;6433:151:4:-;6507:15;;:::i;:::-;6541:36;;;;;;;;;6565:10;;6550;;6541:36;;6550:26;;:10;:14;:26::i;:::-;6541:36;;6534:43;6433:151;-1:-1:-1;;;6433:151:4:o;1942:137::-;2062:10;2049;;:23;;1942:137::o;7107:151::-;7181:15;;:::i;:::-;7215:36;;;;;;;;;7239:10;;7224;;7215:36;;7224:26;;:10;:14;:26::i;5792:146::-;5866:15;;:::i;:::-;5913:10;;5900;;:23;:31;;5930:1;5900:31;;;-1:-1:-1;5926:1:4;;5792:146;-1:-1:-1;5792:146:4:o;14439:1607:34:-;14676:61;;:::i;:::-;15056:28;;:::i;:::-;15087:29;15114:1;15087:26;:29::i;:::-;15056:60;;15236:35;;:::i;:::-;15274:65;15299:39;15317:20;15299:17;:39::i;:::-;15274:20;;:24;:65::i;:::-;15236:103;;15432:47;;:::i;:::-;15482:19;:3;15490:10;15482:7;:19::i;:::-;15432:69;;15601:51;;:::i;:::-;15667:92;15689:69;15704:22;15728:29;15755:1;15728:26;:29::i;:::-;15689:14;:69::i;:::-;15667:21;:92::i;:::-;15601:158;-1:-1:-1;15971:68:34;:38;15601:158;15971:42;:68::i;:::-;15934:105;14439:1607;-1:-1:-1;;;;;;;;14439:1607:34:o;19031:138:4:-;19152:10;19138;;:24;;;19031:138::o;17075:141::-;17199:10;17185;;:24;;;17075:141::o;1692:187:100:-;1778:7;1813:12;1805:6;;;;1797:29;;;;-1:-1:-1;;;1797:29:100;;;;;;;;:::i;:::-;-1:-1:-1;;;1848:5:100;;;1692:187::o;1621:120:56:-;1715:18;;-1:-1:-1;;;;;1715:18:56;1621:120;:::o;2671:1096:105:-;3267:27;3275:5;-1:-1:-1;;;;;3267:25:105;;:27::i;:::-;3259:71;;;;-1:-1:-1;;;3259:71:105;;;;;;;:::i;:::-;3401:12;3415:23;3450:5;-1:-1:-1;;;;;3442:19:105;3462:4;3442:25;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3400:67;;;;3485:7;3477:52;;;;-1:-1:-1;;;3477:52:105;;;;;;;:::i;:::-;3544:17;;:21;3540:221;;3684:10;3673:30;;;;;;;;;;;;:::i;:::-;3665:85;;;;-1:-1:-1;;;3665:85:105;;;;;;;:::i;834:176:100:-;892:7;923:5;;;946:6;;;;938:46;;;;-1:-1:-1;;;938:46:100;;;;;;;:::i;12377:398:4:-;12455:15;;:::i;:::-;12500:10;;12482:15;;12500:33;;607:6;12500:14;:33::i;:::-;12574:10;;12482:51;;-1:-1:-1;12543:16:4;;12562:23;;12482:51;;12562:11;:23::i;:::-;12621:10;;12543:42;;-1:-1:-1;12595:11:4;;12609:23;;:7;;:11;:23::i;:::-;12595:37;-1:-1:-1;12646:8:4;;12642:127;;12677:25;;;;;;;;;;12686:15;:8;12699:1;12686:12;:15::i;:::-;12677:25;;;12670:32;;;;;;;12642:127;12740:18;;;;;;;;12749:8;12740:18;;;12733:25;;;;;;;8646:3509:34;8718:24;;8874:17;;8870:3279;;8958:42;9003:22;:20;:22::i;:::-;9060;;8958:67;;-1:-1:-1;9096:26:34;9125:19;:17;:19::i;:::-;9492:75;;-1:-1:-1;;;9492:75:34;;9096:48;;-1:-1:-1;;;;;;9492:34:34;;;;;:75;;9527:10;;9539:12;;9096:48;;9492:75;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;9492:75:34;;;;;;;;-1:-1:-1;;9492:75:34;;;;;;;;;;;;:::i;:::-;;;9488:2651;;11814:48;;:::i;:::-;11885:83;;-1:-1:-1;;;11885:83:34;;-1:-1:-1;;;;;11885:27:34;;;;;:83;;11921:4;;11928:10;;11940:12;;11954:13;;11885:83;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;11990:16;;;;11814:154;;-1:-1:-1;;;;;;11990:30:34;;;;:64;;-1:-1:-1;12024:16:34;;-1:-1:-1;;;;;12024:30:34;;11990:64;11986:139;;;12105:1;12078:24;:28;11986:139;11431:708;9488:2651;;;9821:22;;9865:30;;;9861:1423;;9982:24;;;;;;;;;;;;9963:11;:43;;;10028:22;:37;;;10151:33;;:::i;:::-;10187:30;10215:1;10187:27;:30::i;:::-;10151:66;;10239:48;;:::i;:::-;10314:83;;-1:-1:-1;;;10314:83:34;;-1:-1:-1;;;;;10314:27:34;;;;;:83;;10350:4;;10357:10;;10369:12;;10383:13;;10314:83;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;10423:16;;;;10239:158;;-1:-1:-1;;;;;;10423:30:34;10419:429;;10490:82;10539:32;:12;10556:14;10539:16;:32::i;:::-;10490:44;10501:12;:10;:12::i;:::-;:32;;;10490:6;:4;:6::i;:44::-;:48;;:82::i;:::-;10481:91;-1:-1:-1;10602:23:34;10481:91;10623:1;10602:20;:23::i;:::-;10598:228;;;10657:46;10688:6;10696;:4;:6::i;:::-;10657:30;:46::i;:::-;10765:16;;10783:15;;10733:18;;:66;;-1:-1:-1;;;;;10733:18:34;;;;:31;:66::i;:::-;11225:22;;:11;11198:25;11249:15;;11179:86;;;;;;11198:25;;11179:86;:::i;:::-;;;;;;;;9861:1423;;;-1:-1:-1;;11414:1:34;11387:24;:28;8870:3279;;;8646:3509;:::o;3884:134:4:-;4001:10;3988;;:23;;3884:134::o;10602:634::-;10676:15;;:::i;:::-;11170:59;;;;;;;;;11217:10;;11179;;11170:59;;11179:49;;:33;;607:6;11179:14;:33::i;:::-;:37;;:49::i;15174:130::-;15232:13;;:::i;:::-;15264:33;;;;;;;;;;15271:25;:1;14465:6;15271:5;:25::i;3538:178:109:-;3594:6;-1:-1:-1;;;3620:5:109;:14;3612:67;;;;-1:-1:-1;;;3612:67:109;;;;;;;:::i;:::-;-1:-1:-1;3703:5:109;3538:178::o;23330:127:4:-;23393:13;;:::i;:::-;23425:25;;;;;;;;;23432:10;;23425:25;;23432:17;;23447:1;23432:14;:17::i;20674:143::-;20744:13;;:::i;:::-;20776:34;;;;;;;;;20798:10;;20783;;20776:34;;20783:26;;:10;:14;:26::i;20341:140::-;20411:13;;:::i;:::-;20456:10;;20443;;:23;:31;;20473:1;20443:31;;14530:191;14590:15;;:::i;:::-;14625:10;;14639:1;-1:-1:-1;14625:15:4;14617:51;;;;-1:-1:-1;;;14617:51:4;;;;;;;:::i;:::-;-1:-1:-1;14685:29:4;;;;;;;;;14702:10;;14685:29;;;14530:191::o;685:610:106:-;745:4;1206:20;;1051:66;1245:23;;;;;;:42;;-1:-1:-1;;1272:15:106;;;1237:51;-1:-1:-1;;685:610:106:o;3033:130:100:-;3091:7;3117:39;3121:1;3124;3117:39;;;;;;;;;;;;;;;;;:3;:39::i;4420:128::-;4478:7;4504:37;4508:1;4511;4504:37;;;;;;;;;;;;;;;;;:3;:37::i;9089:134:4:-;9155:15;;:::i;:::-;9189:27;;;;;;;;;9198:10;;9189:27;;9198:17;;9213:1;9198:14;:17::i;292:554:101:-;348:6;588;584:45;;-1:-1:-1;617:1:101;610:8;;584:45;649:1;-1:-1:-1;;649:7:101;:27;;;;;-1:-1:-1;;;660:1:101;:16;649:27;647:30;639:82;;;;-1:-1:-1;;;639:82:101;;;;;;;:::i;:::-;743:5;;;747:1;743;:5;:1;766:5;;;;;:10;758:62;;;;-1:-1:-1;;;758:62:101;;;;;;;:::i;1618:210::-;1674:6;1703:5;;;1727:6;;;;;;:16;;;1742:1;1737;:6;;1727:16;1726:38;;;;1753:1;1749;:5;:14;;;;;1762:1;1758;:5;1749:14;1718:84;;;;-1:-1:-1;;;1718:84:101;;;;;;;:::i;3638:338:100:-;3724:7;3824:12;3817:5;3809:28;;;;-1:-1:-1;;;3809:28:100;;;;;;;;:::i;:::-;;3847:9;3863:1;3859;:5;;;;;;;3638:338;-1:-1:-1;;;;;3638:338:100:o;5012:163::-;5098:7;5133:12;5125:6;5117:29;;;;-1:-1:-1;;;5117:29:100;;;;;;;;:::i;:::-;;5167:1;5163;:5;;;;;;;5012:163;-1:-1:-1;;;;5012:163:100:o;-1:-1:-1:-;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;5:134::-;83:13;;101:33;83:13;101:33;:::i;146:128::-;221:13;;34057;;34050:21;36867:32;;36857:2;;36913:1;;36903:12;4328:325;;4441:4;4429:9;4424:3;4420:19;4416:30;4413:2;;;-1:-1;;4449:12;4413:2;4477:20;4441:4;4477:20;:::i;:::-;520;;4558:74;;-1:-1;4468:29;4407:246;-1:-1;4407:246::o;4691:347::-;;4815:4;4803:9;4798:3;4794:19;4790:30;4787:2;;;-1:-1;;4823:12;4787:2;4851:20;4815:4;4851:20;:::i;:::-;666:13;;4932:85;;-1:-1;4842:29;4781:257;-1:-1;4781:257::o;6079:263::-;;6194:2;6182:9;6173:7;6169:23;6165:32;6162:2;;;-1:-1;;6200:12;6162:2;89:6;83:13;101:33;128:5;101:33;:::i;6349:257::-;;6461:2;6449:9;6440:7;6436:23;6432:32;6429:2;;;-1:-1;;6467:12;6429:2;227:6;221:13;36892:5;34057:13;34050:21;36870:5;36867:32;36857:2;;-1:-1;;36903:12;6613:261;;6727:2;6715:9;6706:7;6702:23;6698:32;6695:2;;;-1:-1;;6733:12;6695:2;-1:-1;666:13;;6689:185;-1:-1;6689:185::o;6881:330::-;;7029:3;7017:9;7008:7;7004:23;7000:33;6997:2;;;-1:-1;;7036:12;6997:2;946:20;7029:3;946:20;:::i;:::-;1092:22;6016:13;1042:16;1035:86;1230:85;1311:3;1197:2;1291:9;1287:22;1230:85;:::i;:::-;1197:2;1216:5;1212:16;1205:111;1428:85;1509:3;1395:2;1489:9;1485:22;1428:85;:::i;:::-;1395:2;1414:5;1410:16;1403:111;1618:84;1698:3;1585:2;1678:9;1674:22;1618:84;:::i;:::-;1585:2;1604:5;1600:16;1593:110;1808:84;1888:3;1774;1868:9;1864:22;1808:84;:::i;:::-;1774:3;1794:5;1790:16;1783:110;1971:3;2041:9;2037:22;6016:13;1971:3;1991:5;1987:16;1980:86;7088:107;;;;6991:220;;;;:::o;7218:316::-;;7359:3;;7347:9;7338:7;7334:23;7330:33;7327:2;;;-1:-1;;7366:12;7327:2;2305:22;7359:3;2305:22;:::i;:::-;2296:31;;2413:60;2469:3;2445:22;2413:60;:::i;:::-;2395:16;2388:86;2572:60;2628:3;2539:2;2608:9;2604:22;2572:60;:::i;:::-;2539:2;2558:5;2554:16;2547:86;2731:76;2803:3;2698:2;2783:9;2779:22;2731:76;:::i;:::-;2698:2;2717:5;2713:16;2706:102;2905:57;2958:3;2872:2;2938:9;2934:22;2905:57;:::i;:::-;2872:2;2891:5;2887:16;2880:83;3069:57;3122:3;3035;3102:9;3098:22;3069:57;:::i;:::-;3035:3;3051:16;;3044:83;3197:3;3262:22;;;666:13;3213:16;;;3206:85;3361:3;3426:22;;;666:13;3377:16;;;3370:85;3526:3;3592:22;;;6016:13;3542:16;;;3535:86;3684:3;3752:22;;;6016:13;3700:18;;;3693:88;3846:3;3914:22;;;6016:13;3862:18;;;3855:88;4004:3;4072:22;;;6016:13;4020:18;;;4013:88;4172:3;4240:22;;;6016:13;4188:18;;;4181:88;;;;-1:-1;3055:5;7321:213;-1:-1;7321:213::o;7541:414::-;;;7686:2;7674:9;7665:7;7661:23;7657:32;7654:2;;;-1:-1;;7692:12;7654:2;7754:77;7823:7;7799:22;7754:77;:::i;:::-;7744:87;7868:2;7907:22;;;;5868:20;;-1:-1;;;7648:307::o;7962:499::-;;;8144:2;8132:9;8123:7;8119:23;8115:32;8112:2;;;-1:-1;;8150:12;8112:2;8212:89;8293:7;8269:22;8212:89;:::i;:::-;8202:99;;8356:89;8437:7;8338:2;8417:9;8413:22;8356:89;:::i;:::-;8346:99;;8106:355;;;;;:::o;8468:241::-;;8572:2;8560:9;8551:7;8547:23;8543:32;8540:2;;;-1:-1;;8578:12;8540:2;-1:-1;5868:20;;8534:175;-1:-1;8534:175::o;8986:589::-;;;;9161:9;9152:7;9148:23;9173:2;9148:23;9144:32;9141:2;;;-1:-1;;9179:12;9141:2;5881:6;5868:20;9231:63;;9349:77;9418:7;9331:2;9398:9;9394:22;9349:77;:::i;:::-;9339:87;-1:-1;9331:2;-1:-1;;5171:19;;5167:30;5164:2;;;-1:-1;;5200:12;5164:2;;5228:20;9331:2;5228:20;:::i;:::-;9463:2;9527:22;;;;5868:20;5309:75;;-1:-1;9135:440;;;;-1:-1;9135:440::o;10130:343::-;;10272:5;33227:12;33512:6;33507:3;33500:19;10365:52;10410:6;33549:4;33544:3;33540:14;33549:4;10391:5;10387:16;10365:52;:::i;:::-;36564:7;36548:14;-1:-1;;36544:28;10429:39;;;;33549:4;10429:39;;10220:253;-1:-1;;10220:253::o;17390:::-;36659:2;36655:14;;;;-1:-1;;36655:14;9940:58;;17615:2;17606:12;;17506:137::o;17650:271::-;;10640:5;33227:12;10751:52;10796:6;10791:3;10784:4;10777:5;10773:16;10751:52;:::i;:::-;10815:16;;;;;17784:137;-1:-1;;17784:137::o;17928:222::-;-1:-1;;;;;34416:54;;;;9802:37;;18055:2;18040:18;;18026:124::o;18157:876::-;-1:-1;;;;;34416:54;;;9661:58;;34416:54;;18621:2;18606:18;;9802:37;18704:2;18689:18;;10081:37;;;18787:2;18772:18;;10081:37;;;18448:3;18824;18809:19;;18802:49;;;18157:876;;18865:76;;18433:19;;18927:6;18865:76;:::i;:::-;18857:84;;10111:5;19018:3;19007:9;19003:19;10081:37;18419:614;;;;;;;;;:::o;19040:333::-;-1:-1;;;;;34416:54;;;9802:37;;34416:54;;19359:2;19344:18;;9802:37;19195:2;19180:18;;19166:207::o;19380:444::-;-1:-1;;;;;34416:54;;;9802:37;;34416:54;;;;19727:2;19712:18;;9802:37;19810:2;19795:18;;10081:37;;;;19563:2;19548:18;;19534:290::o;19831:640::-;;36655:14;;;;;33973:5;34416:54;9809:3;9802:37;10111:5;20225:2;20214:9;20210:18;10081:37;10111:5;20308:2;20297:9;20293:18;10081:37;20060:3;20345:2;20334:9;20330:18;20323:48;20385:76;20060:3;20049:9;20045:19;20447:6;20385:76;:::i;:::-;20377:84;20031:440;-1:-1;;;;;;20031:440::o;20478:433::-;-1:-1;;;;;34416:54;;;;9802:37;;17040:23;20897:2;20882:18;;10081:37;20683:2;20668:18;;20654:257::o;20918:333::-;-1:-1;;;;;34416:54;;;;9802:37;;21237:2;21222:18;;10081:37;21073:2;21058:18;;21044:207::o;21258:222::-;10081:37;;;21385:2;21370:18;;21356:124::o;21487:528::-;;10111:5;10088:3;10081:37;10111:5;21852:2;21841:9;21837:18;10081:37;21688:2;21889;21878:9;21874:18;21867:48;21929:76;21688:2;21677:9;21673:18;21991:6;21929:76;:::i;:::-;21921:84;21659:356;-1:-1;;;;;21659:356::o;22022:800::-;;10111:5;10088:3;10081:37;10111:5;22468:2;22457:9;22453:18;10081:37;22303:3;22505:2;22494:9;22490:18;22483:48;22545:76;22303:3;22292:9;22288:19;22607:6;22545:76;:::i;:::-;-1:-1;;;;;34416:54;;;;22716:2;22701:18;;10944:80;-1:-1;22807:3;22792:19;11687:58;22537:84;22274:548;-1:-1;;;22274:548::o;22829:640::-;;10111:5;10088:3;10081:37;10111:5;23223:2;23212:9;23208:18;10081:37;23058:3;23260:2;23249:9;23245:18;23238:48;23300:76;23058:3;23047:9;23043:19;23362:6;23300:76;:::i;:::-;23292:84;;10111:5;23455:2;23444:9;23440:18;10081:37;23029:440;;;;;;;:::o;24305:329::-;10081:37;;;24620:2;24605:18;;10081:37;24458:2;24443:18;;24429:205::o;24641:310::-;;24788:2;24809:17;24802:47;24863:78;24788:2;24777:9;24773:18;24927:6;24863:78;:::i;24958:416::-;25158:2;25172:47;;;12336:2;25143:18;;;33500:19;12372:29;33540:14;;;12352:50;12421:12;;;25129:245::o;25381:416::-;25581:2;25595:47;;;12672:2;25566:18;;;33500:19;12708:34;33540:14;;;12688:55;-1:-1;;;12763:12;;;12756:25;12800:12;;;25552:245::o;25804:416::-;26004:2;26018:47;;;25989:18;;;33500:19;13087:34;33540:14;;;13067:55;13141:12;;;25975:245::o;26227:416::-;26427:2;26441:47;;;13392:2;26412:18;;;33500:19;-1:-1;;;33540:14;;;13408:46;13473:12;;;26398:245::o;26650:416::-;26850:2;26864:47;;;13724:2;26835:18;;;33500:19;-1:-1;;;33540:14;;;13740:44;13803:12;;;26821:245::o;27073:416::-;27273:2;27287:47;;;14054:2;27258:18;;;33500:19;14090:34;33540:14;;;14070:55;-1:-1;;;14145:12;;;14138:25;14182:12;;;27244:245::o;27496:416::-;27696:2;27710:47;;;14433:2;27681:18;;;33500:19;14469:34;33540:14;;;14449:55;-1:-1;;;14524:12;;;14517:31;14567:12;;;27667:245::o;27919:416::-;28119:2;28133:47;;;14818:2;28104:18;;;33500:19;-1:-1;;;33540:14;;;14834:43;14896:12;;;28090:245::o;28342:416::-;28542:2;28556:47;;;15147:2;28527:18;;;33500:19;15183:34;33540:14;;;15163:55;-1:-1;;;15238:12;;;15231:32;15282:12;;;28513:245::o;28765:416::-;28965:2;28979:47;;;15533:2;28950:18;;;33500:19;15569:34;33540:14;;;15549:55;-1:-1;;;15624:12;;;15617:34;15670:12;;;28936:245::o;29188:416::-;29388:2;29402:47;;;15921:2;29373:18;;;33500:19;15957:33;33540:14;;;15937:54;16010:12;;;29359:245::o;29611:416::-;29811:2;29825:47;;;16261:2;29796:18;;;33500:19;16297:33;33540:14;;;16277:54;16350:12;;;29782:245::o;30034:976::-;16646:23;;10081:37;;30612:2;30597:18;;10081:37;;;;17040:23;;30745:2;30730:18;;10081:37;30828:2;30813:18;;10081:37;30911:3;30896:19;;10081:37;30995:3;30980:19;;10081:37;30399:3;30384:19;;30370:640::o;31017:322::-;17040:23;;10081:37;;31194:2;31179:18;;31165:174::o;31346:744::-;17040:23;;10081:37;;17040:23;;31943:2;31928:18;;10081:37;17040:23;32076:2;32061:18;;10081:37;31679:2;31664:18;;31650:440::o;32326:544::-;10081:37;;;32723:2;32708:18;;10081:37;;;;17040:23;32856:2;32841:18;;10081:37;32559:2;32544:18;;32530:340::o;32877:256::-;32939:2;32933:9;32965:17;;;33040:18;33025:34;;33061:22;;;33022:62;33019:2;;;33097:1;;33087:12;33019:2;32939;33106:22;32917:216;;-1:-1;32917:216::o;36006:268::-;36071:1;36078:101;36092:6;36089:1;36086:13;36078:101;;;36159:11;;;36153:18;36140:11;;;36133:39;36114:2;36107:10;36078:101;;;36194:6;36191:1;36188:13;36185:2;;;-1:-1;;36071:1;36241:16;;36234:27;36055:219::o;36687:117::-;-1:-1;;;;;34416:54;;36746:35;;36736:2;;36795:1;;36785:12",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\n\npragma experimental ABIEncoderV2;\n\nimport \"../common/FundingRateApplier.sol\";\nimport \"../../common/implementation/FixedPoint.sol\";\n\n// Implements FundingRateApplier internal methods to enable unit testing.\ncontract FundingRateApplierTest is FundingRateApplier {\n    constructor(\n        bytes32 _fundingRateIdentifier,\n        address _collateralAddress,\n        address _finderAddress,\n        address _configStoreAddress,\n        FixedPoint.Unsigned memory _tokenScaling,\n        address _timerAddress\n    )\n        public\n        FundingRateApplier(\n            _fundingRateIdentifier,\n            _collateralAddress,\n            _finderAddress,\n            _configStoreAddress,\n            _tokenScaling,\n            _timerAddress\n        )\n    {}\n\n    function calculateEffectiveFundingRate(\n        uint256 paymentPeriodSeconds,\n        FixedPoint.Signed memory fundingRatePerSecond,\n        FixedPoint.Unsigned memory currentCumulativeFundingRateMultiplier\n    ) public pure returns (FixedPoint.Unsigned memory) {\n        return\n            _calculateEffectiveFundingRate(\n                paymentPeriodSeconds,\n                fundingRatePerSecond,\n                currentCumulativeFundingRateMultiplier\n            );\n    }\n\n    // Required overrides.\n    function _pfc() internal view virtual override returns (FixedPoint.Unsigned memory currentPfc) {\n        return FixedPoint.Unsigned(collateralCurrency.balanceOf(address(this)));\n    }\n\n    function emergencyShutdown() external override {}\n\n    function remargin() external override {}\n\n    function _getTokenAddress() internal view override returns (address) {\n        return address(collateralCurrency);\n    }\n}\n",
+  "sourcePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/test/FundingRateApplierTest.sol",
+  "ast": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/test/FundingRateApplierTest.sol",
+    "exportedSymbols": {
+      "FundingRateApplierTest": [
+        16577
+      ]
+    },
+    "id": 16578,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 16489,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:56"
+      },
+      {
+        "id": 16490,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:56"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/common/FundingRateApplier.sol",
+        "file": "../common/FundingRateApplier.sol",
+        "id": 16491,
+        "nodeType": "ImportDirective",
+        "scope": 16578,
+        "sourceUnit": 7106,
+        "src": "102:42:56",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 16492,
+        "nodeType": "ImportDirective",
+        "scope": 16578,
+        "sourceUnit": 2374,
+        "src": "145:52:56",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 16493,
+              "name": "FundingRateApplier",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7105,
+              "src": "308:18:56",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FundingRateApplier_$7105",
+                "typeString": "contract FundingRateApplier"
+              }
+            },
+            "id": 16494,
+            "nodeType": "InheritanceSpecifier",
+            "src": "308:18:56"
+          }
+        ],
+        "contractDependencies": [
+          2434,
+          3114,
+          5730,
+          6434,
+          7105,
+          23444
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 16577,
+        "linearizedBaseContracts": [
+          16577,
+          7105,
+          6434,
+          2434,
+          3114,
+          23444,
+          5730
+        ],
+        "name": "FundingRateApplierTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 16517,
+              "nodeType": "Block",
+              "src": "816:2:56",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 16518,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 16509,
+                    "name": "_fundingRateIdentifier",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16496,
+                    "src": "632:22:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16510,
+                    "name": "_collateralAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16498,
+                    "src": "668:18:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16511,
+                    "name": "_finderAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16500,
+                    "src": "700:14:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16512,
+                    "name": "_configStoreAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16502,
+                    "src": "728:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16513,
+                    "name": "_tokenScaling",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16504,
+                    "src": "761:13:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16514,
+                    "name": "_timerAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16506,
+                    "src": "788:13:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 16515,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 16508,
+                  "name": "FundingRateApplier",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 7105,
+                  "src": "600:18:56",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_FundingRateApplier_$7105_$",
+                    "typeString": "type(contract FundingRateApplier)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "600:211:56"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 16507,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16496,
+                  "mutability": "mutable",
+                  "name": "_fundingRateIdentifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "354:30:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 16495,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "354:7:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16498,
+                  "mutability": "mutable",
+                  "name": "_collateralAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "394:26:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16497,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "394:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16500,
+                  "mutability": "mutable",
+                  "name": "_finderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "430:22:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16499,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "430:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16502,
+                  "mutability": "mutable",
+                  "name": "_configStoreAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "462:27:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16501,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "462:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16504,
+                  "mutability": "mutable",
+                  "name": "_tokenScaling",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "499:40:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16503,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "499:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16506,
+                  "mutability": "mutable",
+                  "name": "_timerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "549:21:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16505,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "549:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "344:232:56"
+            },
+            "returnParameters": {
+              "id": 16516,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "816:0:56"
+            },
+            "scope": 16577,
+            "src": "333:485:56",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 16535,
+              "nodeType": "Block",
+              "src": "1086:212:56",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16530,
+                        "name": "paymentPeriodSeconds",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16520,
+                        "src": "1163:20:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 16531,
+                        "name": "fundingRatePerSecond",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16522,
+                        "src": "1201:20:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signed_$1581_memory_ptr",
+                          "typeString": "struct FixedPoint.Signed memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 16532,
+                        "name": "currentCumulativeFundingRateMultiplier",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16524,
+                        "src": "1239:38:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_struct$_Signed_$1581_memory_ptr",
+                          "typeString": "struct FixedPoint.Signed memory"
+                        },
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      ],
+                      "id": 16529,
+                      "name": "_calculateEffectiveFundingRate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7087,
+                      "src": "1115:30:56",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_struct$_Signed_$1581_memory_ptr_$_t_struct$_Unsigned_$887_memory_ptr_$returns$_t_struct$_Unsigned_$887_memory_ptr_$",
+                        "typeString": "function (uint256,struct FixedPoint.Signed memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 16533,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1115:176:56",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16528,
+                  "id": 16534,
+                  "nodeType": "Return",
+                  "src": "1096:195:56"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "c8aa07bd",
+            "id": 16536,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "calculateEffectiveFundingRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 16525,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16520,
+                  "mutability": "mutable",
+                  "name": "paymentPeriodSeconds",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "872:28:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 16519,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "872:7:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16522,
+                  "mutability": "mutable",
+                  "name": "fundingRatePerSecond",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "910:45:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1581_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16521,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1581,
+                    "src": "910:17:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1581_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16524,
+                  "mutability": "mutable",
+                  "name": "currentCumulativeFundingRateMultiplier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "965:65:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16523,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "965:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "862:174:56"
+            },
+            "returnParameters": {
+              "id": 16528,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16527,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "1058:26:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16526,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "1058:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1057:28:56"
+            },
+            "scope": 16577,
+            "src": "824:474:56",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6206
+            ],
+            "body": {
+              "id": 16553,
+              "nodeType": "Block",
+              "src": "1426:88:56",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 16548,
+                                "name": "this",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": -28,
+                                "src": "1500:4:56",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_FundingRateApplierTest_$16577",
+                                  "typeString": "contract FundingRateApplierTest"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_FundingRateApplierTest_$16577",
+                                  "typeString": "contract FundingRateApplierTest"
+                                }
+                              ],
+                              "id": 16547,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1492:7:56",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": {
+                                "id": 16546,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "1492:7:56",
+                                "typeDescriptions": {
+                                  "typeIdentifier": null,
+                                  "typeString": null
+                                }
+                              }
+                            },
+                            "id": 16549,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1492:13:56",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 16544,
+                            "name": "collateralCurrency",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5760,
+                            "src": "1463:18:56",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$27325",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "id": 16545,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "balanceOf",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 27264,
+                          "src": "1463:28:56",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                            "typeString": "function (address) view external returns (uint256)"
+                          }
+                        },
+                        "id": 16550,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1463:43:56",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 16542,
+                        "name": "FixedPoint",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2373,
+                        "src": "1443:10:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_FixedPoint_$2373_$",
+                          "typeString": "type(library FixedPoint)"
+                        }
+                      },
+                      "id": 16543,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "Unsigned",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 887,
+                      "src": "1443:19:56",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Unsigned_$887_storage_ptr_$",
+                        "typeString": "type(struct FixedPoint.Unsigned storage pointer)"
+                      }
+                    },
+                    "id": 16551,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1443:64:56",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16541,
+                  "id": 16552,
+                  "nodeType": "Return",
+                  "src": "1436:71:56"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16554,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_pfc",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16538,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1369:8:56"
+            },
+            "parameters": {
+              "id": 16537,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1344:2:56"
+            },
+            "returnParameters": {
+              "id": 16541,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16540,
+                  "mutability": "mutable",
+                  "name": "currentPfc",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16554,
+                  "src": "1387:37:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16539,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "1387:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1386:39:56"
+            },
+            "scope": 16577,
+            "src": "1331:183:56",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          },
+          {
+            "baseFunctions": [
+              23433
+            ],
+            "body": {
+              "id": 16558,
+              "nodeType": "Block",
+              "src": "1567:2:56",
+              "statements": []
+            },
+            "documentation": null,
+            "functionSelector": "3403c2fc",
+            "id": 16559,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "emergencyShutdown",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16556,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1558:8:56"
+            },
+            "parameters": {
+              "id": 16555,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1546:2:56"
+            },
+            "returnParameters": {
+              "id": 16557,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1567:0:56"
+            },
+            "scope": 16577,
+            "src": "1520:49:56",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              23437
+            ],
+            "body": {
+              "id": 16563,
+              "nodeType": "Block",
+              "src": "1613:2:56",
+              "statements": []
+            },
+            "documentation": null,
+            "functionSelector": "bda02e77",
+            "id": 16564,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "remargin",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16561,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1604:8:56"
+            },
+            "parameters": {
+              "id": 16560,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1592:2:56"
+            },
+            "returnParameters": {
+              "id": 16562,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1613:0:56"
+            },
+            "scope": 16577,
+            "src": "1575:40:56",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              7104
+            ],
+            "body": {
+              "id": 16575,
+              "nodeType": "Block",
+              "src": "1690:51:56",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16572,
+                        "name": "collateralCurrency",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5760,
+                        "src": "1715:18:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$27325",
+                          "typeString": "contract IERC20"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_IERC20_$27325",
+                          "typeString": "contract IERC20"
+                        }
+                      ],
+                      "id": 16571,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "1707:7:56",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": {
+                        "id": 16570,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1707:7:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": null,
+                          "typeString": null
+                        }
+                      }
+                    },
+                    "id": 16573,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1707:27:56",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 16569,
+                  "id": 16574,
+                  "nodeType": "Return",
+                  "src": "1700:34:56"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16576,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_getTokenAddress",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16566,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1663:8:56"
+            },
+            "parameters": {
+              "id": 16565,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1646:2:56"
+            },
+            "returnParameters": {
+              "id": 16569,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16568,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16576,
+                  "src": "1681:7:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16567,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1681:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1680:9:56"
+            },
+            "scope": 16577,
+            "src": "1621:120:56",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 16578,
+        "src": "273:1470:56"
+      }
+    ],
+    "src": "42:1702:56"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/test/FundingRateApplierTest.sol",
+    "exportedSymbols": {
+      "FundingRateApplierTest": [
+        16577
+      ]
+    },
+    "id": 16578,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 16489,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:56"
+      },
+      {
+        "id": 16490,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "67:33:56"
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/financial-templates/common/FundingRateApplier.sol",
+        "file": "../common/FundingRateApplier.sol",
+        "id": 16491,
+        "nodeType": "ImportDirective",
+        "scope": 16578,
+        "sourceUnit": 7106,
+        "src": "102:42:56",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/circleci/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 16492,
+        "nodeType": "ImportDirective",
+        "scope": 16578,
+        "sourceUnit": 2374,
+        "src": "145:52:56",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 16493,
+              "name": "FundingRateApplier",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7105,
+              "src": "308:18:56",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FundingRateApplier_$7105",
+                "typeString": "contract FundingRateApplier"
+              }
+            },
+            "id": 16494,
+            "nodeType": "InheritanceSpecifier",
+            "src": "308:18:56"
+          }
+        ],
+        "contractDependencies": [
+          2434,
+          3114,
+          5730,
+          6434,
+          7105,
+          23444
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 16577,
+        "linearizedBaseContracts": [
+          16577,
+          7105,
+          6434,
+          2434,
+          3114,
+          23444,
+          5730
+        ],
+        "name": "FundingRateApplierTest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 16517,
+              "nodeType": "Block",
+              "src": "816:2:56",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 16518,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 16509,
+                    "name": "_fundingRateIdentifier",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16496,
+                    "src": "632:22:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16510,
+                    "name": "_collateralAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16498,
+                    "src": "668:18:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16511,
+                    "name": "_finderAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16500,
+                    "src": "700:14:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16512,
+                    "name": "_configStoreAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16502,
+                    "src": "728:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16513,
+                    "name": "_tokenScaling",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16504,
+                    "src": "761:13:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  {
+                    "argumentTypes": null,
+                    "id": 16514,
+                    "name": "_timerAddress",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 16506,
+                    "src": "788:13:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 16515,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 16508,
+                  "name": "FundingRateApplier",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 7105,
+                  "src": "600:18:56",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_FundingRateApplier_$7105_$",
+                    "typeString": "type(contract FundingRateApplier)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "600:211:56"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 16507,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16496,
+                  "mutability": "mutable",
+                  "name": "_fundingRateIdentifier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "354:30:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 16495,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "354:7:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16498,
+                  "mutability": "mutable",
+                  "name": "_collateralAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "394:26:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16497,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "394:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16500,
+                  "mutability": "mutable",
+                  "name": "_finderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "430:22:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16499,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "430:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16502,
+                  "mutability": "mutable",
+                  "name": "_configStoreAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "462:27:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16501,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "462:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16504,
+                  "mutability": "mutable",
+                  "name": "_tokenScaling",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "499:40:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16503,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "499:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16506,
+                  "mutability": "mutable",
+                  "name": "_timerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16518,
+                  "src": "549:21:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16505,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "549:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "344:232:56"
+            },
+            "returnParameters": {
+              "id": 16516,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "816:0:56"
+            },
+            "scope": 16577,
+            "src": "333:485:56",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 16535,
+              "nodeType": "Block",
+              "src": "1086:212:56",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16530,
+                        "name": "paymentPeriodSeconds",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16520,
+                        "src": "1163:20:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 16531,
+                        "name": "fundingRatePerSecond",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16522,
+                        "src": "1201:20:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signed_$1581_memory_ptr",
+                          "typeString": "struct FixedPoint.Signed memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 16532,
+                        "name": "currentCumulativeFundingRateMultiplier",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 16524,
+                        "src": "1239:38:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_struct$_Signed_$1581_memory_ptr",
+                          "typeString": "struct FixedPoint.Signed memory"
+                        },
+                        {
+                          "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                          "typeString": "struct FixedPoint.Unsigned memory"
+                        }
+                      ],
+                      "id": 16529,
+                      "name": "_calculateEffectiveFundingRate",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7087,
+                      "src": "1115:30:56",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_struct$_Signed_$1581_memory_ptr_$_t_struct$_Unsigned_$887_memory_ptr_$returns$_t_struct$_Unsigned_$887_memory_ptr_$",
+                        "typeString": "function (uint256,struct FixedPoint.Signed memory,struct FixedPoint.Unsigned memory) pure returns (struct FixedPoint.Unsigned memory)"
+                      }
+                    },
+                    "id": 16533,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1115:176:56",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16528,
+                  "id": 16534,
+                  "nodeType": "Return",
+                  "src": "1096:195:56"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "c8aa07bd",
+            "id": 16536,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "calculateEffectiveFundingRate",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 16525,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16520,
+                  "mutability": "mutable",
+                  "name": "paymentPeriodSeconds",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "872:28:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 16519,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "872:7:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16522,
+                  "mutability": "mutable",
+                  "name": "fundingRatePerSecond",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "910:45:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signed_$1581_memory_ptr",
+                    "typeString": "struct FixedPoint.Signed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16521,
+                    "name": "FixedPoint.Signed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1581,
+                    "src": "910:17:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signed_$1581_storage_ptr",
+                      "typeString": "struct FixedPoint.Signed"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16524,
+                  "mutability": "mutable",
+                  "name": "currentCumulativeFundingRateMultiplier",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "965:65:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16523,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "965:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "862:174:56"
+            },
+            "returnParameters": {
+              "id": 16528,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16527,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16536,
+                  "src": "1058:26:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16526,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "1058:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1057:28:56"
+            },
+            "scope": 16577,
+            "src": "824:474:56",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              6206
+            ],
+            "body": {
+              "id": 16553,
+              "nodeType": "Block",
+              "src": "1426:88:56",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 16548,
+                                "name": "this",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": -28,
+                                "src": "1500:4:56",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_FundingRateApplierTest_$16577",
+                                  "typeString": "contract FundingRateApplierTest"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_FundingRateApplierTest_$16577",
+                                  "typeString": "contract FundingRateApplierTest"
+                                }
+                              ],
+                              "id": 16547,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1492:7:56",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": {
+                                "id": 16546,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "1492:7:56",
+                                "typeDescriptions": {
+                                  "typeIdentifier": null,
+                                  "typeString": null
+                                }
+                              }
+                            },
+                            "id": 16549,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1492:13:56",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 16544,
+                            "name": "collateralCurrency",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5760,
+                            "src": "1463:18:56",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$27325",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "id": 16545,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "balanceOf",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 27264,
+                          "src": "1463:28:56",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                            "typeString": "function (address) view external returns (uint256)"
+                          }
+                        },
+                        "id": 16550,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1463:43:56",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 16542,
+                        "name": "FixedPoint",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2373,
+                        "src": "1443:10:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_FixedPoint_$2373_$",
+                          "typeString": "type(library FixedPoint)"
+                        }
+                      },
+                      "id": 16543,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "Unsigned",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 887,
+                      "src": "1443:19:56",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Unsigned_$887_storage_ptr_$",
+                        "typeString": "type(struct FixedPoint.Unsigned storage pointer)"
+                      }
+                    },
+                    "id": 16551,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1443:64:56",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                      "typeString": "struct FixedPoint.Unsigned memory"
+                    }
+                  },
+                  "functionReturnParameters": 16541,
+                  "id": 16552,
+                  "nodeType": "Return",
+                  "src": "1436:71:56"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16554,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_pfc",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16538,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1369:8:56"
+            },
+            "parameters": {
+              "id": 16537,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1344:2:56"
+            },
+            "returnParameters": {
+              "id": 16541,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16540,
+                  "mutability": "mutable",
+                  "name": "currentPfc",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16554,
+                  "src": "1387:37:56",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$887_memory_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 16539,
+                    "name": "FixedPoint.Unsigned",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 887,
+                    "src": "1387:19:56",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Unsigned_$887_storage_ptr",
+                      "typeString": "struct FixedPoint.Unsigned"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1386:39:56"
+            },
+            "scope": 16577,
+            "src": "1331:183:56",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          },
+          {
+            "baseFunctions": [
+              23433
+            ],
+            "body": {
+              "id": 16558,
+              "nodeType": "Block",
+              "src": "1567:2:56",
+              "statements": []
+            },
+            "documentation": null,
+            "functionSelector": "3403c2fc",
+            "id": 16559,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "emergencyShutdown",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16556,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1558:8:56"
+            },
+            "parameters": {
+              "id": 16555,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1546:2:56"
+            },
+            "returnParameters": {
+              "id": 16557,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1567:0:56"
+            },
+            "scope": 16577,
+            "src": "1520:49:56",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              23437
+            ],
+            "body": {
+              "id": 16563,
+              "nodeType": "Block",
+              "src": "1613:2:56",
+              "statements": []
+            },
+            "documentation": null,
+            "functionSelector": "bda02e77",
+            "id": 16564,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "remargin",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16561,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1604:8:56"
+            },
+            "parameters": {
+              "id": 16560,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1592:2:56"
+            },
+            "returnParameters": {
+              "id": 16562,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1613:0:56"
+            },
+            "scope": 16577,
+            "src": "1575:40:56",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              7104
+            ],
+            "body": {
+              "id": 16575,
+              "nodeType": "Block",
+              "src": "1690:51:56",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 16572,
+                        "name": "collateralCurrency",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5760,
+                        "src": "1715:18:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$27325",
+                          "typeString": "contract IERC20"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_IERC20_$27325",
+                          "typeString": "contract IERC20"
+                        }
+                      ],
+                      "id": 16571,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "1707:7:56",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": {
+                        "id": 16570,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1707:7:56",
+                        "typeDescriptions": {
+                          "typeIdentifier": null,
+                          "typeString": null
+                        }
+                      }
+                    },
+                    "id": 16573,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1707:27:56",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 16569,
+                  "id": 16574,
+                  "nodeType": "Return",
+                  "src": "1700:34:56"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16576,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_getTokenAddress",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 16566,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1663:8:56"
+            },
+            "parameters": {
+              "id": 16565,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1646:2:56"
+            },
+            "returnParameters": {
+              "id": 16569,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16568,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 16576,
+                  "src": "1681:7:56",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16567,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1681:7:56",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1680:9:56"
+            },
+            "scope": 16577,
+            "src": "1621:120:56",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 16578,
+        "src": "273:1470:56"
+      }
+    ],
+    "src": "42:1702:56"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2021-02-27T02:08:44.360Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "getCurrentTime()": {
+        "returns": {
+          "_0": "uint for the current Testable timestamp."
+        }
+      },
+      "getOutstandingRegularFees(uint256)": {
+        "details": "This returns 0 and exit early if there is no pfc, fees were already paid during the current block, or the fee rate is 0.",
+        "returns": {
+          "latePenalty": "outstanding unpaid late fee for being late in previous fee payments.",
+          "regularFee": "outstanding unpaid regular fee.",
+          "totalPaid": "Amount of collateral that the contract paid (sum of the amount paid to the Store and caller)."
+        }
+      },
+      "gulp()": {
+        "details": "Multiplying the `cumulativeFeeMultiplier` by the ratio of non-PfC-collateral :: PfC-collateral effectively pays all sponsors a pro-rata portion of the excess collateral.This will revert if PfC is 0 and this contract's collateral balance > 0."
+      },
+      "payRegularFees()": {
+        "details": "These must be paid periodically for the life of the contract. If the contract has not paid its regular fee in a week or more then a late penalty is applied which is sent to the caller. If the amount of fees owed are greater than the pfc, then this will pay as much as possible from the available collateral. An event is only fired if the fees charged are greater than 0.",
+        "returns": {
+          "_0": "totalPaid Amount of collateral that the contract paid (sum of the amount paid to the Store and caller). This returns 0 and exit early if there is no pfc, fees were already paid during the current block, or the fee rate is 0."
+        }
+      },
+      "pfc()": {
+        "details": "This is equivalent to the collateral pool available from which to pay fees. Therefore, derived contracts are expected to implement this so that pay-fee methods can correctly compute the owed fees as a % of PfC.",
+        "returns": {
+          "_0": "pfc value for equal to the current profit from corruption denominated in collateral currency."
+        }
+      },
+      "proposeFundingRate((int256),uint256)": {
+        "params": {
+          "rate": "funding rate being proposed.",
+          "timestamp": "time at which the funding rate was computed."
+        }
+      },
+      "remargin()": {
+        "details": "It pays fees and moves money between margin accounts to make sure they reflect the NAV of the contract."
+      },
+      "setCurrentTime(uint256)": {
+        "details": "Will revert if not running in test mode.",
+        "params": {
+          "time": "timestamp to set current Testable time to."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "applyFundingRate()": {
+        "notice": "This method takes 3 distinct actions: 1. Pays out regular fees. 2. If possible, resolves the outstanding funding rate proposal, pulling the result in and paying out the rewards. 3. Applies the prevailing funding rate over the most recent period."
+      },
+      "emergencyShutdown()": {
+        "notice": "Initiates the shutdown process, in case of an emergency."
+      },
+      "getCurrentTime()": {
+        "notice": "Gets the current time. Will return the last time set in `setCurrentTime` if running in test mode. Otherwise, it will return the block timestamp."
+      },
+      "getOutstandingRegularFees(uint256)": {
+        "notice": "Fetch any regular fees that the contract has pending but has not yet paid. If the fees to be paid are more than the total collateral within the contract then the totalPaid returned is full contract collateral amount."
+      },
+      "gulp()": {
+        "notice": "Removes excess collateral balance not counted in the PfC by distributing it out pro-rata to all sponsors."
+      },
+      "payRegularFees()": {
+        "notice": "Pays UMA DVM regular fees (as a % of the collateral pool) to the Store contract."
+      },
+      "pfc()": {
+        "notice": "Gets the current profit from corruption for this contract in terms of the collateral currency."
+      },
+      "proposeFundingRate((int256),uint256)": {
+        "notice": "Proposes a new funding rate. Proposer receives a reward if correct."
+      },
+      "remargin()": {
+        "notice": "A core contract method called independently or as a part of other financial contract transactions."
+      },
+      "setCurrentTime(uint256)": {
+        "notice": "Sets the current time."
+      }
+    },
+    "version": 1
+  }
+}

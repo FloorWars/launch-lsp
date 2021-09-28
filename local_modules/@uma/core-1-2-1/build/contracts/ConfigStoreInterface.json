@@ -1,0 +1,640 @@
+{
+  "contractName": "ConfigStoreInterface",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getCurrentConfig",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "timelockLiveness",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "rawValue",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct FixedPoint.Unsigned",
+              "name": "rewardRatePerSecond",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "rawValue",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct FixedPoint.Unsigned",
+              "name": "proposerBondPct",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "proposalTimeFutureLimit",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "proposalTimePastLimit",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ConfigStoreInterface.ConfigSettings",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getCurrentConfig\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"timelockLiveness\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"rewardRatePerSecond\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"rawValue\",\"type\":\"uint256\"}],\"internalType\":\"struct FixedPoint.Unsigned\",\"name\":\"proposerBondPct\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"proposalTimeFutureLimit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalTimePastLimit\",\"type\":\"uint256\"}],\"internalType\":\"struct ConfigStoreInterface.ConfigSettings\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/ConfigStoreInterface.sol\":\"ConfigStoreInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":199},\"remappings\":[]},\"sources\":{\"/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol\":{\"keccak256\":\"0x15636c4d1914553c95712ef01d59e73a2ce6efacbe1a20bab8a513d5897cf96d\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://8b942ab427bf0c45a3d5b3701a8c509fcf01f2aa0ec525fc74f7f01a2aaa18cf\",\"dweb:/ipfs/QmPoSCBrBUQTiaKR6baSYchK863Lu7RY6gqMPEeUbwsgQV\"]},\"/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/ConfigStoreInterface.sol\":{\"keccak256\":\"0xd3eb835f10eb4467f73487ea2933394096176de42c1bd17e48be9cbb91c3a393\",\"license\":\"AGPL-3.0-only\",\"urls\":[\"bzz-raw://b26e8649be647838053d029ca93a0245e564a481f17c7987f8fb3e4bb8f27725\",\"dweb:/ipfs/QmRCtavZq6R8MvWZswiuChsh6g9LZgzh5q48wQhRrFB9xQ\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x04d34b3cd5677bea25f8dfceb6dec0eaa071d4d4b789a43f13fe0c415ba4c296\",\"urls\":[\"bzz-raw://e7e8b526a6839e5ba14f0d23a830387fec47f7043ce01d42c9f285b709a9d080\",\"dweb:/ipfs/QmXmhhFmX5gcAvVzNiDPAGA35iHMPNaYtQkACswRHBVTNw\"]},\"@openzeppelin/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0xfadc24a31d75d6b3f955190cffe13bbe6e24a274c12b2b60e8c4004131487ce8\",\"urls\":[\"bzz-raw://0ec35367d49b2ea45f556a439f836e208d2460faeb6e2341e9130d163128b619\",\"dweb:/ipfs/QmTwKCBdkVAarY5hteSdwQ1J4GpogZoxCZHrbieMQVzuQJ\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPL-3.0-only\npragma solidity ^0.6.0;\npragma experimental ABIEncoderV2;\n\nimport \"../../common/implementation/FixedPoint.sol\";\n\ninterface ConfigStoreInterface {\n    // All of the configuration settings available for querying by a perpetual.\n    struct ConfigSettings {\n        // Liveness period (in seconds) for an update to currentConfig to become official.\n        uint256 timelockLiveness;\n        // Reward rate paid to successful proposers. Percentage of 1 E.g., .1 is 10%.\n        FixedPoint.Unsigned rewardRatePerSecond;\n        // Bond % (of given contract's PfC) that must be staked by proposers. Percentage of 1, e.g. 0.0005 is 0.05%.\n        FixedPoint.Unsigned proposerBondPct;\n        // Funding rate proposal timestamp cannot be more than this amount of seconds in the future .\n        uint256 proposalTimeFutureLimit;\n        // Funding rate proposal timestamp cannot be more than this amount of seconds in the past from the latest\n        // update time.\n        uint256 proposalTimePastLimit;\n    }\n\n    function getCurrentConfig() external view returns (ConfigSettings memory);\n}\n",
+  "sourcePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/ConfigStoreInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/ConfigStoreInterface.sol",
+    "exportedSymbols": {
+      "ConfigStoreInterface": [
+        12159
+      ]
+    },
+    "id": 12160,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12140,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:43"
+      },
+      {
+        "id": 12141,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "66:33:43"
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 12142,
+        "nodeType": "ImportDirective",
+        "scope": 12160,
+        "sourceUnit": 1958,
+        "src": "101:52:43",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 12159,
+        "linearizedBaseContracts": [
+          12159
+        ],
+        "name": "ConfigStoreInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "ConfigStoreInterface.ConfigSettings",
+            "id": 12153,
+            "members": [
+              {
+                "constant": false,
+                "id": 12144,
+                "mutability": "mutable",
+                "name": "timelockLiveness",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "395:24:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12143,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "395:7:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12146,
+                "mutability": "mutable",
+                "name": "rewardRatePerSecond",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "515:39:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12145,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "515:19:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12148,
+                "mutability": "mutable",
+                "name": "proposerBondPct",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "681:35:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12147,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "681:19:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12150,
+                "mutability": "mutable",
+                "name": "proposalTimeFutureLimit",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "828:31:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12149,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "828:7:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12152,
+                "mutability": "mutable",
+                "name": "proposalTimePastLimit",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "1007:29:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12151,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1007:7:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "ConfigSettings",
+            "nodeType": "StructDefinition",
+            "scope": 12159,
+            "src": "272:771:43",
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "4308aec1",
+            "id": 12158,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCurrentConfig",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12154,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1074:2:43"
+            },
+            "returnParameters": {
+              "id": 12157,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12156,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12158,
+                  "src": "1100:21:43",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_ConfigSettings_$12153_memory_ptr",
+                    "typeString": "struct ConfigStoreInterface.ConfigSettings"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12155,
+                    "name": "ConfigSettings",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 12153,
+                    "src": "1100:14:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_ConfigSettings_$12153_storage_ptr",
+                      "typeString": "struct ConfigStoreInterface.ConfigSettings"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1099:23:43"
+            },
+            "scope": 12159,
+            "src": "1049:74:43",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 12160,
+        "src": "155:970:43"
+      }
+    ],
+    "src": "42:1084:43"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/financial-templates/perpetual-multiparty/ConfigStoreInterface.sol",
+    "exportedSymbols": {
+      "ConfigStoreInterface": [
+        12159
+      ]
+    },
+    "id": 12160,
+    "license": "AGPL-3.0-only",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12140,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:43"
+      },
+      {
+        "id": 12141,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "66:33:43"
+      },
+      {
+        "absolutePath": "/Users/matt/git/protocol/packages/core/contracts/common/implementation/FixedPoint.sol",
+        "file": "../../common/implementation/FixedPoint.sol",
+        "id": 12142,
+        "nodeType": "ImportDirective",
+        "scope": 12160,
+        "sourceUnit": 1958,
+        "src": "101:52:43",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 12159,
+        "linearizedBaseContracts": [
+          12159
+        ],
+        "name": "ConfigStoreInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "ConfigStoreInterface.ConfigSettings",
+            "id": 12153,
+            "members": [
+              {
+                "constant": false,
+                "id": 12144,
+                "mutability": "mutable",
+                "name": "timelockLiveness",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "395:24:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12143,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "395:7:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12146,
+                "mutability": "mutable",
+                "name": "rewardRatePerSecond",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "515:39:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12145,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "515:19:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12148,
+                "mutability": "mutable",
+                "name": "proposerBondPct",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "681:35:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                  "typeString": "struct FixedPoint.Unsigned"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 12147,
+                  "name": "FixedPoint.Unsigned",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 471,
+                  "src": "681:19:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Unsigned_$471_storage_ptr",
+                    "typeString": "struct FixedPoint.Unsigned"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12150,
+                "mutability": "mutable",
+                "name": "proposalTimeFutureLimit",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "828:31:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12149,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "828:7:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 12152,
+                "mutability": "mutable",
+                "name": "proposalTimePastLimit",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 12153,
+                "src": "1007:29:43",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12151,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1007:7:43",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "ConfigSettings",
+            "nodeType": "StructDefinition",
+            "scope": 12159,
+            "src": "272:771:43",
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "4308aec1",
+            "id": 12158,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCurrentConfig",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 12154,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1074:2:43"
+            },
+            "returnParameters": {
+              "id": 12157,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12156,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 12158,
+                  "src": "1100:21:43",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_ConfigSettings_$12153_memory_ptr",
+                    "typeString": "struct ConfigStoreInterface.ConfigSettings"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 12155,
+                    "name": "ConfigSettings",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 12153,
+                    "src": "1100:14:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_ConfigSettings_$12153_storage_ptr",
+                      "typeString": "struct ConfigStoreInterface.ConfigSettings"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1099:23:43"
+            },
+            "scope": 12159,
+            "src": "1049:74:43",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 12160,
+        "src": "155:970:43"
+      }
+    ],
+    "src": "42:1084:43"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-12-04T19:07:26.470Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
