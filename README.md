@@ -1,3 +1,11 @@
+# FloorWars Fork to Launch fw10PUNK Covered Calls on Polygon
+
+This is a fork of UMA's launch-lsp to use our own collateral addresses for testing on Mumbai. Included is a script `launch-USDfw10PUNKc800k-1221.sh` to launch an LSP token contract on Polygon (Mumbai) using USDC as collateral but the USDBTC price identifier as a placeholder for when the USDfw10PUNK price ID is whitelisted into the DVM.
+
+The covered call should expire at the last second of 2021 in UTC with a strike price of $800,000 USDC per fw10PUNK with long tokens worth (1/fw10PUNK - 1/800000)/(1/fw10PUNK) at expiry. For example with a Decile Floor index of $350,000 each long token would be worth (1/350-1/800)/(1/350) = $0.5625 of collateral, while at a price at or above $800,000 each long is worth 0 and each short is worth $1.
+
+Below is the original README.
+
 # Package for Launching a New LSP
 
 The purpose of this repository/package is to make it easy to customize your LSP (Long-Short Pair) deployment. Feel free to use this repository in place or fork and customize it.
